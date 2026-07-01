@@ -186,9 +186,22 @@ export default function Addons() {
                       overflow: "hidden",
                     }}
                   >
-                    <span className="scope-arrow" style={{ display: "inline-block" }}>
-                      →
-                    </span>
+                    <svg
+                      className="scope-arrow"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ display: "block" }}
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
                   </span>
                 </a>
               </div>
