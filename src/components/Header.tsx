@@ -70,7 +70,9 @@ export default function Header() {
             style={{ display: "flex", alignItems: "center", gap: 22 }}
           >
             <a
-              href="#"
+              href="https://portal.madebysprint.com/auth/login"
+              target="_blank"
+              rel="noopener noreferrer"
               className="navlink mm-hide-mobile"
               style={{ fontSize: 15, fontWeight: 500, whiteSpace: "nowrap" }}
             >
@@ -191,7 +193,13 @@ export default function Header() {
             {l.label}
           </a>
         ))}
-        <a href="#" className="mm-link" onClick={() => setMenuOpen(false)}>
+        <a
+          href="https://portal.madebysprint.com/auth/login"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mm-link"
+          onClick={() => setMenuOpen(false)}
+        >
           Sign In
         </a>
         <a
