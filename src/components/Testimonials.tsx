@@ -55,6 +55,27 @@ export default function Testimonials() {
     return () => clearInterval(timer);
   }, [goTo]);
 
+  // Swipe / drag support (touch + pointer). Horizontal drag past the
+  // threshold advances or rewinds; auto-advance pauses during the gesture.
+  const dragRef = useRef<{ x: number; y: number } | null>(null);
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragRef.current = { x: e.clientX, y: e.clientY };
+    pausedRef.current = true;
+  };
+  const endDrag = (e: React.PointerEvent) => {
+    const start = dragRef.current;
+    dragRef.current = null;
+    pausedRef.current = false;
+    if (!start) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      const dir = dx < 0 ? 1 : -1;
+      setIndex((i) => ((i + dir) % n + n) % n);
+      lastRef.current = Date.now();
+    }
+  };
+
   return (
     <section
       id="testimonials"
@@ -134,7 +155,12 @@ export default function Testimonials() {
             />
           </button>
 
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div
+            style={{ flex: 1, minWidth: 0, touchAction: "pan-y", cursor: "grab" }}
+            onPointerDown={onPointerDown}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+          >
             <div ref={stackRef} style={{ position: "relative", minHeight: 300 }}>
               {TESTIMONIALS.map((t, i) => {
                 const active = i === index;
