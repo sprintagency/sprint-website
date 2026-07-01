@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/sprint-design-system-019e2273-d1a6-75b0-bde6-5e418906a5cb/colors_and_type.css">
+  <script src="_ds/sprint-design-system-019e2273-d1a6-75b0-bde6-5e418906a5cb/_ds_bundle.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #0c1321; }
+    @keyframes cfloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .cform input, .cform select, .cform textarea {
+      width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px; color: #ffffff; font-family: var(--font-sans); font-size: 15px;
+      padding: 13px 15px; outline: none; transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      color-scheme: dark;
+    }
+    .cform textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+    .cform input:focus, .cform select:focus, .cform textarea:focus {
+      border-color: rgba(181,230,2,0.6); background: rgba(255,255,255,0.06); box-shadow: 0 0 0 3px rgba(181,230,2,0.12);
+    }
+    .cform ::placeholder { color: rgba(255,255,255,0.34); }
+    .ctopic:hover { border-color: rgba(181,230,2,0.5); color: #ffffff; }
+    .csubmit { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, background 0.2s ease; }
+    .csubmit:hover { transform: translateY(-2px); box-shadow: 0 14px 34px -12px rgba(181,230,2,0.5); }
+    .clink:hover { color: #b5e602 !important; }
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
+      .contact-2col { grid-template-columns: 1fr !important; }
+      .contact-left { position: static !important; }
+    }
+  </style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="background:#0c1321;color:#ffffff;font-family:var(--font-sans);min-height:100vh;overflow-x:clip;position:relative;">
+
+  <!-- ambient glow -->
+  <div style="position:absolute;top:-240px;right:-160px;width:1000px;height:1000px;max-width:80vw;border-radius:50%;background:radial-gradient(circle,rgba(93,107,255,0.26),rgba(138,92,255,0.10) 40%,transparent 70%);pointer-events:none;z-index:0;"></div>
+  <div style="position:absolute;bottom:-320px;left:-200px;width:900px;height:900px;max-width:80vw;border-radius:50%;background:radial-gradient(circle,rgba(138,92,255,0.16),rgba(93,107,255,0.06) 44%,transparent 72%);pointer-events:none;z-index:0;"></div>
+
+  <!-- NAV -->
+  <header style="position:relative;z-index:20;">
+    <div style="max-width:1360px;margin:0 auto;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+      <a href="Hero.dc.html" style="display:inline-flex;align-items:center;"><img src="assets/sprint-logo-white.svg" alt="Sprint" style="height:26px;width:auto;display:block;" /></a>
+      <a href="Hero.dc.html" class="clink" style="display:inline-flex;align-items:center;gap:9px;color:rgba(255,255,255,0.72);text-decoration:none;font-size:14px;font-weight:600;">
+        <span style="font-size:16px;">&larr;</span> Back to site
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTACT -->
+  <section style="position:relative;z-index:10;max-width:1360px;margin:0 auto;padding:44px 48px 110px;">
+    <div class="contact-grid" style="display:grid;grid-template-columns:minmax(0,0.82fr) minmax(0,1.18fr);gap:72px;align-items:start;">
+
+      <!-- LEFT: context -->
+      <div class="contact-left" style="position:sticky;top:40px;">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:24px;">[ GET IN TOUCH ]</div>
+        <h1 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(38px,4.4vw,58px);line-height:1.03;letter-spacing:-0.03em;margin:0 0 24px;">
+          <span ref="{{ headRef }}">Let&rsquo;s build something great</span><span class="s-dot">.</span>
+        </h1>
+        <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,0.66);margin:0 0 44px;max-width:420px;">
+          Tell us what you need and we&rsquo;ll come back with a clear next step, usually within one business day.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:26px;">
+          <div>
+            <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.42);margin-bottom:8px;">Email</div>
+            <a href="mailto:hello@madebysprint.com" class="clink" style="color:#ffffff;text-decoration:none;font-size:17px;font-weight:500;">hello@madebysprint.com</a>
+          </div>
+          <div>
+            <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.42);margin-bottom:8px;">Response time</div>
+            <div style="font-size:17px;font-weight:500;color:rgba(255,255,255,0.9);">Within one business day</div>
+          </div>
+          <div>
+            <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.42);margin-bottom:18px;">Trusted by</div>
+            <div style="display:grid;grid-template-columns:repeat(3,auto);gap:24px 30px;align-items:center;justify-items:start;max-width:360px;">
+              <img src="assets/logos/logo01.svg" alt="" style="height:22px;width:auto;display:block;opacity:0.55;" />
+              <img src="assets/logos/logo02.svg" alt="" style="height:22px;width:auto;display:block;opacity:0.55;" />
+              <img src="assets/logos/logo03.svg" alt="" style="height:22px;width:auto;display:block;opacity:0.55;" />
+              <img src="assets/logos/logo04.svg" alt="" style="height:22px;width:auto;display:block;opacity:0.55;" />
+              <img src="assets/logos/logo05.svg" alt="" style="height:22px;width:auto;display:block;opacity:0.55;" />
+              <img src="assets/logos/logo06.svg" alt="" style="height:22px;width:auto;display:block;opacity:0.55;" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: form card -->
+      <div style="position:relative;padding:44px 44px 40px;border-radius:10px;background:radial-gradient(ellipse 110% 120% at 80% -10%,rgba(93,107,255,0.16),rgba(138,92,255,0.06) 46%,rgba(255,255,255,0.02) 80%),rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.11);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 40px 90px -50px rgba(0,0,0,0.85);">
+
+        <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form class="cform" onSubmit="{{ onSubmit }}" novalidate="novalidate">
+
+          <div class="contact-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;">
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Name <span style="color:var(--sprint-lime);">*</span></label>
+              <input ref="{{ nameRef }}" type="text" name="name" placeholder="Your name" />
+            </div>
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Email <span style="color:var(--sprint-lime);">*</span></label>
+              <input ref="{{ emailRef }}" type="email" name="email" placeholder="you@company.com" />
+            </div>
+          </div>
+
+          <div class="contact-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:26px;">
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Company</label>
+              <input ref="{{ companyRef }}" type="text" name="company" placeholder="Company name" />
+            </div>
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Phone</label>
+              <input ref="{{ phoneRef }}" type="tel" name="phone" placeholder="Optional" />
+            </div>
+          </div>
+
+          <div style="margin-bottom:22px;">
+            <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:12px;">What can we help with? <span style="color:var(--sprint-lime);">*</span></label>
+            <div ref="{{ topicWrapRef }}" style="display:flex;flex-wrap:wrap;gap:10px;">
+              <button type="button" class="ctopic" data-topic="creative" style="padding:11px 16px;border-radius:4px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-family:var(--font-sans);">Creative plan</button>
+              <button type="button" class="ctopic" data-topic="ai" style="padding:11px 16px;border-radius:4px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-family:var(--font-sans);">AI solution</button>
+              <button type="button" class="ctopic" data-topic="addon" style="padding:11px 16px;border-radius:4px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-family:var(--font-sans);">Add-on service</button>
+              <button type="button" class="ctopic" data-topic="demo" style="padding:11px 16px;border-radius:4px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-family:var(--font-sans);">Book a demo</button>
+              <button type="button" class="ctopic" data-topic="other" style="padding:11px 16px;border-radius:4px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-family:var(--font-sans);">Something else</button>
+            </div>
+          </div>
+
+          <div ref="{{ detailWrapRef }}" style="margin-bottom:22px;display:none;overflow:hidden;">
+            <label ref="{{ detailLabelRef }}" class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Which one?</label>
+            <select ref="{{ detailRef }}" name="detail"></select>
+          </div>
+
+          <div class="contact-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;">
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Budget</label>
+              <select ref="{{ budgetRef }}" name="budget">
+                <option value="">Select a range</option>
+                <option value="Under $5k/mo">Under $5k / month</option>
+                <option value="$5k-$10k/mo">$5k &ndash; $10k / month</option>
+                <option value="$10k-$25k/mo">$10k &ndash; $25k / month</option>
+                <option value="$25k+/mo">$25k+ / month</option>
+                <option value="One-off project">One-off project</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Timeline</label>
+              <select ref="{{ timelineRef }}" name="timeline">
+                <option value="">Select timing</option>
+                <option value="ASAP">As soon as possible</option>
+                <option value="1-3 months">In 1&ndash;3 months</option>
+                <option value="3-6 months">In 3&ndash;6 months</option>
+                <option value="Just exploring">Just exploring</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Tell us more</label>
+            <textarea ref="{{ messageRef }}" name="message" placeholder="A few lines on your goals, project, or question."></textarea>
+          </div>
+
+          <div ref="{{ errRef }}" style="display:none;color:#ff8a8a;font-size:13px;margin-bottom:14px;"></div>
+
+          <button ref="{{ submitRef }}" type="submit" class="csubmit" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--sprint-lime);color:#0c1321;border:none;border-radius:4px;font-family:var(--font-sans);font-size:16px;font-weight:600;padding:16px 0;cursor:pointer;margin-top:8px;">Send message</button>
+
+          <p style="font-size:12px;line-height:1.5;color:rgba(255,255,255,0.4);margin:16px 0 0;text-align:center;">By sending this you agree to our privacy policy. We&rsquo;ll only use your details to reply.</p>
+        </form>
+        </sc-if>
+
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:36px 12px 30px;">
+          <div style="width:64px;height:64px;margin:0 auto 26px;border-radius:50%;background:var(--sprint-lime);display:flex;align-items:center;justify-content:center;animation:cfloat 4s ease-in-out infinite;">
+            <span style="width:30px;height:30px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span>
+          </div>
+          <h2 style="font-family:var(--font-sans);font-weight:600;font-size:30px;letter-spacing:-0.02em;margin:0 0 14px;">Message sent<span class="s-dot">.</span></h2>
+          <p ref="{{ successMsgRef }}" style="font-size:16px;line-height:1.6;color:rgba(255,255,255,0.66);margin:0 auto 30px;max-width:400px;">Thanks for reaching out. A member of the team will get back to you within one business day.</p>
+          <a href="Hero.dc.html" class="clink" style="display:inline-flex;align-items:center;gap:9px;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;"><span style="font-size:16px;">&larr;</span> Back to site</a>
+        </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { submitted: false, submitting: false };
+    this.rootRef = React.createRef();
+    this.headRef = React.createRef();
+    this.nameRef = React.createRef();
+    this.emailRef = React.createRef();
+    this.companyRef = React.createRef();
+    this.phoneRef = React.createRef();
+    this.messageRef = React.createRef();
+    this.budgetRef = React.createRef();
+    this.timelineRef = React.createRef();
+    this.detailRef = React.createRef();
+    this.detailWrapRef = React.createRef();
+    this.detailLabelRef = React.createRef();
+    this.topicWrapRef = React.createRef();
+    this.errRef = React.createRef();
+    this.submitRef = React.createRef();
+    this.successMsgRef = React.createRef();
+    this.topic = '';
+    this.onSubmit = this.onSubmit.bind(this);
+
+    // ---- Backend config (fill these to go live) ----
+    // Supabase: create a table (default: contact_submissions) with columns matching the payload
+    // and an INSERT policy for the anon role. Resend: point NOTIFY_ENDPOINT at a Supabase Edge
+    // Function (or any serverless route) that emails the team via the Resend API.
+    this.CONFIG = {
+      SUPABASE_URL: '',                 // e.g. 'https://xxxxxxxx.supabase.co'
+      SUPABASE_ANON_KEY: '',            // public anon key
+      TABLE: 'contact_submissions',
+      NOTIFY_ENDPOINT: ''               // e.g. '/functions/v1/notify-contact' (sends via Resend)
+    };
+  }
+
+  DETAILS() {
+    return {
+      creative: { label: 'Which plan?', options: ['Starter', 'Growth', 'Scale', 'Not sure yet'] },
+      ai: { label: 'What kind?', options: ['AI consultation', 'Custom platform build', 'Workflow & automation', 'Not sure yet'] },
+      addon: { label: 'Which service?', options: ['Digital Marketing', 'Social Media Management', 'Other'] },
+      demo: null,
+      other: null
+    };
+  }
+  HEADINGS() {
+    return {
+      creative: 'Let\u2019s scope your creative',
+      ai: 'Let\u2019s design your platform',
+      addon: 'Let\u2019s scope your add-on',
+      demo: 'Let\u2019s book your demo',
+      other: 'Let\u2019s talk'
+    };
+  }
+
+  selectTopic(topic, presetDetail) {
+    this.topic = topic;
+    // active styling
+    const wrap = this.topicWrapRef.current;
+    if (wrap) wrap.querySelectorAll('.ctopic').forEach((b) => {
+      const on = b.getAttribute('data-topic') === topic;
+      b.style.background = on ? '#b5e602' : 'rgba(255,255,255,0.03)';
+      b.style.color = on ? '#0c1321' : 'rgba(255,255,255,0.8)';
+      b.style.borderColor = on ? '#b5e602' : 'rgba(255,255,255,0.14)';
+    });
+    // adaptive heading
+    const head = this.headRef.current;
+    if (head) head.textContent = this.HEADINGS()[topic] || 'Let\u2019s build something great';
+    // detail dropdown
+    const cfg = this.DETAILS()[topic];
+    const wrapD = this.detailWrapRef.current;
+    const sel = this.detailRef.current;
+    const lab = this.detailLabelRef.current;
+    if (cfg && wrapD && sel) {
+      if (lab) lab.textContent = cfg.label;
+      sel.innerHTML = '<option value="">Select one</option>' +
+        cfg.options.map((o) => '<option value="' + o + '">' + o + '</option>').join('');
+      if (presetDetail) sel.value = presetDetail;
+      wrapD.style.display = 'block';
+    } else if (wrapD) {
+      wrapD.style.display = 'none';
+      if (sel) sel.innerHTML = '';
+    }
+  }
+
+  componentDidMount() {
+    const wrap = this.topicWrapRef.current;
+    if (wrap) wrap.querySelectorAll('.ctopic').forEach((b) => {
+      b.addEventListener('click', () => this.selectTopic(b.getAttribute('data-topic')));
+    });
+
+    // ---- smart pre-fill from URL ----
+    const q = new URLSearchParams(window.location.search);
+    const intent = (q.get('intent') || '').toLowerCase();
+    const plan = q.get('plan') || '';
+    const service = q.get('service') || '';
+    const cap = (s) => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+    if (intent === 'demo') this.selectTopic('demo');
+    else if (intent === 'plan') this.selectTopic('creative', cap(plan));
+    else if (intent === 'ai-platform') this.selectTopic('ai', 'Custom platform build');
+    else if (intent === 'ai-consultation') this.selectTopic('ai', 'AI consultation');
+    else if (intent === 'addon') this.selectTopic('addon', service);
+    else if (intent === 'creative') this.selectTopic('creative');
+    else if (intent === 'ai') this.selectTopic('ai');
+  }
+
+  showError(msg) {
+    const e = this.errRef.current;
+    if (e) { e.textContent = msg; e.style.display = msg ? 'block' : 'none'; }
+  }
+
+  async onSubmit(ev) {
+    ev.preventDefault();
+    if (this.state.submitting) return;
+    const val = (r) => (r && r.current ? (r.current.value || '').trim() : '');
+    const name = val(this.nameRef);
+    const email = val(this.emailRef);
+    if (!name) { this.showError('Please add your name.'); this.nameRef.current && this.nameRef.current.focus(); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { this.showError('Please add a valid email.'); this.emailRef.current && this.emailRef.current.focus(); return; }
+    if (!this.topic) { this.showError('Please pick what we can help with.'); return; }
+    this.showError('');
+
+    const payload = {
+      name: name,
+      email: email,
+      company: val(this.companyRef),
+      phone: val(this.phoneRef),
+      topic: this.topic,
+      detail: this.detailRef.current ? this.detailRef.current.value : '',
+      budget: val(this.budgetRef),
+      timeline: val(this.timelineRef),
+      message: val(this.messageRef),
+      source_url: window.location.href,
+      created_at: new Date().toISOString()
+    };
+
+    this.setState({ submitting: true });
+    const btn = this.submitRef.current;
+    if (btn) { btn.textContent = 'Sending\u2026'; btn.style.opacity = '0.7'; btn.disabled = true; }
+
+    try {
+      const c = this.CONFIG;
+      if (c.SUPABASE_URL && c.SUPABASE_ANON_KEY) {
+        const r = await fetch(c.SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/' + c.TABLE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': c.SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + c.SUPABASE_ANON_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(payload)
+        });
+        if (!r.ok) throw new Error('Supabase ' + r.status);
+        if (c.NOTIFY_ENDPOINT) {
+          fetch(c.NOTIFY_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
+        }
+      } else {
+        // demo mode (no backend configured): persist locally so nothing is lost
+        try {
+          const arr = JSON.parse(localStorage.getItem('sprint_contact_submissions') || '[]');
+          arr.push(payload);
+          localStorage.setItem('sprint_contact_submissions', JSON.stringify(arr));
+        } catch (e) {}
+        await new Promise((res) => setTimeout(res, 650));
+      }
+      // personalise success copy
+      const sm = this.successMsgRef.current;
+      if (sm) {
+        const first = name.split(' ')[0];
+        sm.textContent = 'Thanks ' + first + '. A member of the team will get back to you within one business day.';
+      }
+      this.setState({ submitted: true, submitting: false });
+    } catch (err) {
+      this.setState({ submitting: false });
+      if (btn) { btn.textContent = 'Send message'; btn.style.opacity = '1'; btn.disabled = false; }
+      this.showError('Something went wrong. Please email hello@madebysprint.com directly.');
+    }
+  }
+
+  renderVals() {
+    return {
+      rootRef: this.rootRef, headRef: this.headRef,
+      nameRef: this.nameRef, emailRef: this.emailRef, companyRef: this.companyRef, phoneRef: this.phoneRef,
+      messageRef: this.messageRef, budgetRef: this.budgetRef, timelineRef: this.timelineRef,
+      detailRef: this.detailRef, detailWrapRef: this.detailWrapRef, detailLabelRef: this.detailLabelRef,
+      topicWrapRef: this.topicWrapRef, errRef: this.errRef, submitRef: this.submitRef, successMsgRef: this.successMsgRef,
+      onSubmit: this.onSubmit,
+      notSubmitted: !this.state.submitted,
+      submitted: this.state.submitted
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#0c1321">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0c1321"/>
+    <text x="600" y="430" font-family="Arial, sans-serif" font-size="150" font-weight="700" fill="#ffffff" text-anchor="middle">Sprint<tspan fill="#b5e602">.</tspan></text>
+  </svg>
+</template>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/sprint-design-system-019e2273-d1a6-75b0-bde6-5e418906a5cb/colors_and_type.css">
+  <script src="_ds/sprint-design-system-019e2273-d1a6-75b0-bde6-5e418906a5cb/_ds_bundle.js"></script>
+  <script src="image-slot.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #0c1321; }
+    @keyframes floatA { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    @keyframes floatB { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes floatCenter { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,-10px); } }
+    @keyframes logomarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Request a scope button */
+    .scope-btn { display:inline-flex; align-items:center; gap:13px; }
+    .scope-label { transition: color 0.25s ease; }
+    .scope-btn:hover .scope-label { color: var(--sprint-lime); }
+    .scope-circle { transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+    .scope-btn:hover .scope-circle { background: var(--sprint-lime); border-color: var(--sprint-lime); color:#0c1321; }
+
+    /* Contact modal form */
+    .cform input, .cform select, .cform textarea { width:100%; background-color:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); border-radius:4px; color:#fff; font-family:var(--font-sans); font-size:15px; padding:12px 14px; outline:none; transition:border-color 0.2s,background-color 0.2s,box-shadow 0.2s; }
+    .cform select { appearance:none; -webkit-appearance:none; -moz-appearance:none; }
+    .cform textarea { resize:vertical; min-height:104px; line-height:1.5; }
+    .cform input:focus, .cform select:focus, .cform textarea:focus { border-color:rgba(181,230,2,0.6); background-color:rgba(255,255,255,0.06); box-shadow:0 0 0 3px rgba(181,230,2,0.12); }
+    .cform ::placeholder { color:rgba(255,255,255,0.34); }
+    .cs-trigger:hover { border-color:rgba(255,255,255,0.22) !important; }
+    .cs-panel::-webkit-scrollbar { width:8px; }
+    .cs-panel::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.15); border-radius:8px; }
+    .cm-submit { transition:transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s; }
+    .cm-submit:hover { transform:translateY(-2px); }
+    #cm-close:hover { background:rgba(255,255,255,0.1) !important; border-color:rgba(255,255,255,0.28) !important; }
+    body.cm-open { overflow:hidden; }
+    @media (max-width: 600px) {
+      .cm-2col { grid-template-columns: 1fr !important; }
+      #cm-dialog { padding: 30px 22px 26px !important; }
+    }
+
+    /* Platform capability cards hover */
+    .platform-cards > div { transition: transform 0.36s cubic-bezier(0.22,1,0.36,1), box-shadow 0.36s ease, border-color 0.26s ease, background 0.26s ease, opacity 0.64s ease !important; will-change: transform; }
+    .platform-cards > div:hover { transform: translateY(-8px) !important; background: rgba(255,255,255,0.08) !important; border-color: rgba(181,230,2,0.5) !important; box-shadow: 0 0 0 1px rgba(181,230,2,0.28), 0 26px 54px -20px rgba(181,230,2,0.42) !important; }
+
+    /* Unified CTA hover */
+    .cta { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, background 0.2s ease, border-color 0.2s ease; }
+    .cta:hover { transform: translateY(-2px); }
+    .cta-lime:hover { box-shadow: 0 14px 32px -12px rgba(181,230,2,0.5); }
+    .cta-ghost:hover { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.28) !important; box-shadow: 0 14px 30px -14px rgba(0,0,0,0.6); }
+    .cm-submit:hover { box-shadow: 0 14px 32px -12px rgba(181,230,2,0.5); }
+
+    /* Nav links + logo */
+    .navlink { position: relative; color: rgba(255,255,255,0.82); text-decoration: none; transition: color 0.2s ease; }
+    .navlink:hover { color: #ffffff; }
+    .navlink::after { content: ''; position: absolute; left: 0; bottom: -7px; height: 2px; width: 0; border-radius: 2px; background: var(--sprint-lime); transition: width 0.3s cubic-bezier(0.22,1,0.36,1); }
+    .navlink:hover::after { width: 100%; }
+    .logo-link { display: inline-flex; align-items: center; transition: opacity 0.2s ease; }
+    .logo-link:hover { opacity: 0.75; }
+    .nav-hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; cursor: pointer; flex: none; padding: 0; }
+    .mm-link { font-family: var(--font-sans); font-size: 22px; font-weight: 600; color: #fff; text-decoration: none; padding: 17px 2px; border-bottom: 1px solid rgba(255,255,255,0.08); transition: color 0.2s ease; }
+    .mm-link:hover { color: var(--sprint-lime); }
+    @media (max-width: 980px) {
+      .nav-hamburger { display: inline-flex; }
+      .mm-hide-mobile { display: none !important; }
+    }
+    @media (min-width: 981px) {
+      #mobile-menu { display: none !important; }
+    }
+
+    /* FAQ accordion */
+    details.faq-item > summary { list-style: none; }
+    details.faq-item > summary::-webkit-details-marker { display: none; }
+    details.faq-item[open] .faq-plus { transform: rotate(45deg); }
+    details.faq-item[open] .faq-q { color: #ffffff; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 1100px) {
+      .pricing-grid { grid-template-columns: repeat(2,1fr) !important; }
+      .platform-cards { grid-template-columns: repeat(2,1fr) !important; }
+    }
+    @media (max-width: 980px) {
+      .nav-links { display: none !important; }
+      .hero-section { min-height: auto !important; }
+      .hero-inner { padding-top: 108px !important; padding-bottom: 8px !important; }
+      .hero-media { position: static !important; top: auto !important; left: auto !important; transform: none !important; height: auto !important; width: 100% !important; margin: 46px auto 0 !important; padding: 0 24px !important; }
+      .hero-media-frame { height: auto !important; }
+      .hero-strip { margin-top: 40px !important; padding-bottom: 20px !important; }
+      .why-grid { grid-template-columns: 1fr !important; }
+      .showreel-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .svc-float { display: none !important; }
+      .svc-mobile { display: block !important; }
+      .addon-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+      .addon-header { position: static !important; top: auto !important; order: -1 !important; }
+      .platform-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .platform-cards {
+        max-height: 236px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 6px 2px !important;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 14%, #000 34%, #000 66%, rgba(0,0,0,0.15) 86%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 14%, #000 34%, #000 66%, rgba(0,0,0,0.15) 86%, transparent 100%);
+        scrollbar-width: none;
+      }
+      .platform-cards::-webkit-scrollbar { display: none; }
+      .footer-grid { grid-template-columns: repeat(2,1fr) !important; }
+    }
+    @media (max-width: 768px) {
+      .px { padding-left: 22px !important; padding-right: 22px !important; }
+      section.px { padding-top: 60px !important; padding-bottom: 60px !important; }
+      #addons.px { padding-top: 4px !important; }
+      .nav-inner { gap: 16px !important; }
+      .nav-actions { gap: 14px !important; }
+      .trust-bar { display: flex !important; flex-direction: column !important; align-items: stretch !important; width: 100% !important; max-width: 360px !important; }
+      .trust-div { width: auto !important; height: 1px !important; }
+      .trust-cell { justify-content: flex-start !important; }
+    }
+    @media (max-width: 640px) {
+      .hero-h1 { white-space: normal !important; }
+      .hero-copy { max-width: 100% !important; }
+      .hero-cta { flex-direction: column !important; align-items: stretch !important; }
+      .hero-cta > a { justify-content: center !important; }
+      .pricing-grid { grid-template-columns: 1fr !important; }
+      .platform-cards { grid-template-columns: 1fr !important; }
+      .avatar-cluster { transform: scale(0.84); }
+      .logo-track { gap: 40px !important; }
+      .logo-track img { height: 26px !important; }
+      .testi-arrow { display: none !important; }
+      .addon-card-grid { grid-template-columns: 1fr !important; gap: 22px !important; }
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</helmet>
+
+<div style="background:#0c1321;color:#ffffff;font-family:var(--font-sans);min-height:100vh;overflow-x:clip;position:relative;">
+
+  <!-- ambient glow -->
+  <div style="position:absolute;top:-260px;right:-160px;width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,rgba(93,107,255,0.28) 0%,rgba(138,92,255,0.10) 38%,rgba(12,19,33,0) 70%);pointer-events:none;filter:blur(4px);z-index:0;"></div>
+
+  <!-- NAV -->
+  <header style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(12,19,33,0.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div class="nav-inner px" style="max-width:1360px;margin:0 auto;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;">
+    <div style="display:flex;align-items:center;gap:56px;">
+      <a href="Hero.dc.html" class="logo-link" aria-label="Sprint home"><img src="assets/sprint-logo-white.svg" alt="Sprint" style="height:26px;width:auto;display:block;" /></a>
+      <nav class="nav-links" style="display:flex;align-items:center;gap:34px;">
+        <a href="#why" class="navlink" style="font-size:15px;font-weight:500;">Services</a>
+        <a href="#why" class="navlink" style="font-size:15px;font-weight:500;">Why Sprint</a>
+        <a href="#showreel" class="navlink" style="font-size:15px;font-weight:500;">Work</a>
+        <a href="#pricing" class="navlink" style="font-size:15px;font-weight:500;">Pricing</a>
+        <a href="FAQ.dc.html" class="navlink" style="font-size:15px;font-weight:500;">FAQ</a>
+      </nav>
+    </div>
+    <div class="nav-actions" style="display:flex;align-items:center;gap:22px;">
+      <a href="#" class="navlink mm-hide-mobile" style="font-size:15px;font-weight:500;white-space:nowrap;">Sign In</a>
+      <a class="cta cta-lime" href="#" data-open-contact="1" data-intent="demo" style="display:inline-flex;align-items:center;gap:10px;background:var(--sprint-lime);color:#0c1321;text-decoration:none;font-size:14px;font-weight:600;padding:11px 18px;border-radius:4px;white-space:nowrap;">
+        Book Demo
+      </a>
+      <button class="nav-hamburger" id="nav-burger" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"><path d="M3 6h18"></path><path d="M3 12h18"></path><path d="M3 18h18"></path></svg>
+      </button>
+    </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(10,15,28,0.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:26px 30px 40px;flex-direction:column;opacity:0;transition:opacity 0.25s ease;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;">
+      <img src="assets/sprint-logo-white.svg" alt="Sprint" style="height:24px;width:auto;display:block;" />
+      <button id="mm-close" aria-label="Close menu" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;padding:0;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
+      </button>
+    </div>
+    <a href="#why" class="mm-link">Services</a>
+    <a href="#why" class="mm-link">Why Sprint</a>
+    <a href="#showreel" class="mm-link">Work</a>
+    <a href="#pricing" class="mm-link">Pricing</a>
+    <a href="FAQ.dc.html" class="mm-link">FAQ</a>
+    <a href="#" class="mm-link">Sign In</a>
+    <a href="#" class="mm-link cta cta-lime" data-open-contact="1" data-intent="demo" style="margin-top:26px;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--sprint-lime);color:#0c1321;text-decoration:none;font-size:16px;font-weight:600;padding:16px 0;border-radius:4px;border-bottom:none;">Book a Demo</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero-section" style="position:relative;z-index:10;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;">
+
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+      <div style="position:absolute;top:-140px;right:-110px;width:1080px;height:1020px;max-width:72vw;border-radius:50%;background:radial-gradient(circle,rgba(93,107,255,0.30),rgba(138,92,255,0.12) 42%,rgba(12,19,33,0) 70%);filter:blur(34px);"></div>
+      <div style="position:absolute;bottom:-220px;right:120px;width:920px;height:920px;max-width:60vw;border-radius:50%;background:radial-gradient(circle,rgba(0,200,255,0.13),rgba(93,107,255,0.10) 40%,rgba(12,19,33,0) 68%);filter:blur(40px);"></div>
+    </div>
+
+    <div style="position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(to bottom,rgba(12,19,33,0) 0%,rgba(12,19,33,0.7) 55%,#0c1321 100%);pointer-events:none;z-index:1;"></div>
+
+    <div class="hero-inner px" style="position:relative;z-index:2;max-width:1360px;margin:0 auto;width:100%;padding:40px 48px;flex:1;display:flex;align-items:center;">
+    <div class="hero-copy" style="max-width:560px;">
+      <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:26px;">[ CREATIVE + AI SOLUTIONS ]</div>
+
+      <h1 class="hero-h1" style="font-family:var(--font-sans);font-weight:600;font-size:clamp(44px,5vw,76px);line-height:0.94;letter-spacing:-0.035em;margin:0 0 26px;white-space:nowrap;">
+        Creative &amp; tech<br>that work<span class="s-dot">.</span>
+      </h1>
+
+      <p style="font-size:19px;line-height:1.55;color:rgba(255,255,255,0.68);margin:0 0 38px;max-width:480px;letter-spacing:-0.01em;">
+        Creative services and business platforms powered by AI, built to save you time, freeing your team to move faster and focus on what matters.
+      </p>
+
+      <div class="hero-cta" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <a class="cta cta-lime" href="#why" style="display:inline-flex;align-items:center;gap:12px;background:var(--sprint-lime);color:#0c1321;text-decoration:none;font-size:16px;font-weight:600;padding:15px 24px;border-radius:4px;">
+          Explore Creative
+          <span style="display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;background:rgba(12,19,33,0.16);border-radius:3px;">→</span>
+        </a>
+        <a class="cta cta-ghost" href="#platform" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.05);color:#ffffff;text-decoration:none;font-size:16px;font-weight:600;padding:15px 24px;border-radius:4px;border:1px solid rgba(255,255,255,0.14);">
+          Explore AI Solutions
+          <span style="display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;background:rgba(255,255,255,0.10);border-radius:3px;">→</span>
+        </a>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;margin-top:34px;">
+        <span style="color:var(--sprint-lime);font-size:15px;letter-spacing:2px;">★★★★★</span>
+        <span style="font-size:14px;color:rgba(255,255,255,0.55);">Trusted by teams from Fortune 500 to fast growing SMBs</span>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="hero-media" style="position:absolute;top:50%;transform:translateY(-50%);left:clamp(640px,50vw,920px);height:min(60vh,600px);z-index:1;">
+      <div class="hero-media-frame" style="height:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);box-shadow:0 50px 100px -34px rgba(0,0,0,0.8);background:#0c1321;">
+        <video ref="{{ heroVideoRef }}" autoplay muted loop playsinline style="display:block;width:100%;height:100%;object-fit:cover;">
+          <source src="https://r2.vidzflow.com/source/ed0f5832-15ba-4b45-9c00-74433019fddf.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+
+    <!-- CLIENT LOGO STRIP (pinned to hero bottom) -->
+    <div class="hero-strip px" style="position:relative;z-index:2;width:100%;max-width:1360px;margin:0 auto;padding:0 48px 48px;">
+    <div class="s-eyebrow" style="color:rgba(255,255,255,0.42);text-align:center;margin-bottom:22px;">[ TRUSTED BY ]</div>
+    <div style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,#000 9%,#000 91%,transparent 100%);">
+      <div class="logo-track" style="display:flex;align-items:center;gap:56px;width:max-content;opacity:0.7;animation:logomarquee 54s linear infinite;">
+        <img src="assets/logos/logo01.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo02.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo03.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo04.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo05.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo06.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo07.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo08.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo09.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo10.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo11.svg" alt="" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo01.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo02.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo03.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo04.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo05.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo06.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo07.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo08.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo09.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo10.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+        <img src="assets/logos/logo11.svg" alt="" aria-hidden="true" style="height:28px;width:auto;display:block;" />
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- WHY / CARDS SECTION -->
+  <section id="why" class="px" style="position:relative;z-index:10;max-width:1360px;margin:0 auto;padding:96px 48px 40px;">
+    <div style="max-width:780px;margin:0 auto 52px;text-align:center;">
+      <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:20px;">[ THE PLATFORM ]</div>
+      <h2 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-0.03em;margin:0;">
+        Everything a creative department is<span class="s-dot">.</span> None of the overhead<span class="s-dot">.</span>
+      </h2>
+    </div>
+
+    <div class="why-grid" ref="{{ whyRef }}" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+      <div style="position:relative;padding:20px 20px 34px;border-radius:4px;background:#12182b;border:1px solid rgba(255,255,255,0.10);overflow:hidden;">
+        <div style="position:absolute;inset:0;border-radius:4px;background:radial-gradient(ellipse 120% 90% at 72% 22%,rgba(93,107,255,0.28),rgba(138,92,255,0.11) 42%,rgba(0,200,255,0.09) 64%,transparent 84%);pointer-events:none;"></div>
+        <div style="position:relative;z-index:1;height:180px;margin-bottom:26px;display:flex;align-items:center;justify-content:center;">
+          <div class="avatar-cluster" style="display:flex;align-items:center;">
+            <img src="assets/team/skye.webp" alt="Skye" width="200" height="200" loading="lazy" style="width:82px;height:82px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(12,18,40,0.95),0 0 0 3.5px rgba(255,255,255,0.15);margin-top:14px;animation:floatB 7s ease-in-out 0s infinite" />
+            <img src="assets/team/graham.webp" alt="Graham" width="200" height="200" loading="lazy" style="width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(12,18,40,0.95),0 0 0 3.5px rgba(255,255,255,0.15);margin-left:-18px;margin-top:-8px;z-index:3;animation:floatA 7.6s ease-in-out 0.5s infinite" />
+            <img src="assets/team/trae.webp" alt="Trae" width="200" height="200" loading="lazy" style="width:88px;height:88px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(12,18,40,0.95),0 0 0 3.5px rgba(255,255,255,0.15);margin-left:-18px;margin-top:4px;z-index:2;animation:floatB 8.3s ease-in-out 1s infinite" />
+            <img src="assets/team/can.webp" alt="Can" width="200" height="200" loading="lazy" style="width:80px;height:80px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(12,18,40,0.95),0 0 0 3.5px rgba(255,255,255,0.15);margin-left:-18px;margin-top:-12px;z-index:1;animation:floatA 6.6s ease-in-out 0.3s infinite" />
+          </div>
+        </div>
+        <div style="padding:0 14px;">
+          <h3 style="font-family:var(--font-sans);font-weight:600;font-size:22px;letter-spacing:-0.02em;margin:0 0 12px;">A senior team on demand</h3>
+          <p style="font-size:15px;line-height:1.55;color:rgba(255,255,255,0.62);margin:0;">Brand, digital, print and video specialists working as your department, with no recruiting, retainers, or overhead.</p>
+        </div>
+      </div>
+
+      <div style="position:relative;padding:20px 20px 34px;border-radius:4px;background:#12182b;border:1px solid rgba(255,255,255,0.10);overflow:hidden;">
+        <div style="position:absolute;inset:0;border-radius:4px;background:radial-gradient(ellipse 120% 90% at 72% 22%,rgba(93,107,255,0.28),rgba(138,92,255,0.11) 42%,rgba(0,200,255,0.09) 64%,transparent 84%);pointer-events:none;"></div>
+        <div style="position:relative;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);height:196px;margin-bottom:26px;background:#0c1321;">
+          <img src="assets/platform.webp" alt="Sprint workflow" style="display:block;width:100%;height:100%;object-fit:cover;object-position:46% 58%;" />
+        </div>
+        <div style="padding:0 14px;">
+          <h3 style="font-family:var(--font-sans);font-weight:600;font-size:22px;letter-spacing:-0.02em;margin:0 0 12px;">Delivered in days, not weeks</h3>
+          <p style="font-size:15px;line-height:1.55;color:rgba(255,255,255,0.62);margin:0;">Submit unlimited requests and we turn them around fast, one after another, so your marketing never waits on creative.</p>
+        </div>
+      </div>
+
+      <div style="position:relative;padding:20px 20px 34px;border-radius:4px;background:#12182b;border:1px solid rgba(255,255,255,0.10);overflow:hidden;">
+        <div style="position:absolute;inset:0;border-radius:4px;background:radial-gradient(ellipse 120% 90% at 72% 22%,rgba(93,107,255,0.28),rgba(138,92,255,0.11) 42%,rgba(0,200,255,0.09) 64%,transparent 84%);pointer-events:none;"></div>
+        <div style="position:relative;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);height:196px;margin-bottom:26px;background:#0c1321;">
+          <img src="assets/platform.webp" alt="Sprint activity" style="display:block;width:100%;height:100%;object-fit:cover;object-position:92% 62%;" />
+        </div>
+        <div style="padding:0 14px;">
+          <h3 style="font-family:var(--font-sans);font-weight:600;font-size:22px;letter-spacing:-0.02em;margin:0 0 12px;">One platform to run it all</h3>
+          <p style="font-size:15px;line-height:1.55;color:rgba(255,255,255,0.62);margin:0;">Track projects, review deliverables, message the team and manage every brand asset in one workspace, built around you.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SHOWREEL / CREATIVE SERVICES -->
+  <section id="showreel" class="px" style="position:relative;z-index:10;max-width:1360px;margin:0 auto;padding:100px 48px 60px;">
+    <div class="showreel-grid" style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:60px;align-items:center;">
+
+      <!-- LEFT: glass video player with floating lime service cards -->
+      <div style="position:relative;min-width:0;">
+        <div style="position:absolute;inset:-9% -7%;border-radius:20px;background:radial-gradient(ellipse at 50% 46%,rgba(93,107,255,0.32),rgba(138,92,255,0.13) 40%,rgba(0,200,255,0.12) 62%,transparent 78%);filter:blur(44px);z-index:0;pointer-events:none;"></div>
+        <div style="position:relative;z-index:1;border-radius:10px;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 40px 90px -34px rgba(0,0,0,0.75);">
+          <div style="position:relative;border-radius:6px;overflow:hidden;background:#0c1321;aspect-ratio:16/9;">
+            <video ref="{{ videoRef }}" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <source src="https://r2.vidzflow.com/source/ed0f5832-15ba-4b45-9c00-74433019fddf.mp4" type="video/mp4" />
+            </video>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(to top,rgba(12,19,33,0.78),rgba(12,19,33,0) 100%);display:flex;align-items:center;gap:11px;pointer-events:none;">
+              <span style="color:#fff;font-size:13px;line-height:1;">▶</span>
+              <span class="s-mono" style="font-size:12px;color:rgba(255,255,255,0.85);">SHOWREEL 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- floating lime service cards -->
+        <div class="svc-float" style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:3;animation:floatCenter 6.5s ease-in-out 0s infinite;display:flex;align-items:center;gap:10px;background:rgba(11,17,44,0.82);color:#ffffff;padding:12px 15px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px -16px rgba(10,16,52,0.72);">
+          <img src="assets/icons/megaphone.svg" width="19" height="19" alt="" style="display:block;" />
+          <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Digital Marketing</span>
+        </div>
+        <div class="svc-float" style="position:absolute;top:34px;left:-26px;z-index:2;animation:floatA 7.2s ease-in-out 0.5s infinite;display:flex;align-items:center;gap:10px;background:rgba(11,17,44,0.82);color:#ffffff;padding:12px 15px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px -16px rgba(10,16,52,0.72);">
+          <img src="assets/icons/palette.svg" width="19" height="19" alt="" style="display:block;" />
+          <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Brand Identity</span>
+        </div>
+        <div class="svc-float" style="position:absolute;bottom:78px;left:-26px;z-index:2;animation:floatB 8s ease-in-out 1s infinite;display:flex;align-items:center;gap:10px;background:rgba(11,17,44,0.82);color:#ffffff;padding:12px 15px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px -16px rgba(10,16,52,0.72);">
+          <img src="assets/icons/monitor.svg" width="19" height="19" alt="" style="display:block;" />
+          <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Digital &amp; Social</span>
+        </div>
+        <div class="svc-float" style="position:absolute;top:44px;right:-26px;z-index:2;animation:floatA 6.8s ease-in-out 0.3s infinite;display:flex;align-items:center;gap:10px;background:rgba(11,17,44,0.82);color:#ffffff;padding:12px 15px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px -16px rgba(10,16,52,0.72);">
+          <img src="assets/icons/clapperboard.svg" width="19" height="19" alt="" style="display:block;" />
+          <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Video &amp; Motion</span>
+        </div>
+        <div class="svc-float" style="position:absolute;bottom:24px;right:-26px;z-index:2;animation:floatB 7.6s ease-in-out 1.4s infinite;display:flex;align-items:center;gap:10px;background:rgba(11,17,44,0.82);color:#ffffff;padding:12px 15px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px -16px rgba(10,16,52,0.72);">
+          <img src="assets/icons/printer.svg" width="19" height="19" alt="" style="display:block;" />
+          <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Print Design</span>
+        </div>
+        <div class="svc-float" style="position:absolute;top:46%;right:-30px;z-index:2;animation:floatA 8.4s ease-in-out 0.8s infinite;display:flex;align-items:center;gap:10px;background:rgba(11,17,44,0.82);color:#ffffff;padding:12px 15px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px -16px rgba(10,16,52,0.72);">
+          <img src="assets/icons/app-window.svg" width="19" height="19" alt="" style="display:block;" />
+          <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Web Design</span>
+        </div>
+
+        <!-- mobile-only service chip marquee -->
+        <div class="svc-mobile" style="display:none;margin-top:16px;position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);">
+          <div style="display:flex;align-items:center;gap:10px;width:max-content;animation:logomarquee 24s linear infinite;">
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;"><img src="assets/icons/megaphone.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Digital Marketing</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;"><img src="assets/icons/palette.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Brand Identity</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;"><img src="assets/icons/clapperboard.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Video &amp; Motion</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;"><img src="assets/icons/app-window.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Web Design</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;"><img src="assets/icons/printer.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Print Design</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;"><img src="assets/icons/monitor.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Digital &amp; Social</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;" aria-hidden="true"><img src="assets/icons/megaphone.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Digital Marketing</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;" aria-hidden="true"><img src="assets/icons/palette.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Brand Identity</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;" aria-hidden="true"><img src="assets/icons/clapperboard.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Video &amp; Motion</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;" aria-hidden="true"><img src="assets/icons/app-window.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Web Design</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;" aria-hidden="true"><img src="assets/icons/printer.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Print Design</span></div>
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(11,17,44,0.82);color:#fff;padding:11px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);white-space:nowrap;" aria-hidden="true"><img src="assets/icons/monitor.svg" width="18" height="18" alt="" /><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Digital &amp; Social</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: copy -->
+      <div style="max-width:460px;">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ CREATIVE SERVICES ]</div>
+        <h2 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-0.03em;margin:0 0 24px;">
+          Full service creative, in motion<span class="s-dot">.</span>
+        </h2>
+        <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,0.66);margin:0 0 34px;">
+          Brand identity, digital, print, and broadcast standard video and motion. One team, produced end to end and delivered through your Sprint platform.
+        </p>
+        <a class="cta cta-lime" href="#pricing" style="display:inline-flex;align-items:center;gap:12px;background:var(--sprint-lime);color:#0c1321;text-decoration:none;font-size:16px;font-weight:600;padding:15px 24px;border-radius:4px;">
+          Sign Up
+          <span style="display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;background:rgba(12,19,33,0.16);border-radius:3px;">→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="px" style="position:relative;z-index:10;max-width:1360px;margin:0 auto;padding:112px 48px 120px;">
+    <div style="text-align:center;max-width:640px;margin:0 auto 60px;">
+      <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ PLANS &amp; PRICING ]</div>
+      <h2 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(34px,4.4vw,58px);line-height:1.04;letter-spacing:-0.03em;margin:0 0 30px;">
+        Plans that fit how you work<span class="s-dot">.</span>
+      </h2>
+    </div>
+
+    <div class="pricing-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start;">
+
+      <!-- Starter -->
+      <div style="position:relative;padding:32px 28px 34px;border-radius:4px;background:radial-gradient(ellipse 135% 75% at 80% -5%,rgba(93,107,255,0.22),rgba(138,92,255,0.09) 42%,rgba(0,200,255,0.07) 64%,rgba(255,255,255,0.015) 82%),#111a35;border:1px solid rgba(120,130,255,0.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ FOR SOLO FOUNDERS ]</div>
+        <div style="font-family:var(--font-sans);font-weight:600;font-size:30px;letter-spacing:-0.02em;padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.09);">Starter</div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:22px;">
+          <span style="font-size:34px;font-weight:600;letter-spacing:-0.02em;">$3,500</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.2;">per month<br>one flat fee</span>
+        </div>
+        <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.62);margin:0 0 22px;min-height:42px;">Everything a founder needs to launch and look sharp.</p>
+        <div style="height:1px;background:rgba(255,255,255,0.10);margin-bottom:22px;"></div>
+        <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:18px;">Includes</div>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-bottom:30px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">1 active request at a time</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Brand, digital &amp; print design</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Unlimited revisions</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Dashboard &amp; asset library</span></div>
+        </div>
+        <a class="cta cta-ghost" href="https://buy.stripe.com/eVq9AU2bbezJ3kXgTo3oA0g" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;padding:13px 0;border-radius:4px;border:1px solid rgba(255,255,255,0.16);">Get started</a>
+      </div>
+
+      <!-- Growth -->
+      <div style="position:relative;padding:32px 28px 34px;border-radius:4px;background:radial-gradient(ellipse 135% 75% at 80% -5%,rgba(93,107,255,0.24),rgba(138,92,255,0.10) 42%,rgba(0,200,255,0.08) 64%,rgba(255,255,255,0.015) 82%),#121c3a;border:1px solid rgba(126,136,255,0.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ FOR GROWING BRANDS ]</div>
+        <div style="font-family:var(--font-sans);font-weight:600;font-size:30px;letter-spacing:-0.02em;padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.09);">Growth</div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:22px;">
+          <span style="font-size:34px;font-weight:600;letter-spacing:-0.02em;">$4,500</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.2;">per month<br>one flat fee</span>
+        </div>
+        <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.68);margin:0 0 22px;min-height:42px;">For brands scaling their marketing across every channel.</p>
+        <div style="height:1px;background:rgba(255,255,255,0.12);margin-bottom:22px;"></div>
+        <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px;">Includes</div>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-bottom:30px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:#ffffff;">2 active requests</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:#ffffff;">Brand, digital &amp; print design</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:#ffffff;">Unlimited revisions</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:#ffffff;">Dashboard &amp; asset library</span></div>
+        </div>
+        <a class="cta cta-ghost" href="https://buy.stripe.com/cNi14o3ffbnxbRt5aG3oA0f" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;padding:13px 0;border-radius:4px;border:1px solid rgba(255,255,255,0.16);">Get started</a>
+      </div>
+
+      <!-- Scale (popular) -->
+      <div style="position:relative;padding:32px 28px 34px;border-radius:4px;background:radial-gradient(ellipse 135% 78% at 80% -5%,rgba(93,107,255,0.24),rgba(138,92,255,0.10) 42%,rgba(0,200,255,0.08) 64%,rgba(255,255,255,0.015) 82%),#121c3a;border:1px solid rgba(181,230,2,0.45);box-shadow:0 0 0 1px rgba(181,230,2,0.12),0 20px 50px -24px rgba(181,230,2,0.30);">
+        <div style="position:absolute;top:-11px;right:16px;background:var(--sprint-lime);color:#0c1321;font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:5px 8px;border-radius:3px;">Most popular</div>
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ FOR MARKETING TEAMS ]</div>
+        <div style="font-family:var(--font-sans);font-weight:600;font-size:30px;letter-spacing:-0.02em;padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.09);">Scale</div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:22px;">
+          <span style="font-size:34px;font-weight:600;letter-spacing:-0.02em;">$7,500</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.2;">per month<br>one flat fee</span>
+        </div>
+        <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.62);margin:0 0 22px;min-height:42px;">Full service creative firepower, including video and motion.</p>
+        <div style="height:1px;background:rgba(255,255,255,0.10);margin-bottom:22px;"></div>
+        <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:18px;">Everything in Growth, plus</div>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-bottom:30px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">2 active requests</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">1 active video request</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Motion &amp; animation</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Quarterly brand reviews</span></div>
+        </div>
+        <a class="cta cta-lime" href="https://buy.stripe.com/6oUeVe1773V58Fhav03oA0e" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;background:var(--sprint-lime);color:#0c1321;text-decoration:none;font-size:14px;font-weight:600;padding:13px 0;border-radius:4px;">Get started</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div style="position:relative;padding:32px 28px 34px;border-radius:4px;background:radial-gradient(ellipse 140% 70% at 82% -8%,rgba(138,92,255,0.15),rgba(93,107,255,0.05) 44%,transparent 76%),linear-gradient(180deg,#0c1124,#080b18);border:1px solid rgba(138,92,255,0.24);box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 24px 60px -30px rgba(0,0,0,0.8);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ AI SOLUTIONS ]</div>
+        <div style="font-family:var(--font-sans);font-weight:600;font-size:30px;letter-spacing:-0.02em;padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.09);">Enterprise</div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:22px;">
+          <span style="font-size:34px;font-weight:600;letter-spacing:-0.02em;">Custom</span>
+        </div>
+        <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.62);margin:0 0 22px;min-height:42px;">Bespoke AI platforms and automation, built around your operation.</p>
+        <div style="height:1px;background:rgba(255,255,255,0.10);margin-bottom:22px;"></div>
+        <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:18px;">Includes</div>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-bottom:30px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Custom AI platform build</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Workflow automation &amp; integrations</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Dedicated build team</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:15px;height:15px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Custom SLAs</span></div>
+        </div>
+        <a class="cta cta-ghost" href="#" data-open-contact="1" data-intent="ai-platform" style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;padding:13px 0;border-radius:4px;border:1px solid rgba(255,255,255,0.16);">Contact sales</a>
+      </div>
+
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:38px;">
+      <div class="trust-bar" style="display:inline-flex;align-items:stretch;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.025);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);">
+        <div class="trust-cell" style="display:flex;align-items:center;gap:11px;padding:16px 24px;">
+          <span style="width:22px;height:22px;flex:none;background:var(--sprint-lime);-webkit-mask:url(assets/icons/refresh.svg) center/contain no-repeat;mask:url(assets/icons/refresh.svg) center/contain no-repeat;"></span>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#ffffff;line-height:1.3;">6-month rolling terms</div>
+            <div class="s-mono" style="font-size:11px;letter-spacing:0.03em;color:rgba(255,255,255,0.5);">Renews automatically</div>
+          </div>
+        </div>
+        <div class="trust-div" style="width:1px;background:rgba(255,255,255,0.1);"></div>
+        <div class="trust-cell" style="display:flex;align-items:center;gap:11px;padding:16px 24px;">
+          <span style="width:22px;height:22px;flex:none;background:var(--sprint-lime);-webkit-mask:url(assets/icons/pause.svg) center/contain no-repeat;mask:url(assets/icons/pause.svg) center/contain no-repeat;"></span>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#ffffff;line-height:1.3;">Pause anytime</div>
+            <div class="s-mono" style="font-size:11px;letter-spacing:0.03em;color:rgba(255,255,255,0.5);">Just 30 days' notice before your term ends</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD-ON SERVICES (scoped, no pricing) -->
+  <section id="addons" class="px" style="position:relative;z-index:10;max-width:1360px;margin:0 auto;padding:20px 48px 120px;">
+
+    <div class="addon-grid" style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,0.78fr);gap:60px;align-items:start;">
+
+      <!-- LEFT: add-on blocks -->
+      <div ref="{{ addonRef }}" style="display:flex;flex-direction:column;gap:20px;">
+
+        <!-- Digital Marketing -->
+        <div style="position:relative;padding:34px 34px 28px;border-radius:6px;background:radial-gradient(ellipse 120% 130% at 88% -10%,rgba(93,107,255,0.22),rgba(138,92,255,0.09) 44%,rgba(0,200,255,0.07) 66%,rgba(255,255,255,0.015) 84%),#111a35;border:1px solid rgba(120,130,255,0.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:border-color 0.25s ease,box-shadow 0.25s ease;" style-hover="border-color:rgba(181,230,2,0.45);box-shadow:0 0 0 1px rgba(181,230,2,0.12),0 20px 50px -30px rgba(181,230,2,0.28);">
+          <div class="addon-card-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;">
+            <div>
+              <div class="s-mono" style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--sprint-lime);margin-bottom:16px;">Scoped to fit</div>
+              <div style="font-family:var(--font-sans);font-weight:600;font-size:26px;letter-spacing:-0.025em;margin-bottom:12px;">Digital Marketing<span class="s-dot">.</span></div>
+              <p style="font-size:15px;line-height:1.5;color:rgba(255,255,255,0.58);margin:0;">End to end campaigns that turn attention into pipeline.</p>
+            </div>
+            <div>
+              <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;">Includes</div>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Paid media, search &amp; social</span></div>
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">SEO &amp; content strategy</span></div>
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Email &amp; lifecycle flows</span></div>
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Landing pages &amp; CRO</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.09);">
+            <a href="#" data-open-contact="1" data-intent="addon" data-service="Digital Marketing" class="scope-btn" style="display:inline-flex;align-items:center;gap:13px;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap;">
+              <span class="scope-label">Request a scope</span>
+              <span class="scope-circle" style="display:inline-flex;width:40px;height:40px;flex:none;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.22);border-radius:50%;font-size:16px;overflow:hidden;"><span class="scope-arrow" style="display:inline-block;">→</span></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Social Media Management -->
+        <div style="position:relative;padding:34px 34px 28px;border-radius:6px;background:radial-gradient(ellipse 120% 130% at 88% -10%,rgba(93,107,255,0.22),rgba(138,92,255,0.09) 44%,rgba(0,200,255,0.07) 66%,rgba(255,255,255,0.015) 84%),#111a35;border:1px solid rgba(120,130,255,0.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:border-color 0.25s ease,box-shadow 0.25s ease;" style-hover="border-color:rgba(181,230,2,0.45);box-shadow:0 0 0 1px rgba(181,230,2,0.12),0 20px 50px -30px rgba(181,230,2,0.28);">
+          <div class="addon-card-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;">
+            <div>
+              <div class="s-mono" style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--sprint-lime);margin-bottom:16px;">Scoped to fit</div>
+              <div style="font-family:var(--font-sans);font-weight:600;font-size:26px;letter-spacing:-0.025em;margin-bottom:12px;">Social Media Management<span class="s-dot">.</span></div>
+              <p style="font-size:15px;line-height:1.5;color:rgba(255,255,255,0.58);margin:0;">Always on presence, planned, produced and posted.</p>
+            </div>
+            <div>
+              <div class="s-mono" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;">Includes</div>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Content calendar &amp; scheduling</span></div>
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Post, story &amp; reel design</span></div>
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Community management</span></div>
+                <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:14px;height:14px;flex:none;margin-top:2px;background:var(--sprint-lime);-webkit-mask:url(assets/icons/sparkle.svg) center/contain no-repeat;mask:url(assets/icons/sparkle.svg) center/contain no-repeat;"></span><span style="font-size:14px;color:rgba(255,255,255,0.82);">Monthly performance reporting</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.09);">
+            <a href="#" data-open-contact="1" data-intent="addon" data-service="Social Media Management" class="scope-btn" style="display:inline-flex;align-items:center;gap:13px;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap;">
+              <span class="scope-label">Request a scope</span>
+              <span class="scope-circle" style="display:inline-flex;width:40px;height:40px;flex:none;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.22);border-radius:50%;font-size:16px;overflow:hidden;"><span class="scope-arrow" style="display:inline-block;">→</span></span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: header (sticky) -->
+      <div class="addon-header" style="position:sticky;top:120px;">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ ADD ON SERVICES ]</div>
+        <h2 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(32px,3.4vw,48px);line-height:1.04;letter-spacing:-0.03em;margin:0 0 22px;">
+          Bigger goals?<br>Add it on<span class="s-dot">.</span>
+        </h2>
+        <p style="font-size:16px;line-height:1.6;color:rgba(255,255,255,0.62);margin:0;">Programs that run alongside your plan. Every program is scoped to your goals, so pricing is built around what you actually need.</p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:30px;">
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">Paid Ads</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">SEO / AEO</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">Email &amp; CRM</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">Content</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">Analytics</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">PR &amp; Outreach</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">Email</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">Lead Gen</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">SMS</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:8px 15px;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease,box-shadow 0.25s ease;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.4);color:#ffffff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.12);">Hyperlocal</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BEYOND CREATIVE / AI PLATFORM -->
+  <section id="platform" class="px" style="position:relative;z-index:10;overflow:hidden;padding:120px 48px 150px;background:#0c1321;">
+
+    <!-- ambient glow (fills section) -->
+    <div style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;">
+      <div style="position:absolute;top:-180px;right:-140px;width:1150px;height:1150px;max-width:80vw;border-radius:50%;background:radial-gradient(circle,rgba(93,107,255,0.30),rgba(138,92,255,0.12) 42%,rgba(12,19,33,0) 70%);filter:blur(30px);"></div>
+      <div style="position:absolute;left:0;right:0;bottom:-40px;height:540px;background:radial-gradient(ellipse 92% 100% at 62% 100%,rgba(93,107,255,0.22),rgba(0,200,255,0.08) 46%,rgba(12,19,33,0) 74%);filter:blur(30px);"></div>
+    </div>
+
+    <div style="position:absolute;top:0;left:0;right:0;height:300px;background:linear-gradient(to bottom,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.42) 26%,rgba(0,0,0,0) 100%);z-index:1;pointer-events:none;"></div>
+
+    <div ref="{{ revealRef }}" class="platform-grid" style="position:relative;z-index:2;max-width:1360px;margin:0 auto;display:grid;grid-template-columns:minmax(0,0.72fr) minmax(0,1.28fr);gap:56px;align-items:start;will-change:transform;">
+
+      <!-- heading -->
+      <div style="max-width:560px;">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:22px;">[ BEYOND CREATIVE ]</div>
+        <h2 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-0.03em;margin:0 0 26px;">
+          Need a platform like Sprint?
+        </h2>
+        <p style="font-size:19px;line-height:1.55;color:rgba(255,255,255,0.78);margin:0 0 14px;font-weight:500;">We don't just create great work. We build better ways to work.</p>
+        <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,0.62);margin:0 0 34px;max-width:540px;">Our AI team designs bespoke client portals, workflow automation and internal platforms that help businesses operate more efficiently.</p>
+        <a class="cta cta-lime" href="#" data-open-contact="1" data-intent="ai-consultation" style="display:inline-flex;align-items:center;gap:12px;background:var(--sprint-lime);color:#0c1321;text-decoration:none;font-size:16px;font-weight:600;padding:15px 24px;border-radius:4px;">
+          Free Consultation
+          <span style="display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;background:rgba(12,19,33,0.14);border-radius:3px;">→</span>
+        </a>
+      </div>
+
+      <!-- capability panels -->
+      <div ref="{{ cardsRef }}" class="platform-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;">
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Client Portals</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Professional self service experiences</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Workflow Automation</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Reduce manual admin and repetitive tasks</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Team Collaboration</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Everything in one shared workspace</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">AI Assistants</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Intelligent support built into your business</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Dashboards &amp; Reporting</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Live operational visibility</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Secure Documents</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">One source of truth for your organisation</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Approvals</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Faster decisions with complete audit trails</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Integrations</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Connect the tools you already use</p>
+        </div>
+        <div style="padding:22px 22px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 44px -28px rgba(0,0,0,0.7);opacity:0;transform:translateY(42px);transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease,opacity 640ms ease,transform 640ms cubic-bezier(0.16,1,0.3,1);" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);box-shadow:0 0 0 1px rgba(181,230,2,0.26),0 16px 46px -16px rgba(181,230,2,0.36);">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--sprint-lime);border-radius:50%;"><span style="width:11px;height:11px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span></span><span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Notifications</span></div>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:0;padding-left:29px;">Keep everyone informed automatically</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="px" style="position:relative;z-index:10;overflow:hidden;padding:110px 48px 120px;">
+    <div style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1100px;height:760px;max-width:90vw;border-radius:50%;background:radial-gradient(ellipse,rgba(93,107,255,0.20),rgba(138,92,255,0.08) 45%,transparent 72%);filter:blur(18px);"></div>
+    </div>
+
+    <div style="position:relative;z-index:2;max-width:960px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:52px;">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:20px;">[ WHAT CLIENTS SAY ]</div>
+        <h2 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-0.03em;margin:0;">
+          Trusted by the teams we work with<span class="s-dot">.</span>
+        </h2>
+      </div>
+
+      <div class="testi-row" style="display:flex;align-items:center;gap:22px;" onMouseEnter="{{ tPause }}" onMouseLeave="{{ tResume }}">
+        <button onClick="{{ tPrev }}" aria-label="Previous" class="testi-arrow" style="flex:none;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.25s,border-color 0.25s;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);">
+          <span style="width:18px;height:18px;transform:rotate(180deg);background:rgba(255,255,255,0.8);-webkit-mask:url(assets/icons/arrow-right.svg) center/contain no-repeat;mask:url(assets/icons/arrow-right.svg) center/contain no-repeat;"></span>
+        </button>
+
+        <div style="flex:1;min-width:0;">
+          <div ref="{{ stackRef }}" style="position:relative;min-height:300px;">
+            <div class="testi-slide" style="position:absolute;top:0;left:0;width:100%;box-sizing:border-box;padding:2px 4px 6px;opacity:1;pointer-events:auto;transition:opacity 0.35s ease;">
+                <div style="position:relative;padding:46px 46px 38px;border-radius:8px;background:radial-gradient(ellipse 120% 150% at 50% -10%,rgba(93,107,255,0.16),rgba(138,92,255,0.06) 46%,rgba(255,255,255,0.02) 80%),rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.11);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 30px 70px -40px rgba(0,0,0,0.8);">
+                  <div style="font-family:var(--font-sans);font-size:76px;line-height:0.7;color:var(--sprint-lime);opacity:0.85;height:34px;">&ldquo;</div>
+                  <p style="font-family:var(--font-sans);font-weight:500;font-size:clamp(19px,2.1vw,27px);line-height:1.42;letter-spacing:-0.01em;color:rgba(255,255,255,0.92);margin:22px 0 30px;text-wrap:pretty;">It has been an absolute pleasure working with the team at Sprint. They have assisted through a large project and ensured that we stay on track with it.</p>
+                  <div style="display:flex;align-items:center;gap:15px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.09);">
+                    <img src="assets/testimonials/petro.webp" alt="" style="width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,0.16);box-shadow:0 0 0 4px rgba(255,255,255,0.03);" />
+                    <div>
+                      <div style="font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--sprint-lime);line-height:1.3;">Petro Haasbroek</div>
+                      <div class="s-mono" style="font-size:11px;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:3px;">[ MARKETING MANAGER, COBA ]</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="testi-slide" style="position:absolute;top:0;left:0;width:100%;box-sizing:border-box;padding:2px 4px 6px;opacity:0;pointer-events:none;transition:opacity 0.35s ease;">
+                <div style="position:relative;padding:46px 46px 38px;border-radius:8px;background:radial-gradient(ellipse 120% 150% at 50% -10%,rgba(93,107,255,0.16),rgba(138,92,255,0.06) 46%,rgba(255,255,255,0.02) 80%),rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.11);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 30px 70px -40px rgba(0,0,0,0.8);">
+                  <div style="font-family:var(--font-sans);font-size:76px;line-height:0.7;color:var(--sprint-lime);opacity:0.85;height:34px;">&ldquo;</div>
+                  <p style="font-family:var(--font-sans);font-weight:500;font-size:clamp(19px,2.1vw,27px);line-height:1.42;letter-spacing:-0.01em;color:rgba(255,255,255,0.92);margin:22px 0 30px;text-wrap:pretty;">From the start of the creative process to the delivery of the final, Sprint were an exemplary creative partner.</p>
+                  <div style="display:flex;align-items:center;gap:15px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.09);">
+                    <img src="assets/testimonials/david.webp" alt="" style="width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,0.16);box-shadow:0 0 0 4px rgba(255,255,255,0.03);" />
+                    <div>
+                      <div style="font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--sprint-lime);line-height:1.3;">David Camacho</div>
+                      <div class="s-mono" style="font-size:11px;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:3px;">[ COMMUNICATIONS, SIEMENS US ]</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="testi-slide" style="position:absolute;top:0;left:0;width:100%;box-sizing:border-box;padding:2px 4px 6px;opacity:0;pointer-events:none;transition:opacity 0.35s ease;">
+                <div style="position:relative;padding:46px 46px 38px;border-radius:8px;background:radial-gradient(ellipse 120% 150% at 50% -10%,rgba(93,107,255,0.16),rgba(138,92,255,0.06) 46%,rgba(255,255,255,0.02) 80%),rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.11);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 30px 70px -40px rgba(0,0,0,0.8);">
+                  <div style="font-family:var(--font-sans);font-size:76px;line-height:0.7;color:var(--sprint-lime);opacity:0.85;height:34px;">&ldquo;</div>
+                  <p style="font-family:var(--font-sans);font-weight:500;font-size:clamp(19px,2.1vw,27px);line-height:1.42;letter-spacing:-0.01em;color:rgba(255,255,255,0.92);margin:22px 0 30px;text-wrap:pretty;">Sprint are highly professional and quick to respond to our rapidly changing demands, with useful, value adding suggestions and editing.</p>
+                  <div style="display:flex;align-items:center;gap:15px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.09);">
+                    <img src="assets/testimonials/matt.webp" alt="" style="width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,0.16);box-shadow:0 0 0 4px rgba(255,255,255,0.03);" />
+                    <div>
+                      <div style="font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--sprint-lime);line-height:1.3;">Matt Richardson</div>
+                      <div class="s-mono" style="font-size:11px;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:3px;">[ H&S DIRECTOR, DALKIA ]</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="testi-slide" style="position:absolute;top:0;left:0;width:100%;box-sizing:border-box;padding:2px 4px 6px;opacity:0;pointer-events:none;transition:opacity 0.35s ease;">
+                <div style="position:relative;padding:46px 46px 38px;border-radius:8px;background:radial-gradient(ellipse 120% 150% at 50% -10%,rgba(93,107,255,0.16),rgba(138,92,255,0.06) 46%,rgba(255,255,255,0.02) 80%),rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.11);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 30px 70px -40px rgba(0,0,0,0.8);">
+                  <div style="font-family:var(--font-sans);font-size:76px;line-height:0.7;color:var(--sprint-lime);opacity:0.85;height:34px;">&ldquo;</div>
+                  <p style="font-family:var(--font-sans);font-weight:500;font-size:clamp(19px,2.1vw,27px);line-height:1.42;letter-spacing:-0.01em;color:rgba(255,255,255,0.92);margin:22px 0 30px;text-wrap:pretty;">Aledo Soccer Club wouldn't have been possible without Sprint. From the logo and brand identity to sign-ups and event marketing, they helped bring everything together from day one.</p>
+                  <div style="display:flex;align-items:center;gap:15px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.09);">
+                    <img src="assets/testimonials/denin.webp" alt="" style="width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,0.16);box-shadow:0 0 0 4px rgba(255,255,255,0.03);" />
+                    <div>
+                      <div style="font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--sprint-lime);line-height:1.3;">Denin Spriggs</div>
+                      <div class="s-mono" style="font-size:11px;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:3px;">[ DIRECTOR, ALEDO SOCCER CLUB ]</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="testi-slide" style="position:absolute;top:0;left:0;width:100%;box-sizing:border-box;padding:2px 4px 6px;opacity:0;pointer-events:none;transition:opacity 0.35s ease;">
+                <div style="position:relative;padding:46px 46px 38px;border-radius:8px;background:radial-gradient(ellipse 120% 150% at 50% -10%,rgba(93,107,255,0.16),rgba(138,92,255,0.06) 46%,rgba(255,255,255,0.02) 80%),rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.11);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 30px 70px -40px rgba(0,0,0,0.8);">
+                  <div style="font-family:var(--font-sans);font-size:76px;line-height:0.7;color:var(--sprint-lime);opacity:0.85;height:34px;">&ldquo;</div>
+                  <p style="font-family:var(--font-sans);font-weight:500;font-size:clamp(19px,2.1vw,27px);line-height:1.42;letter-spacing:-0.01em;color:rgba(255,255,255,0.92);margin:22px 0 30px;text-wrap:pretty;">Sprint helped us refresh and align the brand across multiple areas of the business. This resulted in a consistently booked-out schedule for the taco truck.</p>
+                  <div style="display:flex;align-items:center;gap:15px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.09);">
+                    <img src="assets/testimonials/sarah.webp" alt="" style="width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,0.16);box-shadow:0 0 0 4px rgba(255,255,255,0.03);" />
+                    <div>
+                      <div style="font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--sprint-lime);line-height:1.3;">Sarah Kerr</div>
+                      <div class="s-mono" style="font-size:11px;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:3px;">[ MANAGER, TACO HEADS STOCKYARDS ]</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <button onClick="{{ tNext }}" aria-label="Next" class="testi-arrow" style="flex:none;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.25s,border-color 0.25s;" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(181,230,2,0.5);">
+          <span style="width:18px;height:18px;background:rgba(255,255,255,0.8);-webkit-mask:url(assets/icons/arrow-right.svg) center/contain no-repeat;mask:url(assets/icons/arrow-right.svg) center/contain no-repeat;"></span>
+        </button>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:34px;">
+        <button class="testi-dot" data-ti="0" aria-label="Go to testimonial" style="height:8px;width:26px;border-radius:99px;background:var(--sprint-lime);border:none;padding:0;cursor:pointer;transition:width 0.35s cubic-bezier(0.22,1,0.36,1),background 0.35s;"></button>
+          <button class="testi-dot" data-ti="1" aria-label="Go to testimonial" style="height:8px;width:8px;border-radius:99px;background:rgba(255,255,255,0.22);border:none;padding:0;cursor:pointer;transition:width 0.35s cubic-bezier(0.22,1,0.36,1),background 0.35s;"></button>
+          <button class="testi-dot" data-ti="2" aria-label="Go to testimonial" style="height:8px;width:8px;border-radius:99px;background:rgba(255,255,255,0.22);border:none;padding:0;cursor:pointer;transition:width 0.35s cubic-bezier(0.22,1,0.36,1),background 0.35s;"></button>
+          <button class="testi-dot" data-ti="3" aria-label="Go to testimonial" style="height:8px;width:8px;border-radius:99px;background:rgba(255,255,255,0.22);border:none;padding:0;cursor:pointer;transition:width 0.35s cubic-bezier(0.22,1,0.36,1),background 0.35s;"></button>
+          <button class="testi-dot" data-ti="4" aria-label="Go to testimonial" style="height:8px;width:8px;border-radius:99px;background:rgba(255,255,255,0.22);border:none;padding:0;cursor:pointer;transition:width 0.35s cubic-bezier(0.22,1,0.36,1),background 0.35s;"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="position:relative;z-index:10;border-top:1px solid rgba(255,255,255,0.10);">
+    <div class="footer-grid px" style="max-width:1360px;margin:0 auto;padding:76px 48px 44px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px;">
+
+      <div style="max-width:300px;">
+        <img src="assets/sprint-logo-white.svg" alt="Sprint" style="height:26px;width:auto;display:block;margin-bottom:22px;" />
+        <p style="font-size:15px;line-height:1.6;color:rgba(255,255,255,0.55);margin:0 0 24px;">Your creative department and AI platform team. Established 2011.</p>
+        <a class="cta cta-lime" href="#" data-open-contact="1" data-intent="demo" style="display:inline-flex;align-items:center;gap:10px;background:var(--sprint-lime);color:#0c1321;text-decoration:none;font-size:14px;font-weight:600;padding:12px 18px;border-radius:4px;">Book a Demo</a>
+      </div>
+
+      <div>
+        <div class="s-eyebrow" style="color:rgba(255,255,255,0.42);margin-bottom:22px;">[ SERVICES ]</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="#why" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Brand Identity</a>
+          <a href="#why" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Digital &amp; Social</a>
+          <a href="#why" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Web Design</a>
+          <a href="#showreel" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Video &amp; Motion</a>
+          <a href="#why" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Print Design</a>
+          <a href="#why" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Digital Marketing</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="s-eyebrow" style="color:rgba(255,255,255,0.42);margin-bottom:22px;">[ PLATFORM ]</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="#platform" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Client Portals</a>
+          <a href="#platform" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Workflow Automation</a>
+          <a href="#platform" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Dashboards &amp; Reporting</a>
+          <a href="#platform" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Approvals</a>
+          <a href="#platform" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Integrations</a>
+          <a href="#platform" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">AI Solutions</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="s-eyebrow" style="color:rgba(255,255,255,0.42);margin-bottom:22px;">[ COMPANY ]</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="#showreel" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Our Work</a>
+          <a href="#pricing" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Pricing</a>
+          <a href="FAQ.dc.html" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">FAQ</a>
+          <a href="#" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Case Studies</a>
+          <a href="#" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Careers</a>
+          <a href="#" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Freelancers</a>
+          <a href="#" style="font-size:15px;color:rgba(255,255,255,0.66);text-decoration:none;" style-hover="color:#b5e602;">Contact</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="px" style="max-width:1360px;margin:0 auto;padding:22px 48px 18px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
+        <a href="https://www.notion.so/sprintcreative/Terms-of-Service-35897d4735d180df9cedf77685398102?v=5c297d4735d182f6909108d979dc7aa7&source=copy_link" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" style-hover="color:#b5e602;">Terms</a>
+        <a href="https://sprintcreative.notion.site/Privacy-Policy-39097d4735d18029b131f9ce90353295?source=copy_link" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" style-hover="color:#b5e602;">Privacy</a>
+        <a href="https://sprintcreative.notion.site/Cookies-Policy-39097d4735d180baa7edccad82af3637?source=copy_link" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" style-hover="color:#b5e602;">Cookies</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <a href="https://www.instagram.com/madebysprint" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" style-hover="color:#b5e602;">Instagram</a>
+        <a href="https://www.linkedin.com/company/sprint-creative-agency/" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" style-hover="color:#b5e602;">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="px" style="max-width:1360px;margin:0 auto;padding:0 48px 52px;text-align:center;">
+      <span class="s-mono" style="font-size:12px;color:rgba(255,255,255,0.4);">© 2026 SPRINT CREATIVE · FORT WORTH, TX</span>
+    </div>
+  </footer>
+
+  <!-- CONTACT MODAL -->
+  <div id="cm-overlay" style="position:fixed;inset:0;z-index:2000;display:none;align-items:flex-start;justify-content:center;padding:32px 18px;overflow-y:auto;">
+    <div id="cm-backdrop" style="position:fixed;inset:0;background:rgba(6,10,20,0.74);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity 0.3s ease;"></div>
+    <div id="cm-dialog" role="dialog" aria-modal="true" style="position:relative;z-index:2;width:100%;max-width:660px;margin:auto;border-radius:12px;background:radial-gradient(ellipse 110% 90% at 82% -8%,rgba(93,107,255,0.18),rgba(138,92,255,0.07) 44%,transparent 78%),#0f1729;border:1px solid rgba(255,255,255,0.12);box-shadow:0 50px 130px -50px rgba(0,0,0,0.9);padding:40px 44px 36px;opacity:0;transform:translateY(18px) scale(0.985);transition:opacity 0.32s ease,transform 0.32s cubic-bezier(0.22,1,0.36,1);">
+
+      <button id="cm-close" aria-label="Close" style="position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s,border-color 0.2s;line-height:1;">&#10005;</button>
+
+      <div id="cm-body">
+        <div class="s-eyebrow" style="color:var(--sprint-lime);margin-bottom:16px;">[ GET IN TOUCH ]</div>
+        <h2 style="font-family:var(--font-sans);font-weight:600;font-size:clamp(28px,3.4vw,38px);line-height:1.05;letter-spacing:-0.03em;margin:0 0 12px;"><span id="cm-head">Let&rsquo;s build something great</span><span class="s-dot">.</span></h2>
+        <p style="font-size:16px;line-height:1.55;color:rgba(255,255,255,0.64);margin:0 0 28px;max-width:460px;">Tell us what you need and we&rsquo;ll come back with a clear next step, usually within one business day.</p>
+
+        <form id="cm-form" class="cform" novalidate="novalidate">
+          <div id="cm-progress" style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <span class="cm-seg" data-s="1" style="height:4px;flex:1;border-radius:2px;background:var(--sprint-lime);transition:background 0.3s;"></span>
+            <span class="cm-seg" data-s="2" style="height:4px;flex:1;border-radius:2px;background:rgba(255,255,255,0.14);transition:background 0.3s;"></span>
+            <span class="cm-seg" data-s="3" style="height:4px;flex:1;border-radius:2px;background:rgba(255,255,255,0.14);transition:background 0.3s;"></span>
+          </div>
+          <div class="s-mono" id="cm-stepnum" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:20px;">Step 1 of 3 &middot; Your details</div>
+
+          <div class="cm-step" data-step="1">
+          <div class="cm-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Name <span style="color:var(--sprint-lime);">*</span></label>
+              <input id="cm-name" type="text" placeholder="Your name" />
+            </div>
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Email <span style="color:var(--sprint-lime);">*</span></label>
+              <input id="cm-email" type="email" placeholder="you@company.com" />
+            </div>
+          </div>
+
+          <div class="cm-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px;">
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Company</label>
+              <input id="cm-company" type="text" placeholder="Company name" />
+            </div>
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Phone</label>
+              <input id="cm-phone" type="tel" placeholder="Optional" />
+            </div>
+          </div>
+
+          </div>
+
+          <div class="cm-step" data-step="2" style="display:none;">
+          <div style="margin-bottom:20px;">
+            <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">What can we help with? <span style="color:var(--sprint-lime);">*</span></label>
+            <select id="cm-topic-select">
+              <option value="">Select an option</option>
+              <option value="creative">Creative plan</option>
+              <option value="ai">AI solution</option>
+              <option value="addon">Add-on service</option>
+              <option value="demo">Book a demo</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+
+          <div id="cm-detail-wrap" style="margin-bottom:20px;display:none;">
+            <label id="cm-detail-label" class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Which one?</label>
+            <select id="cm-detail"></select>
+          </div>
+
+          <div class="cm-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Budget</label>
+              <select id="cm-budget">
+                <option value="">Select a range</option>
+                <option value="Under $5k/mo">Under $5k / month</option>
+                <option value="$5k-$10k/mo">$5k &ndash; $10k / month</option>
+                <option value="$10k-$25k/mo">$10k &ndash; $25k / month</option>
+                <option value="$25k+/mo">$25k+ / month</option>
+                <option value="One-off project">One-off project</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div>
+              <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Timeline</label>
+              <select id="cm-timeline">
+                <option value="">Select timing</option>
+                <option value="ASAP">As soon as possible</option>
+                <option value="1-3 months">In 1&ndash;3 months</option>
+                <option value="3-6 months">In 3&ndash;6 months</option>
+                <option value="Just exploring">Just exploring</option>
+              </select>
+            </div>
+          </div>
+
+          </div>
+
+          <div class="cm-step" data-step="3" style="display:none;">
+          <div style="margin-bottom:14px;">
+            <label class="s-mono" style="display:block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;">Tell us more</label>
+            <textarea id="cm-message" placeholder="A few lines on your goals, project, or question."></textarea>
+          </div>
+
+          </div>
+
+          <div id="cm-err" style="display:none;color:#ff8a8a;font-size:13px;margin-bottom:12px;"></div>
+
+          <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+            <button type="button" id="cm-back" style="display:none;flex:none;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.16);border-radius:4px;font-family:var(--font-sans);font-size:15px;font-weight:600;padding:15px 22px;cursor:pointer;">Back</button>
+            <button type="button" id="cm-next" class="cm-submit" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--sprint-lime);color:#0c1321;border:none;border-radius:4px;font-family:var(--font-sans);font-size:16px;font-weight:600;padding:15px 0;cursor:pointer;">Continue</button>
+            <button type="submit" id="cm-submit" class="cm-submit" style="display:none;flex:1;align-items:center;justify-content:center;gap:10px;background:var(--sprint-lime);color:#0c1321;border:none;border-radius:4px;font-family:var(--font-sans);font-size:16px;font-weight:600;padding:15px 0;cursor:pointer;">Send message</button>
+          </div>
+          <p style="font-size:12px;line-height:1.5;color:rgba(255,255,255,0.4);margin:14px 0 0;text-align:center;">By sending this you agree to our privacy policy. We&rsquo;ll only use your details to reply.</p>
+        </form>
+      </div>
+
+      <div id="cm-success" style="display:none;text-align:center;padding:26px 8px 18px;">
+        <div style="width:60px;height:60px;margin:0 auto 22px;border-radius:50%;background:var(--sprint-lime);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;background:#0c1321;-webkit-mask:url(assets/icons/check-bold.svg) center/contain no-repeat;mask:url(assets/icons/check-bold.svg) center/contain no-repeat;"></span>
+        </div>
+        <h2 style="font-family:var(--font-sans);font-weight:600;font-size:28px;letter-spacing:-0.02em;margin:0 0 12px;">Message sent<span class="s-dot">.</span></h2>
+        <p id="cm-success-msg" style="font-size:16px;line-height:1.6;color:rgba(255,255,255,0.66);margin:0 auto 26px;max-width:400px;">Thanks for reaching out. A member of the team will get back to you within one business day.</p>
+        <button id="cm-success-close" style="display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.16);border-radius:4px;font-family:var(--font-sans);font-size:15px;font-weight:600;padding:12px 22px;cursor:pointer;">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:3400}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.platformRef = React.createRef();
+    this.videoRef = React.createRef();
+    this.heroVideoRef = React.createRef();
+    this.revealRef = React.createRef();
+    this.cardsRef = React.createRef();
+    this.whyRef = React.createRef();
+    this.addonRef = React.createRef();
+    this.state = { tIndex: 0 };
+    this.stackRef = React.createRef();
+    this.tPrev = this.tPrev.bind(this);
+    this.tNext = this.tNext.bind(this);
+    this.tPause = () => { this._tPaused = true; };
+    this.tResume = () => { this._tPaused = false; };
+  }
+  tGoTo(i) {
+    const n = this.TESTIMONIALS.length;
+    this.setState({ tIndex: ((i % n) + n) % n });
+    this._tLast = Date.now();
+  }
+  tPrev() { this.tGoTo(this.state.tIndex - 1); }
+  tNext() { this.tGoTo(this.state.tIndex + 1); }
+  _fixHeight() {
+    const stack = this.stackRef && this.stackRef.current;
+    if (!stack) return;
+    let max = 0;
+    stack.querySelectorAll('.testi-slide').forEach((sl) => {
+      max = Math.max(max, sl.offsetHeight);
+    });
+    if (max > 0) stack.style.height = max + 'px';
+  }
+  _applyState() {
+    const stack = this.stackRef && this.stackRef.current;
+    if (!stack) return;
+    const idx = this.state.tIndex;
+    // sequenced crossfade: outgoing fades out fast, incoming fades in after a beat
+    stack.querySelectorAll('.testi-slide').forEach((sl, i) => {
+      const active = i === idx;
+      sl.style.transition = active
+        ? 'opacity 0.45s ease 0.22s'
+        : 'opacity 0.3s ease 0s';
+      sl.style.opacity = active ? '1' : '0';
+      sl.style.pointerEvents = active ? 'auto' : 'none';
+    });
+    const root = stack.closest('#testimonials');
+    if (root) root.querySelectorAll('.testi-dot').forEach((d, i) => {
+      d.style.width = i === idx ? '26px' : '8px';
+      d.style.background = i === idx ? 'var(--sprint-lime)' : 'rgba(255,255,255,0.22)';
+    });
+  }
+  componentDidUpdate() { this._applyState(); }
+  get TESTIMONIALS() {
+    return [
+      { quote: 'It has been an absolute pleasure working with the team at Sprint. They have assisted through a large project and ensured that we stay on track with it.', name: 'Petro Haasbroek', title: '[ MARKETING MANAGER, COBA ]', img: 'assets/testimonials/petro.webp' },
+      { quote: 'From the start of the creative process to the delivery of the final, Sprint were an exemplary creative partner.', name: 'David Camacho', title: '[ COMMUNICATIONS, SIEMENS US ]', img: 'assets/testimonials/david.webp' },
+      { quote: 'Sprint are highly professional and quick to respond to our rapidly changing demands, with useful, value adding suggestions and editing.', name: 'Matt Richardson', title: '[ H&S DIRECTOR, DALKIA ]', img: 'assets/testimonials/matt.webp' },
+      { quote: "Aledo Soccer Club wouldn't have been possible without Sprint. From the logo and brand identity to sign-ups and event marketing, they helped bring everything together from day one.", name: 'Denin Spriggs', title: '[ DIRECTOR, ALEDO SOCCER CLUB ]', img: 'assets/testimonials/denin.webp' },
+      { quote: 'Sprint helped us refresh and align the brand across multiple areas of the business. This resulted in a consistently booked-out schedule for the taco truck.', name: 'Sarah Kerr', title: '[ MANAGER, TACO HEADS STOCKYARDS ]', img: 'assets/testimonials/sarah.webp' }
+    ];
+  }
+  renderVals() {
+    return { platformRef: this.platformRef, videoRef: this.videoRef, heroVideoRef: this.heroVideoRef, revealRef: this.revealRef, cardsRef: this.cardsRef, whyRef: this.whyRef, addonRef: this.addonRef,
+      tPrev: this.tPrev, tNext: this.tNext, stackRef: this.stackRef,
+      tPause: this.tPause, tResume: this.tResume };
+  }
+  _cmDetails() {
+    return {
+      creative: { label: 'Which plan?', options: ['Starter', 'Growth', 'Scale', 'Not sure yet'] },
+      ai: { label: 'What kind?', options: ['AI consultation', 'Custom platform build', 'Workflow & automation', 'Not sure yet'] },
+      addon: { label: 'Which service?', options: ['Digital Marketing', 'Social Media Management', 'Other'] },
+      demo: null, other: null
+    };
+  }
+  _cmHeadings() {
+    return {
+      creative: 'Let\u2019s scope your creative', ai: 'Let\u2019s design your platform',
+      addon: 'Let\u2019s scope your add-on', demo: 'Let\u2019s book your demo', other: 'Let\u2019s talk'
+    };
+  }
+  cmSelectTopic(topic, presetDetail) {
+    this._cmTopic = topic;
+    const ts = document.getElementById('cm-topic-select');
+    if (ts && ts.value !== topic) ts.value = topic;
+    if (ts && ts._cs) ts._cs.sync();
+    const head = document.getElementById('cm-head');
+    if (head) head.textContent = this._cmHeadings()[topic] || 'Let\u2019s build something great';
+    const cfg = this._cmDetails()[topic];
+    const wrap = document.getElementById('cm-detail-wrap');
+    const sel = document.getElementById('cm-detail');
+    const lab = document.getElementById('cm-detail-label');
+    if (cfg && wrap && sel) {
+      if (lab) lab.textContent = cfg.label;
+      sel.innerHTML = '<option value="">Select one</option>' + cfg.options.map((o) => '<option value="' + o + '">' + o + '</option>').join('');
+      if (presetDetail) sel.value = presetDetail;
+      if (sel._cs) sel._cs.refresh();
+      wrap.style.display = 'block';
+    } else if (wrap) { wrap.style.display = 'none'; if (sel) { sel.innerHTML = ''; if (sel._cs) sel._cs.refresh(); } }
+  }
+  openContact(intent, plan, service) {
+    const ov = document.getElementById('cm-overlay');
+    const bd = document.getElementById('cm-backdrop');
+    const dg = document.getElementById('cm-dialog');
+    if (!ov) return;
+    // reset to form view
+    document.getElementById('cm-form').style.display = '';
+    document.getElementById('cm-success').style.display = 'none';
+    this.cmShowError('');
+    ov.style.display = 'flex';
+    document.body.classList.add('cm-open');
+    this.cmShowStep(1);
+    // pre-fill
+    this._cmTopic = '';
+    const ts0 = document.getElementById('cm-topic-select');
+    if (ts0) { ts0.value = ''; if (ts0._cs) ts0._cs.sync(); }
+    document.getElementById('cm-head').textContent = 'Let\u2019s build something great';
+    document.getElementById('cm-detail-wrap').style.display = 'none';
+    const cap = (s) => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+    const it = (intent || '').toLowerCase();
+    if (it === 'demo') this.cmSelectTopic('demo');
+    else if (it === 'plan') this.cmSelectTopic('creative', cap(plan));
+    else if (it === 'ai-platform') this.cmSelectTopic('ai', 'Custom platform build');
+    else if (it === 'ai-consultation') this.cmSelectTopic('ai', 'AI consultation');
+    else if (it === 'addon') this.cmSelectTopic('addon', service);
+    requestAnimationFrame(() => { if (bd) bd.style.opacity = '1'; if (dg) { dg.style.opacity = '1'; dg.style.transform = 'translateY(0) scale(1)'; } });
+    setTimeout(() => { const nm = document.getElementById('cm-name'); if (nm) nm.focus(); }, 340);
+  }
+  closeContact() {
+    const ov = document.getElementById('cm-overlay');
+    const bd = document.getElementById('cm-backdrop');
+    const dg = document.getElementById('cm-dialog');
+    if (!ov) return;
+    if (bd) bd.style.opacity = '0';
+    if (dg) { dg.style.opacity = '0'; dg.style.transform = 'translateY(18px) scale(0.985)'; }
+    document.body.classList.remove('cm-open');
+    setTimeout(() => { ov.style.display = 'none'; }, 320);
+  }
+  cmShowError(msg) {
+    const e = document.getElementById('cm-err');
+    if (e) { e.textContent = msg; e.style.display = msg ? 'block' : 'none'; }
+  }
+  async cmSubmit() {
+    if (this._cmBusy) return;
+    const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
+    const name = g('cm-name'), email = g('cm-email');
+    if (!name) { this.cmShowError('Please add your name.'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { this.cmShowError('Please add a valid email.'); return; }
+    if (!this._cmTopic) { this.cmShowError('Please pick what we can help with.'); return; }
+    this.cmShowError('');
+    const payload = {
+      name: name, email: email, company: g('cm-company'), phone: g('cm-phone'),
+      topic: this._cmTopic, detail: g('cm-detail'), budget: g('cm-budget'), timeline: g('cm-timeline'),
+      message: g('cm-message'), source_url: window.location.href, created_at: new Date().toISOString()
+    };
+    this._cmBusy = true;
+    const btn = document.getElementById('cm-submit');
+    if (btn) { btn.textContent = 'Sending\u2026'; btn.style.opacity = '0.7'; btn.disabled = true; }
+    // Backend config (fill to go live): Supabase REST insert + optional Resend notify endpoint
+    const C = { SUPABASE_URL: '', SUPABASE_ANON_KEY: '', TABLE: 'contact_submissions', NOTIFY_ENDPOINT: '' };
+    try {
+      if (C.SUPABASE_URL && C.SUPABASE_ANON_KEY) {
+        const r = await fetch(C.SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/' + C.TABLE, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': C.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + C.SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' },
+          body: JSON.stringify(payload)
+        });
+        if (!r.ok) throw new Error('Supabase ' + r.status);
+        if (C.NOTIFY_ENDPOINT) fetch(C.NOTIFY_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
+      } else {
+        try { const arr = JSON.parse(localStorage.getItem('sprint_contact_submissions') || '[]'); arr.push(payload); localStorage.setItem('sprint_contact_submissions', JSON.stringify(arr)); } catch (e) {}
+        await new Promise((res) => setTimeout(res, 600));
+      }
+      const sm = document.getElementById('cm-success-msg');
+      if (sm) sm.textContent = 'Thanks ' + name.split(' ')[0] + '. A member of the team will get back to you within one business day.';
+      document.getElementById('cm-form').style.display = 'none';
+      document.getElementById('cm-success').style.display = 'block';
+      this._cmBusy = false;
+      if (btn) { btn.textContent = 'Send message'; btn.style.opacity = '1'; btn.disabled = false; }
+    } catch (err) {
+      this._cmBusy = false;
+      if (btn) { btn.textContent = 'Send message'; btn.style.opacity = '1'; btn.disabled = false; }
+      this.cmShowError('Something went wrong. Please email hello@madebysprint.com directly.');
+    }
+  }
+  _closeAllSelects(except) {
+    document.querySelectorAll('.cs-wrap').forEach((w) => {
+      const sel = w.querySelector('select');
+      if (sel && sel._cs && w.querySelector('.cs-trigger') !== except) sel._cs.close();
+    });
+  }
+  _enhanceSelect(sel) {
+    if (!sel || sel._cs) return sel && sel._cs;
+    const wrap = document.createElement('div');
+    wrap.className = 'cs-wrap';
+    wrap.style.position = 'relative';
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel);
+    sel.style.display = 'none';
+
+    const trigger = document.createElement('div');
+    trigger.className = 'cs-trigger';
+    trigger.tabIndex = 0;
+    trigger.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background-color:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:4px;color:#fff;font-family:var(--font-sans);font-size:15px;padding:12px 14px;cursor:pointer;transition:border-color 0.2s,background-color 0.2s,box-shadow 0.2s;';
+    const valSpan = document.createElement('span');
+    valSpan.className = 'cs-value';
+    valSpan.style.cssText = 'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+    const chev = document.createElement('span');
+    chev.style.cssText = 'display:inline-flex;flex:none;transition:transform 0.25s ease;color:#8b93a7;';
+    chev.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>';
+    trigger.appendChild(valSpan);
+    trigger.appendChild(chev);
+
+    const panel = document.createElement('div');
+    panel.className = 'cs-panel';
+    panel.style.cssText = 'position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;background:#0f1729;border:1px solid rgba(255,255,255,0.14);border-radius:6px;box-shadow:0 24px 60px -24px rgba(0,0,0,0.85);padding:6px;display:none;max-height:240px;overflow-y:auto;';
+
+    wrap.appendChild(trigger);
+    wrap.appendChild(panel);
+
+    const syncLabel = () => {
+      const opt = sel.options[sel.selectedIndex];
+      const placeholder = !sel.value;
+      valSpan.textContent = opt ? opt.textContent : '';
+      valSpan.style.color = placeholder ? 'rgba(255,255,255,0.4)' : '#fff';
+      panel.querySelectorAll('.cs-opt').forEach((r) => {
+        r.style.color = (r.getAttribute('data-value') === sel.value && sel.value !== '') ? '#b5e602' : '#fff';
+      });
+    };
+    const renderOpts = () => {
+      panel.innerHTML = '';
+      Array.prototype.forEach.call(sel.options, (o) => {
+        if (o.value === '') return;
+        const row = document.createElement('div');
+        row.className = 'cs-opt';
+        row.setAttribute('data-value', o.value);
+        row.textContent = o.textContent;
+        row.style.cssText = 'padding:11px 12px;border-radius:4px;color:#fff;font-size:15px;cursor:pointer;transition:background 0.15s ease;';
+        row.addEventListener('mouseenter', () => { row.style.background = 'rgba(255,255,255,0.07)'; });
+        row.addEventListener('mouseleave', () => { row.style.background = 'transparent'; });
+        row.addEventListener('click', () => {
+          sel.value = o.value;
+          syncLabel();
+          close();
+          sel.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        panel.appendChild(row);
+      });
+      syncLabel();
+    };
+    const open = () => { renderOpts(); panel.style.display = 'block'; chev.style.transform = 'rotate(180deg)'; trigger.style.borderColor = 'rgba(181,230,2,0.6)'; };
+    const close = () => { panel.style.display = 'none'; chev.style.transform = ''; trigger.style.borderColor = 'rgba(255,255,255,0.12)'; };
+    const toggle = () => { (panel.style.display === 'block') ? close() : open(); };
+
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); this._closeAllSelects(trigger); toggle(); });
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      else if (e.key === 'Escape') close();
+    });
+
+    sel._cs = { refresh: renderOpts, sync: syncLabel, close: close };
+    renderOpts();
+    return sel._cs;
+  }
+  _initSelects() {
+    ['cm-topic-select', 'cm-detail', 'cm-budget', 'cm-timeline'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) this._enhanceSelect(el);
+    });
+  }
+
+  cmShowStep(n) {
+    this._cmStep = n;
+    document.querySelectorAll('#cm-form .cm-step').forEach((s) => {
+      s.style.display = (parseInt(s.getAttribute('data-step'), 10) === n) ? 'block' : 'none';
+    });
+    document.querySelectorAll('#cm-progress .cm-seg').forEach((seg) => {
+      seg.style.background = (parseInt(seg.getAttribute('data-s'), 10) <= n) ? '#b5e602' : 'rgba(255,255,255,0.14)';
+    });
+    const labels = { 1: 'Your details', 2: 'Your project', 3: 'Anything else' };
+    const sn = document.getElementById('cm-stepnum');
+    if (sn) sn.textContent = 'Step ' + n + ' of 3 \u00b7 ' + labels[n];
+    const back = document.getElementById('cm-back');
+    const next = document.getElementById('cm-next');
+    const sub = document.getElementById('cm-submit');
+    if (back) back.style.display = n > 1 ? 'inline-flex' : 'none';
+    if (next) next.style.display = n < 3 ? 'inline-flex' : 'none';
+    if (sub) sub.style.display = n === 3 ? 'inline-flex' : 'none';
+    const dlg = document.getElementById('cm-dialog');
+    if (dlg) dlg.scrollTop = 0;
+  }
+  cmNext() {
+    const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
+    if (this._cmStep === 1) {
+      if (!g('cm-name')) { this.cmShowError('Please add your name.'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(g('cm-email'))) { this.cmShowError('Please add a valid email.'); return; }
+    } else if (this._cmStep === 2) {
+      if (!this._cmTopic) { this.cmShowError('Please pick what we can help with.'); return; }
+    }
+    this.cmShowError('');
+    this.cmShowStep(Math.min(3, this._cmStep + 1));
+  }
+  cmBack() { this.cmShowError(''); this.cmShowStep(Math.max(1, this._cmStep - 1)); }
+
+  _initContactModal() {
+    document.querySelectorAll('[data-open-contact]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openContact(a.getAttribute('data-intent'), a.getAttribute('data-plan'), a.getAttribute('data-service'));
+      });
+    });
+    this._initSelects();
+    document.addEventListener('click', () => this._closeAllSelects(null));
+    const ts = document.getElementById('cm-topic-select');
+    if (ts) ts.addEventListener('change', () => this.cmSelectTopic(ts.value));
+    const form = document.getElementById('cm-form');
+    if (form) form.addEventListener('submit', (e) => { e.preventDefault(); this.cmSubmit(); });
+    const cnext = document.getElementById('cm-next');
+    if (cnext) cnext.addEventListener('click', () => this.cmNext());
+    const cback = document.getElementById('cm-back');
+    if (cback) cback.addEventListener('click', () => this.cmBack());
+    const close = document.getElementById('cm-close');
+    if (close) close.addEventListener('click', () => this.closeContact());
+    const sclose = document.getElementById('cm-success-close');
+    if (sclose) sclose.addEventListener('click', () => this.closeContact());
+    const bd = document.getElementById('cm-backdrop');
+    if (bd) bd.addEventListener('click', () => this.closeContact());
+    document.addEventListener('keydown', this._cmEsc = (e) => {
+      if (e.key === 'Escape') { const ov = document.getElementById('cm-overlay'); if (ov && ov.style.display === 'flex') this.closeContact(); }
+    });
+  }
+
+  _initMobileMenu() {
+    const burger = document.getElementById('nav-burger');
+    const menu = document.getElementById('mobile-menu');
+    const close = document.getElementById('mm-close');
+    if (!burger || !menu) return;
+    const open = () => { menu.style.display = 'flex'; requestAnimationFrame(() => { menu.style.opacity = '1'; }); document.body.classList.add('cm-open'); };
+    const shut = () => { menu.style.opacity = '0'; document.body.classList.remove('cm-open'); setTimeout(() => { menu.style.display = 'none'; }, 250); };
+    burger.addEventListener('click', open);
+    if (close) close.addEventListener('click', shut);
+    menu.querySelectorAll('.mm-link').forEach((a) => a.addEventListener('click', shut));
+  }
+
+  componentDidMount() {
+    this._initContactModal();
+    this._initMobileMenu();
+    const v = this.videoRef && this.videoRef.current;
+    if (v) {
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.setAttribute('muted', '');
+      v.setAttribute('loop', '');
+      const KEY = 'sprint_showreel_time';
+      const restore = () => {
+        const saved = parseFloat(localStorage.getItem(KEY) || '0');
+        if (saved > 0 && isFinite(saved) && saved < (v.duration || 1e9)) {
+          try { v.currentTime = saved; } catch (e) {}
+        }
+      };
+      if (v.readyState >= 1) restore();
+      else v.addEventListener('loadedmetadata', restore, { once: true });
+      v.addEventListener('timeupdate', () => { localStorage.setItem(KEY, String(v.currentTime)); });
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+
+    const hv = this.heroVideoRef && this.heroVideoRef.current;
+    if (hv) {
+      hv.muted = true; hv.loop = true; hv.playsInline = true;
+      hv.setAttribute('muted', ''); hv.setAttribute('loop', '');
+      const HK = 'sprint_hero_time';
+      const restoreH = () => {
+        const s = parseFloat(localStorage.getItem(HK) || '0');
+        if (s > 0 && isFinite(s) && s < (hv.duration || 1e9)) { try { hv.currentTime = s; } catch (e) {} }
+      };
+      if (hv.readyState >= 1) restoreH();
+      else hv.addEventListener('loadedmetadata', restoreH, { once: true });
+      hv.addEventListener('timeupdate', () => { localStorage.setItem(HK, String(hv.currentTime)); });
+      const ph = hv.play(); if (ph && ph.catch) ph.catch(() => {});
+    }
+
+    const rev = this.revealRef && this.revealRef.current;
+    if (rev) {
+      const sec = rev.closest('section') || rev;
+      const onScrollR = () => {
+        const rect = sec.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        let p = (vh - rect.top) / (vh * 0.9);
+        p = Math.max(0, Math.min(1, p));
+        rev.style.transform = 'translateY(' + ((1 - p) * 240).toFixed(1) + 'px)';
+        rev.style.opacity = (0.35 + 0.65 * p).toFixed(3);
+      };
+      window.addEventListener('scroll', onScrollR, { passive: true });
+      onScrollR();
+      this._onScrollR = onScrollR;
+    }
+
+    const grid = this.cardsRef && this.cardsRef.current;
+    if (grid) {
+      const cards = Array.prototype.slice.call(grid.children);
+      let done = false;
+      const reveal = () => {
+        if (done) return;
+        const rect = grid.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        if (rect.top < vh * 0.88) {
+          done = true;
+          cards.forEach((c, idx) => {
+            const d = idx * 70;
+            c.style.transitionDelay = d + 'ms';
+            c.style.opacity = '1';
+            c.style.transform = 'translateY(0)';
+            setTimeout(() => { c.style.transitionDelay = '0ms'; }, d + 720);
+          });
+          window.removeEventListener('scroll', reveal);
+        }
+      };
+      window.addEventListener('scroll', reveal, { passive: true });
+      reveal();
+      this._reveal = reveal;
+    }
+
+    const whyGrid = this.whyRef && this.whyRef.current;
+    if (whyGrid && window.innerWidth > 980) {
+      const wcards = Array.prototype.slice.call(whyGrid.children);
+      const order = { 0: 300, 1: 0, 2: 480 };
+      wcards.forEach((c) => {
+        c.style.opacity = '0';
+        c.style.transform = 'translateY(56px)';
+        c.style.transition = 'opacity 1.25s cubic-bezier(0.22,1,0.36,1), transform 1.25s cubic-bezier(0.22,1,0.36,1)';
+      });
+      let wdone = false;
+      const wreveal = () => {
+        if (wdone) return;
+        const rect = whyGrid.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        if (rect.top < vh * 0.85) {
+          wdone = true;
+          wcards.forEach((c, idx) => {
+            const d = order[idx] != null ? order[idx] : 150;
+            c.style.transitionDelay = d + 'ms';
+            c.style.opacity = '1';
+            c.style.transform = 'translateY(0)';
+            setTimeout(() => { c.style.transitionDelay = '0ms'; }, d + 1300);
+          });
+          window.removeEventListener('scroll', wreveal);
+        }
+      };
+      window.addEventListener('scroll', wreveal, { passive: true });
+      wreveal();
+      this._wreveal = wreveal;
+    }
+
+    const addonWrap = this.addonRef && this.addonRef.current;
+    if (addonWrap && window.innerWidth > 980) {
+      const acards = Array.prototype.slice.call(addonWrap.children);
+      acards.forEach((c) => {
+        c.style.opacity = '0';
+        c.style.transform = 'translateX(-56px)';
+        c.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+      });
+      let adone = false;
+      const areveal = () => {
+        if (adone) return;
+        const rect = addonWrap.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        if (rect.top < vh * 0.85) {
+          adone = true;
+          acards.forEach((c, idx) => {
+            const d = idx * 160;
+            c.style.transitionDelay = d + 'ms';
+            c.style.opacity = '1';
+            c.style.transform = 'translateX(0)';
+            setTimeout(() => { c.style.transitionDelay = '0ms'; }, d + 720);
+          });
+          window.removeEventListener('scroll', areveal);
+        }
+      };
+      window.addEventListener('scroll', areveal, { passive: true });
+      areveal();
+      this._areveal = areveal;
+    }
+
+    // testimonials: set fixed height (tallest slide), wire dots, auto-advance
+    this._applyState();
+    this._fixHeight();
+    setTimeout(() => this._fixHeight(), 150);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this._fixHeight());
+    window.addEventListener('resize', this._tResize = () => this._fixHeight(), { passive: true });
+    const tsec = this.stackRef && this.stackRef.current && this.stackRef.current.closest('#testimonials');
+    if (tsec) tsec.querySelectorAll('.testi-dot').forEach((d) => {
+      d.addEventListener('click', () => this.tGoTo(parseInt(d.getAttribute('data-ti'), 10)));
+    });
+    this._tLast = Date.now();
+    this._tTimer = setInterval(() => {
+      if (this._tPaused) return;
+      if (Date.now() - this._tLast < 5200) return;
+      this.tNext();
+    }, 1000);
+
+    const el = this.platformRef.current;
+    if (!el) return;
+    const maxScroll = 640;
+    let target = 1;
+    let current = 1;
+    const onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      target = Math.max(0, 1 - Math.min(y / maxScroll, 1));
+    };
+    const tick = () => {
+      current += (target - current) * 0.09;
+      const s = (this.props.tiltStrength != null ? this.props.tiltStrength : 1);
+      const t = current * s;
+      const rx = 7 * t;
+      const ry = -15 * t;
+      const rz = -1.2 * t;
+      const tx = 3 * t;
+      el.style.transform =
+        `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg) translateX(${tx.toFixed(2)}%)`;
+      this._raf = requestAnimationFrame(tick);
+    };
+    onScroll();
+    current = target;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this._onScroll = onScroll;
+    tick();
+  }
+  componentWillUnmount() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._onScrollR) window.removeEventListener('scroll', this._onScrollR);
+    if (this._reveal) window.removeEventListener('scroll', this._reveal);
+    if (this._tTimer) clearInterval(this._tTimer);
+    if (this._tResize) window.removeEventListener('resize', this._tResize);
+    if (this._cmEsc) document.removeEventListener('keydown', this._cmEsc);
+    document.body.classList.remove('cm-open');
+  }
+}
+</script>
+</body>
+</html>

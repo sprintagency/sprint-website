@@ -1,0 +1,316 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Geist|Montserrat|Geist Mono))/i]",
+        "message": "Font not provided by the design system. Available: Geist, Montserrat, Geist Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CaseStudies'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<CaseStudies> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Footer'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<Footer> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Header'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<Header> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Hero'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<Hero> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Logos'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<Logos> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Pricing'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<Pricing> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|onClick|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: children, variant, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:light|dark|lime)$/]",
+        "message": "<Button> variant must be one of 'light' | 'dark' | 'lime'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Services'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<Services> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='WhoWeAre'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<WhoWeAre> doesn't accept that prop. Declared props: children."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "CaseStudies": {
+        "replaces": []
+      },
+      "Footer": {
+        "replaces": []
+      },
+      "Header": {
+        "replaces": []
+      },
+      "Hero": {
+        "replaces": []
+      },
+      "Logos": {
+        "replaces": []
+      },
+      "Pricing": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "Services": {
+        "replaces": []
+      },
+      "WhoWeAre": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent-cyan",
+      "--accent-emerald",
+      "--accent-indigo",
+      "--accent-orange",
+      "--accent-violet",
+      "--border-on-dark",
+      "--border-on-light",
+      "--dur-base",
+      "--dur-fast",
+      "--dur-slow",
+      "--ease-out",
+      "--ease-standard",
+      "--fg-accent",
+      "--fg-on-dark",
+      "--fg-on-dark-muted",
+      "--fg-on-dark-subtle",
+      "--fg-on-light",
+      "--fg-on-light-muted",
+      "--fg-on-light-subtle",
+      "--fg-on-lime",
+      "--font-display",
+      "--font-hero",
+      "--font-mono",
+      "--font-sans",
+      "--fs-body",
+      "--fs-body-lg",
+      "--fs-body-sm",
+      "--fs-caption",
+      "--fs-display",
+      "--fs-eyebrow",
+      "--fs-h1",
+      "--fs-h2",
+      "--fs-h3",
+      "--fs-h4",
+      "--fs-h5",
+      "--fw-black",
+      "--fw-bold",
+      "--fw-light",
+      "--fw-medium",
+      "--fw-regular",
+      "--fw-semibold",
+      "--grey-100",
+      "--grey-200",
+      "--grey-300",
+      "--grey-400",
+      "--grey-50",
+      "--grey-500",
+      "--grey-600",
+      "--grey-700",
+      "--grey-800",
+      "--grey-900",
+      "--hairline-on-dark",
+      "--hairline-on-light",
+      "--highlight-bg",
+      "--highlight-fg",
+      "--lh-base",
+      "--lh-loose",
+      "--lh-snug",
+      "--lh-tight",
+      "--radius-0",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-pill",
+      "--radius-sm",
+      "--shadow-card",
+      "--shadow-lime",
+      "--shadow-none",
+      "--shadow-soft",
+      "--space-0",
+      "--space-1",
+      "--space-10",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--sprint-black",
+      "--sprint-lime",
+      "--sprint-lime-soft",
+      "--sprint-white",
+      "--surface-dark",
+      "--surface-dark-2",
+      "--surface-light",
+      "--surface-light-2",
+      "--surface-lime",
+      "--surface-mint",
+      "--tracking-flat",
+      "--tracking-mono",
+      "--tracking-tight"
+    ],
+    "tokenKinds": {
+      "--sprint-black": "color",
+      "--sprint-white": "color",
+      "--sprint-lime": "color",
+      "--sprint-lime-soft": "color",
+      "--accent-cyan": "color",
+      "--accent-indigo": "color",
+      "--accent-violet": "color",
+      "--accent-orange": "color",
+      "--accent-emerald": "color",
+      "--grey-50": "color",
+      "--grey-100": "color",
+      "--grey-200": "color",
+      "--grey-300": "color",
+      "--grey-400": "color",
+      "--grey-500": "color",
+      "--grey-600": "color",
+      "--grey-700": "color",
+      "--grey-800": "color",
+      "--grey-900": "color",
+      "--surface-dark": "color",
+      "--surface-dark-2": "color",
+      "--surface-light": "color",
+      "--surface-light-2": "color",
+      "--surface-lime": "color",
+      "--surface-mint": "color",
+      "--fg-on-dark": "color",
+      "--fg-on-dark-muted": "color",
+      "--fg-on-dark-subtle": "color",
+      "--fg-on-light": "color",
+      "--fg-on-light-muted": "color",
+      "--fg-on-light-subtle": "color",
+      "--fg-on-lime": "color",
+      "--fg-accent": "color",
+      "--border-on-dark": "color",
+      "--border-on-light": "color",
+      "--hairline-on-dark": "color",
+      "--hairline-on-light": "color",
+      "--highlight-bg": "color",
+      "--highlight-fg": "color",
+      "--font-sans": "font",
+      "--font-mono": "font",
+      "--font-hero": "font",
+      "--font-display": "font",
+      "--fw-light": "font",
+      "--fw-regular": "font",
+      "--fw-medium": "font",
+      "--fw-semibold": "font",
+      "--fw-bold": "font",
+      "--fw-black": "font",
+      "--fs-eyebrow": "spacing",
+      "--fs-caption": "spacing",
+      "--fs-body-sm": "spacing",
+      "--fs-body": "spacing",
+      "--fs-body-lg": "spacing",
+      "--fs-h5": "spacing",
+      "--fs-h4": "spacing",
+      "--fs-h3": "spacing",
+      "--fs-h2": "spacing",
+      "--fs-h1": "spacing",
+      "--fs-display": "spacing",
+      "--lh-tight": "font",
+      "--lh-snug": "font",
+      "--lh-base": "font",
+      "--lh-loose": "font",
+      "--tracking-tight": "font",
+      "--tracking-flat": "font",
+      "--tracking-mono": "font",
+      "--space-0": "spacing",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--space-10": "spacing",
+      "--radius-0": "radius",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-pill": "radius",
+      "--shadow-none": "shadow",
+      "--shadow-soft": "shadow",
+      "--shadow-card": "shadow",
+      "--shadow-lime": "shadow",
+      "--ease-standard": "other",
+      "--ease-out": "other",
+      "--dur-fast": "other",
+      "--dur-base": "other",
+      "--dur-slow": "other"
+    },
+    "fontFamilies": [
+      "Geist",
+      "Geist Mono",
+      "Montserrat"
+    ]
+  }
+}

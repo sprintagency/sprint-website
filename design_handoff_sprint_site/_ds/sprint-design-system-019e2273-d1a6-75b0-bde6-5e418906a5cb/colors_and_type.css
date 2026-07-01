@@ -1,0 +1,315 @@
+/* ============================================================
+   SPRINT — Colors & Type
+   Deep navy (#0c1321), lime green (#b5e602), soft mint (#d7ffaa),
+   white and light greys. Geist sans + Geist Mono.
+   ============================================================ */
+
+/* Geist — local variable fonts (uploaded by brand) */
+@font-face {
+  font-family: "Geist";
+  src: url("fonts/Geist-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/Geist-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("fonts/Geist-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/Geist-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Geist Mono — still Google Fonts; swap to @font-face when brand provides files */
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap");
+
+/* Montserrat — local variable font; ONLY used for display (--font-hero) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* -------- Brand palette -------- */
+  --sprint-black:        #0c1321;
+  --sprint-white:        #ffffff;
+  --sprint-lime:         #b5e602;   /* primary brand accent */
+  --sprint-lime-soft:    #d7ffaa;   /* soft mint companion */
+
+  /* -------- Extended accents -------- */
+  /* Secondary accents for data-viz, tags, illustrative moments.
+     Lime stays the primary brand accent — use these sparingly. */
+  --accent-cyan:      #00c8ff;
+  --accent-indigo:    #5d6bff;
+  --accent-violet:    #8a5cff;
+  --accent-orange:    #ff8a00;
+  --accent-emerald:   #00c875;
+
+  /* Neutrals — light side */
+  --grey-50:   #fafafa;
+  --grey-100:  #f4f4f4;
+  --grey-200:  #e8e8e8;
+  --grey-300:  #d4d4d4;
+  --grey-400:  #a8a8a8;
+  --grey-500:  #737373;
+  --grey-600:  #525252;
+  --grey-700:  #2f2f2f;
+  --grey-800:  #1a1a1a;
+  --grey-900:  #0a0a0a;
+
+  /* -------- Surface tokens -------- */
+  --surface-dark:        var(--sprint-black);
+  --surface-dark-2:      #151f33;          /* raised card on navy */
+  --surface-light:       var(--sprint-white);
+  --surface-light-2:     var(--grey-100);  /* "Who we are" bg */
+  --surface-lime:        var(--sprint-lime);
+  --surface-mint:        var(--sprint-lime-soft);
+
+  /* -------- Foreground tokens -------- */
+  --fg-on-dark:          var(--sprint-white);
+  --fg-on-dark-muted:    #8a8a8a;
+  --fg-on-dark-subtle:   #5a5a5a;
+
+  --fg-on-light:         var(--sprint-black);
+  --fg-on-light-muted:   #9a9a9a;        /* big grey paragraph in "Who we are" */
+  --fg-on-light-subtle:  var(--grey-500);
+
+  --fg-on-lime:          var(--sprint-black);
+  --fg-accent:           var(--sprint-lime);
+
+  /* -------- Borders & dividers -------- */
+  --border-on-dark:      rgba(255,255,255,0.10);
+  --border-on-light:     rgba(0,0,0,0.10);
+  --hairline-on-dark:    rgba(255,255,255,0.16);
+  --hairline-on-light:   rgba(0,0,0,0.12);
+
+  /* -------- Highlight (the green text highlight) -------- */
+  --highlight-bg:        var(--sprint-lime);
+  --highlight-fg:        var(--sprint-black);
+
+  /* -------- Typography — families -------- */
+  --font-sans:  "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:  "Geist Mono", ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  /* --font-hero: display / hero / slogan face. Montserrat Black.
+     ONLY used for big display moments — the hero H1, the footer slogan,
+     billboard-style headers. Everywhere else (H2/H3 section heads, body,
+     UI labels) is Geist or Geist Mono. */
+  --font-hero: "Montserrat", "Geist", system-ui, sans-serif;
+  --font-display: var(--font-hero);
+
+  /* -------- Typography — weights -------- */
+  --fw-light:    300;   /* @kind font */
+  --fw-regular:  400;   /* @kind font */
+  --fw-medium:   500;   /* @kind font */
+  --fw-semibold: 600;   /* @kind font */
+  --fw-bold:     700;   /* @kind font */
+  --fw-black:    900;   /* @kind font */
+
+  /* -------- Typography — scale -------- */
+  --fs-eyebrow:  12px;   /* [ STUDIO ] mono labels */
+  --fs-caption:  13px;
+  --fs-body-sm:  14px;
+  --fs-body:     16px;
+  --fs-body-lg:  18px;
+  --fs-h5:       20px;
+  --fs-h4:       24px;
+  --fs-h3:       32px;
+  --fs-h2:       48px;
+  --fs-h1:       72px;
+  --fs-display:  140px;  /* hero "MAKE YOUR BRAND" scale — 2× H1 (72px) */
+
+  /* -------- Typography — leading & tracking -------- */
+  --lh-tight:    1.02;   /* @kind font */
+  --lh-snug:     1.1;    /* @kind font */
+  --lh-base:     1.45;   /* @kind font */
+  --lh-loose:    1.65;   /* @kind font */
+
+  --tracking-tight:  -0.03rem;   /* @kind font */
+  --tracking-flat:    0em;       /* @kind font */
+  --tracking-mono:   0.08em;   /* @kind font */
+
+  /* -------- Spacing scale (4px base) -------- */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+
+  /* -------- Radii (Sprint is square-ish; uses small radii only) -------- */
+  --radius-0:  0;
+  --radius-sm: 4px;       /* buttons, chips */
+  --radius-md: 8px;       /* small cards / inputs */
+  --radius-lg: 12px;      /* pricing & feature cards */
+  --radius-pill: 999px;   /* avatars only */
+
+  /* -------- Shadows -------- */
+  --shadow-none: none;
+  --shadow-soft: 0 1px 2px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-card: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-lime: 0 6px 20px rgba(181, 230, 2, 0.35);
+
+  /* -------- Motion -------- */
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);   /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* @kind other */
+  --dur-fast:  120ms;   /* @kind other */
+  --dur-base:  220ms;   /* @kind other */
+  --dur-slow:  420ms;   /* @kind other */
+}
+
+/* Global default: Geist sits tight — -0.03rem across the board (absolute, not em-scaled).
+   Mono classes (.s-mono / .s-eyebrow / etc) override back to their positive tracking. */
+html { letter-spacing: -0.03rem; }
+
+/* Reset for native mono / kbd elements that may not carry a brand class */
+code, kbd, samp, pre { letter-spacing: var(--tracking-mono); }
+
+/* ============================================================
+   Semantic typography utility classes
+   ============================================================ */
+
+.s-display {
+  /* Display / hero / slogan ONLY — Montserrat Black, uppercase, upright (not italic).
+     Reserved for the biggest display moments. Never use on H2/H3 or body. */
+  font-family: var(--font-hero);
+  font-weight: 900;
+  font-size: clamp(56px, 9vw, var(--fs-display));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  font-style: normal;
+}
+
+.s-h1 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: clamp(40px, 5vw, var(--fs-h1));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.s-h2 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: clamp(32px, 4vw, var(--fs-h2));
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.s-h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.025em;
+}
+
+.s-h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+}
+
+.s-h5 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h5);
+  line-height: var(--lh-snug);
+}
+
+.s-body {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-base);
+  letter-spacing: -0.03rem;
+}
+
+.s-body-lg {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-base);
+  letter-spacing: -0.03rem;
+}
+
+.s-caption {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-base);
+  letter-spacing: -0.03rem;
+  color: var(--fg-on-light-subtle);
+}
+
+/* The signature Sprint eyebrow:  [ STUDIO ]   in Geist Mono uppercase */
+.s-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-eyebrow);
+  line-height: 1;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.s-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-mono);
+}
+
+/* The green highlight "marker" used to emphasise words in headlines */
+.s-highlight {
+  background: var(--highlight-bg);
+  color: var(--highlight-fg);
+  padding: 0.02em 0.18em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* The dot at end of "Who we are." that flips green */
+.s-dot { color: var(--sprint-lime); }
+
+/* Section headers use the eyebrow with a short lime swatch in front */
+.s-eyebrow-with-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+.s-eyebrow-with-swatch::before {
+  content: "";
+  display: inline-block;
+  width: 48px;
+  height: 6px;
+  background: linear-gradient(to right,
+    rgba(181, 230, 2, 0) 0%,
+    var(--sprint-lime) 100%);
+  border-radius: 0 999px 999px 0;
+}

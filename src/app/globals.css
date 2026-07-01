@@ -1,0 +1,266 @@
+/* ============================================================
+   SPRINT — Marketing site global styles
+   Ported from design_handoff_sprint_site (_ds colors_and_type.css
+   + the shared <style> block in Hero.dc.html).
+   Font families are provided by next/font (see layout.tsx) and
+   mapped onto the design-system --font-* tokens below.
+   ============================================================ */
+
+:root {
+  /* -------- Brand palette -------- */
+  --sprint-black:        #0c1321;
+  --sprint-white:        #ffffff;
+  --sprint-lime:         #b5e602;   /* primary brand accent */
+  --sprint-lime-soft:    #d7ffaa;   /* soft mint companion */
+
+  /* -------- Extended accents -------- */
+  --accent-cyan:      #00c8ff;
+  --accent-indigo:    #5d6bff;
+  --accent-violet:    #8a5cff;
+  --accent-orange:    #ff8a00;
+  --accent-emerald:   #00c875;
+
+  /* Neutrals — light side */
+  --grey-50:   #fafafa;
+  --grey-100:  #f4f4f4;
+  --grey-200:  #e8e8e8;
+  --grey-300:  #d4d4d4;
+  --grey-400:  #a8a8a8;
+  --grey-500:  #737373;
+  --grey-600:  #525252;
+  --grey-700:  #2f2f2f;
+  --grey-800:  #1a1a1a;
+  --grey-900:  #0a0a0a;
+
+  /* -------- Surface tokens -------- */
+  --surface-dark:        var(--sprint-black);
+  --surface-dark-2:      #151f33;
+  --surface-light:       var(--sprint-white);
+  --surface-light-2:     var(--grey-100);
+  --surface-lime:        var(--sprint-lime);
+  --surface-mint:        var(--sprint-lime-soft);
+
+  /* -------- Foreground tokens -------- */
+  --fg-on-dark:          var(--sprint-white);
+  --fg-on-dark-muted:    #8a8a8a;
+  --fg-on-dark-subtle:   #5a5a5a;
+  --fg-on-light:         var(--sprint-black);
+  --fg-on-light-muted:   #9a9a9a;
+  --fg-on-light-subtle:  var(--grey-500);
+  --fg-on-lime:          var(--sprint-black);
+  --fg-accent:           var(--sprint-lime);
+
+  /* -------- Borders & dividers -------- */
+  --border-on-dark:      rgba(255,255,255,0.10);
+  --border-on-light:     rgba(0,0,0,0.10);
+  --hairline-on-dark:    rgba(255,255,255,0.16);
+  --hairline-on-light:   rgba(0,0,0,0.12);
+
+  /* -------- Highlight -------- */
+  --highlight-bg:        var(--sprint-lime);
+  --highlight-fg:        var(--sprint-black);
+
+  /* -------- Typography — families --------
+     next/font exposes --font-geist / --font-geist-mono / --font-montserrat.
+     We map them onto the design-system tokens (with the same fallbacks). */
+  --font-sans:  var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:  var(--font-geist-mono), ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --font-hero:  var(--font-montserrat), var(--font-geist), system-ui, sans-serif;
+  --font-display: var(--font-hero);
+
+  /* -------- Typography — weights -------- */
+  --fw-light: 300; --fw-regular: 400; --fw-medium: 500;
+  --fw-semibold: 600; --fw-bold: 700; --fw-black: 900;
+
+  /* -------- Typography — scale -------- */
+  --fs-eyebrow: 12px; --fs-caption: 13px; --fs-body-sm: 14px;
+  --fs-body: 16px; --fs-body-lg: 18px; --fs-h5: 20px; --fs-h4: 24px;
+  --fs-h3: 32px; --fs-h2: 48px; --fs-h1: 72px; --fs-display: 140px;
+
+  /* -------- Leading & tracking -------- */
+  --lh-tight: 1.02; --lh-snug: 1.1; --lh-base: 1.45; --lh-loose: 1.65;
+  --tracking-tight: -0.03rem; --tracking-flat: 0em; --tracking-mono: 0.08em;
+
+  /* -------- Spacing scale (4px base) -------- */
+  --space-0: 0; --space-1: 4px; --space-2: 8px; --space-3: 12px;
+  --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px;
+  --space-8: 64px; --space-9: 96px; --space-10: 128px;
+
+  /* -------- Radii -------- */
+  --radius-0: 0; --radius-sm: 4px; --radius-md: 8px;
+  --radius-lg: 12px; --radius-pill: 999px;
+
+  /* -------- Shadows -------- */
+  --shadow-none: none;
+  --shadow-soft: 0 1px 2px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-card: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-lime: 0 6px 20px rgba(181, 230, 2, 0.35);
+
+  /* -------- Motion -------- */
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms; --dur-base: 220ms; --dur-slow: 420ms;
+}
+
+/* Global default: Geist sits tight. */
+html { letter-spacing: -0.03rem; scroll-behavior: smooth; }
+code, kbd, samp, pre { letter-spacing: var(--tracking-mono); }
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #0c1321; }
+
+/* ============================================================
+   Semantic typography utility classes (subset used by the site)
+   ============================================================ */
+.s-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-eyebrow);
+  line-height: 1;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.s-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-mono);
+}
+.s-dot { color: var(--sprint-lime); }
+
+/* ============================================================
+   Page interaction styles (from Hero.dc.html <style>)
+   ============================================================ */
+@keyframes floatA { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes floatB { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes floatCenter { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,-10px); } }
+@keyframes logomarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Request a scope button */
+.scope-btn { display:inline-flex; align-items:center; gap:13px; }
+.scope-label { transition: color 0.25s ease; }
+.scope-btn:hover .scope-label { color: var(--sprint-lime); }
+.scope-circle { transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+.scope-btn:hover .scope-circle { background: var(--sprint-lime); border-color: var(--sprint-lime); color:#0c1321; }
+
+/* Contact modal form */
+.cform input, .cform select, .cform textarea { width:100%; background-color:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); border-radius:4px; color:#fff; font-family:var(--font-sans); font-size:15px; padding:12px 14px; outline:none; transition:border-color 0.2s,background-color 0.2s,box-shadow 0.2s; }
+.cform select { appearance:none; -webkit-appearance:none; -moz-appearance:none; }
+.cform textarea { resize:vertical; min-height:104px; line-height:1.5; }
+.cform input:focus, .cform select:focus, .cform textarea:focus { border-color:rgba(181,230,2,0.6); background-color:rgba(255,255,255,0.06); box-shadow:0 0 0 3px rgba(181,230,2,0.12); }
+.cform ::placeholder { color:rgba(255,255,255,0.34); }
+.cs-trigger:hover { border-color:rgba(255,255,255,0.22) !important; }
+.cs-panel::-webkit-scrollbar { width:8px; }
+.cs-panel::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.15); border-radius:8px; }
+.cm-submit { transition:transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s; }
+.cm-submit:hover { transform:translateY(-2px); }
+#cm-close:hover { background:rgba(255,255,255,0.1) !important; border-color:rgba(255,255,255,0.28) !important; }
+body.cm-open { overflow:hidden; }
+@media (max-width: 600px) {
+  .cm-2col { grid-template-columns: 1fr !important; }
+  #cm-dialog { padding: 30px 22px 26px !important; }
+}
+
+/* Platform capability cards hover */
+.platform-cards > div { transition: transform 0.36s cubic-bezier(0.22,1,0.36,1), box-shadow 0.36s ease, border-color 0.26s ease, background 0.26s ease, opacity 0.64s ease !important; will-change: transform; }
+.platform-cards > div:hover { transform: translateY(-8px) !important; background: rgba(255,255,255,0.08) !important; border-color: rgba(181,230,2,0.5) !important; box-shadow: 0 0 0 1px rgba(181,230,2,0.28), 0 26px 54px -20px rgba(181,230,2,0.42) !important; }
+
+/* Unified CTA hover */
+.cta { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, background 0.2s ease, border-color 0.2s ease; }
+.cta:hover { transform: translateY(-2px); }
+.cta-lime:hover { box-shadow: 0 14px 32px -12px rgba(181,230,2,0.5); }
+.cta-ghost:hover { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.28) !important; box-shadow: 0 14px 30px -14px rgba(0,0,0,0.6); }
+.cm-submit:hover { box-shadow: 0 14px 32px -12px rgba(181,230,2,0.5); }
+
+/* Nav links + logo */
+.navlink { position: relative; color: rgba(255,255,255,0.82); text-decoration: none; transition: color 0.2s ease; }
+.navlink:hover { color: #ffffff; }
+.navlink::after { content: ''; position: absolute; left: 0; bottom: -7px; height: 2px; width: 0; border-radius: 2px; background: var(--sprint-lime); transition: width 0.3s cubic-bezier(0.22,1,0.36,1); }
+.navlink:hover::after { width: 100%; }
+.logo-link { display: inline-flex; align-items: center; transition: opacity 0.2s ease; }
+.logo-link:hover { opacity: 0.75; }
+.nav-hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; cursor: pointer; flex: none; padding: 0; }
+.mm-link { font-family: var(--font-sans); font-size: 22px; font-weight: 600; color: #fff; text-decoration: none; padding: 17px 2px; border-bottom: 1px solid rgba(255,255,255,0.08); transition: color 0.2s ease; }
+.mm-link:hover { color: var(--sprint-lime); }
+@media (max-width: 980px) {
+  .nav-hamburger { display: inline-flex; }
+  .mm-hide-mobile { display: none !important; }
+}
+@media (min-width: 981px) {
+  #mobile-menu { display: none !important; }
+}
+
+/* Footer link hover */
+.footer-link { transition: color 0.2s ease; }
+.footer-link:hover { color: #b5e602 !important; }
+
+/* Add-on card hover */
+.addon-card:hover { border-color: rgba(181,230,2,0.45) !important; box-shadow: 0 0 0 1px rgba(181,230,2,0.12), 0 20px 50px -30px rgba(181,230,2,0.28) !important; }
+.addon-chip { transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease; }
+.addon-chip:hover { background: rgba(255,255,255,0.09) !important; border-color: rgba(255,255,255,0.4) !important; color: #ffffff !important; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 24px -12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12); }
+
+/* Testimonial arrows hover */
+.testi-arrow { transition: background 0.25s, border-color 0.25s; }
+.testi-arrow:hover { background: rgba(255,255,255,0.09) !important; border-color: rgba(181,230,2,0.5) !important; }
+
+/* FAQ accordion */
+details.faq-item > summary { list-style: none; }
+details.faq-item > summary::-webkit-details-marker { display: none; }
+details.faq-item[open] .faq-plus { transform: rotate(45deg); }
+details.faq-item[open] .faq-q { color: #ffffff; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .pricing-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .platform-cards { grid-template-columns: repeat(2,1fr) !important; }
+}
+@media (max-width: 980px) {
+  .nav-links { display: none !important; }
+  .hero-section { min-height: auto !important; }
+  .hero-inner { padding-top: 108px !important; padding-bottom: 8px !important; }
+  .hero-media { position: static !important; top: auto !important; left: auto !important; transform: none !important; height: auto !important; width: 100% !important; margin: 46px auto 0 !important; padding: 0 24px !important; }
+  .hero-media-frame { height: auto !important; }
+  .hero-strip { margin-top: 40px !important; padding-bottom: 20px !important; }
+  .why-grid { grid-template-columns: 1fr !important; }
+  .showreel-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .svc-float { display: none !important; }
+  .svc-mobile { display: block !important; }
+  .addon-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .addon-header { position: static !important; top: auto !important; order: -1 !important; }
+  .platform-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .platform-cards {
+    max-height: 236px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 2px !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 14%, #000 34%, #000 66%, rgba(0,0,0,0.15) 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 14%, #000 34%, #000 66%, rgba(0,0,0,0.15) 86%, transparent 100%);
+    scrollbar-width: none;
+  }
+  .platform-cards::-webkit-scrollbar { display: none; }
+  .footer-grid { grid-template-columns: repeat(2,1fr) !important; }
+}
+@media (max-width: 768px) {
+  .px { padding-left: 22px !important; padding-right: 22px !important; }
+  section.px { padding-top: 60px !important; padding-bottom: 60px !important; }
+  #addons.px { padding-top: 4px !important; }
+  .nav-inner { gap: 16px !important; }
+  .nav-actions { gap: 14px !important; }
+  .trust-bar { display: flex !important; flex-direction: column !important; align-items: stretch !important; width: 100% !important; max-width: 360px !important; }
+  .trust-div { width: auto !important; height: 1px !important; }
+  .trust-cell { justify-content: flex-start !important; }
+}
+@media (max-width: 640px) {
+  .hero-h1 { white-space: normal !important; }
+  .hero-copy { max-width: 100% !important; }
+  .hero-cta { flex-direction: column !important; align-items: stretch !important; }
+  .hero-cta > a { justify-content: center !important; }
+  .pricing-grid { grid-template-columns: 1fr !important; }
+  .platform-cards { grid-template-columns: 1fr !important; }
+  .avatar-cluster { transform: scale(0.84); }
+  .logo-track { gap: 40px !important; }
+  .logo-track img { height: 26px !important; }
+  .testi-arrow { display: none !important; }
+  .addon-card-grid { grid-template-columns: 1fr !important; gap: 22px !important; }
+  .footer-grid { grid-template-columns: 1fr !important; }
+}
