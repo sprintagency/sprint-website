@@ -473,7 +473,10 @@ export default function ContactModal() {
               noValidate
               onSubmit={(e) => {
                 e.preventDefault();
-                submit();
+                // Enter on steps 1-2 should advance, not submit early
+                // (the topic is often pre-filled, so submit() would pass).
+                if (step < 3) next();
+                else submit();
               }}
             >
               {/* progress */}

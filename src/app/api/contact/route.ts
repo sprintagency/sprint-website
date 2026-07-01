@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 // Sender identity for outbound notifications. Configurable via env; defaults
 // to the address requested in the brief. The domain must be verified in Resend.
@@ -41,8 +42,39 @@ export async function POST(req: Request) {
   if (!validEmail(email))
     return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
 
-  // TODO (CMS): once Supabase is wired, insert this payload into
-  // `contact_submissions` (RLS insert policy) before/after sending the email.
+  const record = {
+    name,
+    email,
+    company: body.company || null,
+    phone: body.phone || null,
+    topic: body.topic || null,
+    detail: body.detail || null,
+    budget: body.budget || null,
+    timeline: body.timeline || null,
+    message: body.message || null,
+    source_url: body.source_url || null,
+  };
+
+  // Persist to Supabase if configured. Prefer the service-role key (server
+  // only, bypasses RLS); fall back to the anon key (needs an insert policy).
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  let saved = false;
+  if (supabaseUrl && supabaseKey) {
+    try {
+      const supabase = createClient(supabaseUrl, supabaseKey, {
+        auth: { persistSession: false },
+      });
+      const { error } = await supabase.from("contact_submissions").insert(record);
+      if (error) console.error("[contact] Supabase insert error:", error.message);
+      else saved = true;
+    } catch (err) {
+      console.error("[contact] Supabase exception:", err);
+    }
+  }
 
   const rows: [string, string | undefined][] = [
     ["Name", name],
@@ -74,13 +106,14 @@ export async function POST(req: Request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    // No key configured (e.g. local dev): log and succeed so the UX still works.
-    console.warn("[contact] RESEND_API_KEY not set — logging submission only:", {
+    // No email key (e.g. local dev): the submission may still be saved to
+    // Supabase. Succeed so the UX works either way.
+    console.warn("[contact] RESEND_API_KEY not set — submission saved:", saved, {
       name,
       email,
       topic: body.topic,
     });
-    return NextResponse.json({ ok: true, delivered: false });
+    return NextResponse.json({ ok: true, delivered: false, saved });
   }
 
   try {
@@ -94,11 +127,14 @@ export async function POST(req: Request) {
     });
     if (error) {
       console.error("[contact] Resend error:", error);
+      // Lead is not lost if it was persisted; don't fail the user in that case.
+      if (saved) return NextResponse.json({ ok: true, delivered: false, saved: true });
       return NextResponse.json({ error: "Email send failed" }, { status: 502 });
     }
-    return NextResponse.json({ ok: true, delivered: true });
+    return NextResponse.json({ ok: true, delivered: true, saved });
   } catch (err) {
     console.error("[contact] send exception:", err);
+    if (saved) return NextResponse.json({ ok: true, delivered: false, saved: true });
     return NextResponse.json({ error: "Email send failed" }, { status: 502 });
   }
 }

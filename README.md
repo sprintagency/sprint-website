@@ -70,9 +70,19 @@ listens via a single delegated click handler.
 2. Add the env vars from `.env.example` in Project → Settings → Environment Variables.
 3. Deploy. No extra build config needed.
 
+## Supabase (contact storage)
+
+Each submission is inserted into a `contact_submissions` table. To enable it:
+
+1. Run `supabase/contact_submissions.sql` in the Supabase SQL editor.
+2. Set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (the Vercel <-> Supabase
+   integration provides these). The route falls back to the anon key, which
+   needs the RLS insert policy from the SQL.
+
+If Supabase is not configured the route still succeeds (email-only). If email
+fails but the row was saved, the request still returns OK so no lead is lost.
+
 ## Roadmap
 
-- **Supabase CMS**: source pricing/testimonials/logos/FAQ from Supabase and
-  persist `contact_submissions` (RLS insert policy). Env vars are stubbed in
-  `.env.example`; the insert point is marked with a `TODO (CMS)` in
-  `src/app/api/contact/route.ts`.
+- **Supabase CMS**: source pricing/testimonials/logos/FAQ content from Supabase
+  (the storage half is already wired via `contact_submissions`).
