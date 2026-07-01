@@ -61,12 +61,11 @@
   --highlight-fg:        var(--sprint-black);
 
   /* -------- Typography — families --------
-     next/font exposes --font-geist / --font-geist-mono / --font-montserrat.
-     We map them onto the design-system tokens (with the same fallbacks). */
+     next/font exposes --font-geist / --font-geist-mono.
+     We map them onto the design-system tokens (with the same fallbacks).
+     Sprint uses only the Geist and Geist Mono families. */
   --font-sans:  var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono:  var(--font-geist-mono), ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
-  --font-hero:  var(--font-montserrat), var(--font-geist), system-ui, sans-serif;
-  --font-display: var(--font-hero);
 
   /* -------- Typography — weights -------- */
   --fw-light: 300; --fw-regular: 400; --fw-medium: 500;
