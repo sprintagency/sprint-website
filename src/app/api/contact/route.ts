@@ -62,17 +62,24 @@ export async function POST(req: Request) {
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.SUPABASE_ANON_KEY ||
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseConfigured = !!(supabaseUrl && supabaseKey);
   let saved = false;
-  if (supabaseUrl && supabaseKey) {
+  let saveError: string | null = supabaseConfigured ? null : "not_configured";
+  if (supabaseConfigured) {
     try {
-      const supabase = createClient(supabaseUrl, supabaseKey, {
+      const supabase = createClient(supabaseUrl!, supabaseKey!, {
         auth: { persistSession: false },
       });
       const { error } = await supabase.from("contact_submissions").insert(record);
-      if (error) console.error("[contact] Supabase insert error:", error.message);
-      else saved = true;
+      if (error) {
+        console.error("[contact] Supabase insert error:", error.message);
+        saveError = error.message;
+      } else {
+        saved = true;
+      }
     } catch (err) {
       console.error("[contact] Supabase exception:", err);
+      saveError = err instanceof Error ? err.message : "exception";
     }
   }
 
@@ -113,7 +120,7 @@ export async function POST(req: Request) {
       email,
       topic: body.topic,
     });
-    return NextResponse.json({ ok: true, delivered: false, saved });
+    return NextResponse.json({ ok: true, delivered: false, saved, supabaseConfigured, saveError });
   }
 
   try {
@@ -131,7 +138,7 @@ export async function POST(req: Request) {
       if (saved) return NextResponse.json({ ok: true, delivered: false, saved: true });
       return NextResponse.json({ error: "Email send failed" }, { status: 502 });
     }
-    return NextResponse.json({ ok: true, delivered: true, saved });
+    return NextResponse.json({ ok: true, delivered: true, saved, supabaseConfigured, saveError });
   } catch (err) {
     console.error("[contact] send exception:", err);
     if (saved) return NextResponse.json({ ok: true, delivered: false, saved: true });
