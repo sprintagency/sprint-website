@@ -7,7 +7,7 @@ const cardBase: CSSProperties = {
   borderRadius: 4,
   background: "#12182b",
   border: "1px solid rgba(255,255,255,0.10)",
-  overflow: "hidden",
+  overflow: "visible",
 };
 
 const cardGlow: CSSProperties = {
@@ -37,14 +37,30 @@ const body: CSSProperties = {
   margin: 0,
 };
 
+// Floating glass image card that lifts up out of the card (needs overflow:visible).
 const imgCard: CSSProperties = {
   position: "relative",
-  borderRadius: 4,
-  overflow: "hidden",
-  border: "1px solid rgba(255,255,255,0.08)",
-  height: 196,
+  zIndex: 2,
+  height: 206,
+  marginTop: -40,
   marginBottom: 26,
-  background: "#0c1321",
+  padding: 3,
+  borderRadius: 12,
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.16)",
+  backdropFilter: "blur(20px)",
+  WebkitBackdropFilter: "blur(20px)",
+  boxShadow: "0 32px 66px -20px rgba(0,0,0,0.88)",
+};
+
+const imgInner: CSSProperties = {
+  display: "block",
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  objectPosition: "center top",
+  borderRadius: 9,
+  border: "1px solid rgba(255,255,255,0.08)",
 };
 
 export default function WhySection() {
@@ -138,7 +154,7 @@ export default function WhySection() {
                   borderRadius: "50%",
                   objectFit: "cover",
                   boxShadow: avatarShadow,
-                  marginLeft: -18,
+                  marginLeft: -6,
                   marginTop: -8,
                   zIndex: 3,
                   animation: "floatA 7.6s ease-in-out 0.5s infinite",
@@ -156,7 +172,7 @@ export default function WhySection() {
                   borderRadius: "50%",
                   objectFit: "cover",
                   boxShadow: avatarShadow,
-                  marginLeft: -18,
+                  marginLeft: -6,
                   marginTop: 4,
                   zIndex: 2,
                   animation: "floatB 8.3s ease-in-out 1s infinite",
@@ -174,7 +190,7 @@ export default function WhySection() {
                   borderRadius: "50%",
                   objectFit: "cover",
                   boxShadow: avatarShadow,
-                  marginLeft: -18,
+                  marginLeft: -6,
                   marginTop: -12,
                   zIndex: 1,
                   animation: "floatA 6.6s ease-in-out 0.3s infinite",
@@ -197,17 +213,7 @@ export default function WhySection() {
           <div style={cardGlow} />
           <div style={imgCard}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/platform.webp"
-              alt="Sprint workflow"
-              style={{
-                display: "block",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "46% 58%",
-              }}
-            />
+            <img src="/assets/card-new-request.webp" alt="Sprint new request" style={imgInner} />
           </div>
           <div style={{ padding: "0 14px" }}>
             <h3 style={h3}>Delivered in days, not weeks</h3>
@@ -223,17 +229,7 @@ export default function WhySection() {
           <div style={cardGlow} />
           <div style={imgCard}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/platform.webp"
-              alt="Sprint activity"
-              style={{
-                display: "block",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "92% 62%",
-              }}
-            />
+            <img src="/assets/card-timeline.webp" alt="Sprint dashboard" style={imgInner} />
           </div>
           <div style={{ padding: "0 14px" }}>
             <h3 style={h3}>One platform to run it all</h3>
