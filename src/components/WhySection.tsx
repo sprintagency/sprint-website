@@ -229,7 +229,7 @@ export default function WhySection() {
           <div style={cardGlow} />
           <div style={imgCard}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/card-timeline.webp" alt="Sprint dashboard" style={imgInner} />
+            <img src="/assets/card-review.webp" alt="Sprint deliverable review" style={imgInner} />
           </div>
           <div style={{ padding: "0 14px" }}>
             <h3 style={h3}>One platform to run it all</h3>

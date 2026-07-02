@@ -26,6 +26,11 @@ type Payload = {
   message?: string;
   source_url?: string;
   created_at?: string;
+  // Growth Partner attribution (surfaced in the notification email; not
+  // persisted to contact_submissions to avoid a schema change).
+  source?: string;
+  partnerId?: string;
+  partnerName?: string;
 };
 
 export async function POST(req: Request) {
@@ -86,6 +91,13 @@ export async function POST(req: Request) {
     ["Budget", body.budget],
     ["Timeline", body.timeline],
     ["Message", body.message],
+    [
+      "Growth partner",
+      body.partnerName
+        ? `${body.partnerName}${body.partnerId ? ` (${body.partnerId})` : ""}`
+        : undefined,
+    ],
+    ["Lead source", body.source],
     ["Source", body.source_url],
   ];
   const html = `

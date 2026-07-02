@@ -51,7 +51,7 @@ function PricingCard({
             borderRadius: 3,
           }}
         >
-          Most popular
+          Video Included
         </div>
       )}
       <Eyebrow style={{ marginBottom: 22 }}>{eyebrow}</Eyebrow>

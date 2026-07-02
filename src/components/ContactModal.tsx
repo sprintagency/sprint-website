@@ -7,200 +7,24 @@ import {
   useState,
   type CSSProperties,
 } from "react";
-
-/* ------------------------------------------------------------------ */
-/* Topic configuration (ported from _cmDetails / _cmHeadings / intents) */
-/* ------------------------------------------------------------------ */
-
-type TopicKey = "creative" | "ai" | "addon" | "demo" | "other" | "";
-
-const TOPIC_OPTIONS: { value: Exclude<TopicKey, "">; label: string }[] = [
-  { value: "creative", label: "Creative plan" },
-  { value: "ai", label: "AI solution" },
-  { value: "addon", label: "Add-on service" },
-  { value: "demo", label: "Book a demo" },
-  { value: "other", label: "Something else" },
-];
-
-const DETAILS: Record<string, { label: string; options: string[] } | null> = {
-  creative: { label: "Which plan?", options: ["Starter", "Growth", "Scale", "Not sure yet"] },
-  ai: {
-    label: "What kind?",
-    options: ["AI consultation", "Custom platform build", "Workflow & automation", "Not sure yet"],
-  },
-  addon: { label: "Which service?", options: ["Digital Marketing", "Social Media Management", "Other"] },
-  demo: null,
-  other: null,
-};
-
-const HEADINGS: Record<string, string> = {
-  creative: "Let’s scope your creative",
-  ai: "Let’s design your platform",
-  addon: "Let’s scope your add-on",
-  demo: "Let’s book your demo",
-  other: "Let’s talk",
-};
-const DEFAULT_HEADING = "Let’s build something great";
-
-const BUDGETS = [
-  "Under $5k/mo",
-  "$5k-$10k/mo",
-  "$10k-$25k/mo",
-  "$25k+/mo",
-  "One-off project",
-  "Not sure yet",
-];
-const TIMELINES = ["ASAP", "1-3 months", "3-6 months", "Just exploring"];
+import CustomSelect from "./CustomSelect";
+import {
+  BUDGETS,
+  DEFAULT_HEADING,
+  DETAILS,
+  HEADINGS,
+  TIMELINES,
+  TOPIC_OPTIONS,
+  resolveIntent,
+  validEmail,
+  type TopicKey,
+} from "@/lib/contact-form";
 
 const STEP_LABELS: Record<number, string> = {
   1: "Your details",
   2: "Your project",
   3: "Anything else",
 };
-
-const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-const validEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-
-/* ------------------------------------------------------------------ */
-/* Custom dark dropdown (replaces the native-select enhancer)          */
-/* ------------------------------------------------------------------ */
-
-function CustomSelect({
-  value,
-  placeholder,
-  options,
-  onChange,
-}: {
-  value: string;
-  placeholder: string;
-  options: string[];
-  onChange: (v: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const wrapRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onDoc = (e: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
-  }, [open]);
-
-  return (
-    <div ref={wrapRef} style={{ position: "relative" }}>
-      <div
-        className="cs-trigger"
-        tabIndex={0}
-        onClick={() => setOpen((o) => !o)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setOpen((o) => !o);
-          } else if (e.key === "Escape") setOpen(false);
-        }}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 10,
-          width: "100%",
-          backgroundColor: "rgba(255,255,255,0.04)",
-          border: `1px solid ${open ? "rgba(181,230,2,0.6)" : "rgba(255,255,255,0.12)"}`,
-          borderRadius: 4,
-          color: "#fff",
-          fontFamily: "var(--font-sans)",
-          fontSize: 15,
-          padding: "12px 14px",
-          cursor: "pointer",
-          transition: "border-color 0.2s,background-color 0.2s,box-shadow 0.2s",
-        }}
-      >
-        <span
-          style={{
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            color: value ? "#fff" : "rgba(255,255,255,0.4)",
-          }}
-        >
-          {value || placeholder}
-        </span>
-        <span
-          style={{
-            display: "inline-flex",
-            flex: "none",
-            transition: "transform 0.25s ease",
-            transform: open ? "rotate(180deg)" : "none",
-            color: "#8b93a7",
-          }}
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </span>
-      </div>
-      {open && (
-        <div
-          className="cs-panel"
-          style={{
-            position: "absolute",
-            top: "calc(100% + 6px)",
-            left: 0,
-            right: 0,
-            zIndex: 60,
-            background: "#0f1729",
-            border: "1px solid rgba(255,255,255,0.14)",
-            borderRadius: 6,
-            boxShadow: "0 24px 60px -24px rgba(0,0,0,0.85)",
-            padding: 6,
-            maxHeight: 240,
-            overflowY: "auto",
-          }}
-        >
-          {options.map((o) => (
-            <div
-              key={o}
-              className="cs-opt"
-              onClick={() => {
-                onChange(o);
-                setOpen(false);
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "rgba(255,255,255,0.07)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = "transparent")
-              }
-              style={{
-                padding: "11px 12px",
-                borderRadius: 4,
-                color: o === value && value !== "" ? "#b5e602" : "#fff",
-                fontSize: 15,
-                cursor: "pointer",
-                transition: "background 0.15s ease",
-              }}
-            >
-              {o}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /* Contact modal                                                       */
@@ -254,13 +78,8 @@ export default function ContactModal() {
       setSubmitting(false);
       setError("");
       setStep(1);
-      const it = (intent || "").toLowerCase();
-      if (it === "demo") selectTopic("demo");
-      else if (it === "plan") selectTopic("creative", cap(plan || ""));
-      else if (it === "ai-platform") selectTopic("ai", "Custom platform build");
-      else if (it === "ai-consultation") selectTopic("ai", "AI consultation");
-      else if (it === "addon") selectTopic("addon", service || "");
-      else selectTopic("");
+      const { topic: t, detail } = resolveIntent(intent, plan, service);
+      selectTopic(t, detail || undefined);
       setOpen(true);
     },
     [selectTopic],

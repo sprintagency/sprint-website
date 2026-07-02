@@ -168,7 +168,7 @@ export default function FaqPage() {
                 style={{
                   fontSize: 15,
                   lineHeight: 1.65,
-                  color: "rgba(255,255,255,0.92)",
+                  color: "rgba(255,255,255,0.6)",
                   margin: 0,
                   padding: "0 4px 28px",
                   maxWidth: 720,

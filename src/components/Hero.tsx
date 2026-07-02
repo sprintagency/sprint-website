@@ -1,4 +1,4 @@
-import { CLIENT_LOGOS, SHOWREEL_VIDEO } from "@/lib/site-content";
+import { CLIENT_LOGOS } from "@/lib/site-content";
 import { CtaArrow, Eyebrow, ctaGhost, ctaLime } from "./primitives";
 
 export default function Hero() {
@@ -181,30 +181,40 @@ export default function Hero() {
         <div
           className="hero-media-frame"
           style={{
+            boxSizing: "border-box",
             height: "100%",
-            aspectRatio: "16 / 9",
-            borderRadius: 8,
-            overflow: "hidden",
+            display: "inline-flex",
+            borderRadius: 12,
+            padding: 10,
+            background: "rgba(255,255,255,0.05)",
             border: "1px solid rgba(255,255,255,0.12)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
             boxShadow: "0 50px 100px -34px rgba(0,0,0,0.8)",
-            background: "#0c1321",
           }}
         >
-          <video
-            data-hero-video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <div
             style={{
-              display: "block",
-              width: "100%",
               height: "100%",
-              objectFit: "cover",
+              aspectRatio: "16 / 9",
+              borderRadius: 6,
+              overflow: "hidden",
+              background: "#0c1321",
             }}
           >
-            <source src={SHOWREEL_VIDEO} type="video/mp4" />
-          </video>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/hero-dashboard-v01.webp"
+              alt="Sprint client portal dashboard"
+              style={{
+                display: "block",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+              }}
+            />
+          </div>
         </div>
       </div>
 

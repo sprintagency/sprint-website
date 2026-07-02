@@ -1,7 +1,15 @@
 import type { CSSProperties } from "react";
 import { Eyebrow } from "./primitives";
 
-const col: { title: string; links: { label: string; href: string; ext?: boolean }[] }[] = [
+type FooterLink = {
+  label: string;
+  href: string;
+  ext?: boolean;
+  openContact?: boolean;
+  intent?: string;
+};
+
+const col: { title: string; links: FooterLink[] }[] = [
   {
     title: "[ SERVICES ]",
     links: [
@@ -30,10 +38,9 @@ const col: { title: string; links: { label: string; href: string; ext?: boolean 
       { label: "Our Work", href: "/#showreel" },
       { label: "Pricing", href: "/#pricing" },
       { label: "FAQ", href: "/faq" },
-      { label: "Case Studies", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Freelancers", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "Careers", href: "#", openContact: true, intent: "careers" },
+      { label: "Freelancers", href: "#", openContact: true, intent: "freelancers" },
+      { label: "Contact", href: "/contact" },
     ],
   },
 ];
@@ -71,12 +78,14 @@ export default function Footer() {
         }}
       >
         <div style={{ maxWidth: 300 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/sprint-logo-white.svg"
-            alt="Sprint"
-            style={{ height: 26, width: "auto", display: "block", marginBottom: 22 }}
-          />
+          <a href="/" aria-label="Sprint home" style={{ display: "inline-block" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/sprint-logo-white.svg"
+              alt="Sprint"
+              style={{ height: 26, width: "auto", display: "block", marginBottom: 22 }}
+            />
+          </a>
           <p
             style={{
               fontSize: 15,
@@ -116,7 +125,14 @@ export default function Footer() {
             </Eyebrow>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {c.links.map((l, i) => (
-                <a key={i} href={l.href} className="footer-link" style={linkStyle}>
+                <a
+                  key={i}
+                  href={l.href}
+                  className="footer-link"
+                  style={linkStyle}
+                  {...(l.openContact ? { "data-open-contact": "1" } : {})}
+                  {...(l.intent ? { "data-intent": l.intent } : {})}
+                >
                   {l.label}
                 </a>
               ))}
@@ -140,31 +156,13 @@ export default function Footer() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 22, flexWrap: "wrap" }}>
-          <a
-            href="https://www.notion.so/sprintcreative/Terms-of-Service-35897d4735d180df9cedf77685398102?v=5c297d4735d182f6909108d979dc7aa7&source=copy_link"
-            target="_blank"
-            rel="noopener"
-            className="footer-link"
-            style={legalStyle}
-          >
+          <a href="/terms" className="footer-link" style={legalStyle}>
             Terms
           </a>
-          <a
-            href="https://sprintcreative.notion.site/Privacy-Policy-39097d4735d18029b131f9ce90353295?source=copy_link"
-            target="_blank"
-            rel="noopener"
-            className="footer-link"
-            style={legalStyle}
-          >
+          <a href="/privacy" className="footer-link" style={legalStyle}>
             Privacy
           </a>
-          <a
-            href="https://sprintcreative.notion.site/Cookies-Policy-39097d4735d180baa7edccad82af3637?source=copy_link"
-            target="_blank"
-            rel="noopener"
-            className="footer-link"
-            style={legalStyle}
-          >
+          <a href="/cookies" className="footer-link" style={legalStyle}>
             Cookies
           </a>
         </div>
@@ -197,14 +195,49 @@ export default function Footer() {
           margin: "0 auto",
           padding: "0 48px 52px",
           textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 8,
         }}
       >
         <span
           className="s-mono"
           style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}
         >
-          © 2026 SPRINT CREATIVE · FORT WORTH, TX
+          © 2026 SPRINT
         </span>
+        <a
+          href="https://maps.google.com/?q=3409+Clayton+Rd+E,+Fort+Worth,+TX+76116"
+          target="_blank"
+          rel="noopener"
+          className="footer-link"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 7,
+            color: "rgba(255,255,255,0.4)",
+            textDecoration: "none",
+          }}
+        >
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ flex: "none" }}
+          >
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span className="s-mono" style={{ fontSize: 11.5, letterSpacing: "0.04em" }}>
+            3409 Clayton Rd E, Fort Worth, TX 76116, USA
+          </span>
+        </a>
       </div>
     </footer>
   );
