@@ -1,5 +1,5 @@
 // Growth Partner directory. Each partner gets an attributed discovery-call
-// landing page at /growth-partner/<id> (e.g. from a QR code or shared link).
+// landing page at /<id> (e.g. /james-kerr, from a QR code or shared link).
 
 export type Partner = {
   id: string;

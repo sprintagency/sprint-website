@@ -221,7 +221,7 @@ body.cm-open { overflow:hidden; }
 .testi-arrow { transition: background 0.25s, border-color 0.25s; }
 .testi-arrow:hover { background: rgba(255,255,255,0.09) !important; border-color: rgba(181,230,2,0.5) !important; }
 
-/* Growth Partner landing page (/growth-partner/*) */
+/* Growth Partner landing page (root /<slug>) */
 @keyframes portalFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .pillar { transition: transform 0.36s cubic-bezier(0.22,1,0.36,1), box-shadow 0.36s ease, border-color 0.26s ease, background 0.26s ease; will-change: transform; }
 .pillar:hover { transform: translateY(-8px); background: rgba(255,255,255,0.08); border-color: rgba(181,230,2,0.5); box-shadow: 0 0 0 1px rgba(181,230,2,0.28), 0 26px 54px -20px rgba(181,230,2,0.42); }
