@@ -135,6 +135,25 @@ body { margin: 0; background: #0c1321; }
 @keyframes floatCenter { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,-10px); } }
 @keyframes logomarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* Hero copy: staggered cinematic fade-up (eyebrow -> h1 -> sub -> CTAs -> rating) */
+@keyframes heroIn {
+  0%   { opacity: 0; transform: translateY(44px); filter: blur(12px); }
+  55%  { filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.hero-copy > * {
+  opacity: 0;
+  animation: heroIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-copy > *:nth-child(1) { animation-delay: 0.15s; }
+.hero-copy > *:nth-child(2) { animation-delay: 0.45s; }
+.hero-copy > *:nth-child(3) { animation-delay: 0.78s; }
+.hero-copy > *:nth-child(4) { animation-delay: 1.10s; }
+.hero-copy > *:nth-child(5) { animation-delay: 1.42s; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > * { animation: none; opacity: 1; }
+}
+
 /* Request a scope button */
 .scope-btn { display:inline-flex; align-items:center; gap:13px; }
 .scope-label { transition: color 0.25s ease; }
