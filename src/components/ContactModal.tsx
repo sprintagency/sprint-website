@@ -652,6 +652,7 @@ export default function ContactModal() {
                 )}
                 {step < 3 ? (
                   <button
+                    key="cm-continue"
                     type="button"
                     onClick={next}
                     className="cm-submit"
@@ -676,7 +677,9 @@ export default function ContactModal() {
                   </button>
                 ) : (
                   <button
-                    type="submit"
+                    key="cm-send"
+                    type="button"
+                    onClick={() => submit()}
                     className="cm-submit"
                     disabled={submitting}
                     style={{
