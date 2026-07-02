@@ -221,6 +221,52 @@ body.cm-open { overflow:hidden; }
 .testi-arrow { transition: background 0.25s, border-color 0.25s; }
 .testi-arrow:hover { background: rgba(255,255,255,0.09) !important; border-color: rgba(181,230,2,0.5) !important; }
 
+/* Final CTA (service landing pages) */
+.fcta-btn { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, background 0.2s ease, border-color 0.2s ease; }
+.fcta-btn:hover { transform: translateY(-2px); }
+.fcta-lime:hover { box-shadow: 0 16px 36px -12px rgba(181,230,2,0.55); }
+.fcta-ghost:hover { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.3) !important; }
+@media (max-width: 640px) {
+  .fcta-actions { flex-direction: column !important; align-items: stretch !important; }
+  .fcta-actions > a { justify-content: center !important; }
+}
+
+/* Service landing pages (/{service}-fort-worth) */
+@keyframes vpFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes vpIn { 0% { opacity: 0; transform: translateY(34px); filter: blur(10px); } 60% { filter: blur(0); } 100% { opacity: 1; transform: translateY(0); filter: blur(0); } }
+.feat-card { transition: transform 0.36s cubic-bezier(0.22,1,0.36,1), box-shadow 0.36s ease, border-color 0.26s ease, background 0.26s ease; }
+.feat-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.06) !important; border-color: rgba(181,230,2,0.5) !important; box-shadow: 0 24px 50px -22px rgba(181,230,2,0.34); }
+.work-slot { transition: transform 0.36s cubic-bezier(0.22,1,0.36,1), box-shadow 0.36s ease, border-color 0.26s ease; }
+.work-slot:hover { transform: translateY(-5px); border-color: rgba(181,230,2,0.5) !important; box-shadow: 0 24px 50px -24px rgba(181,230,2,0.3); }
+.vp-copy > * { opacity: 0; animation: vpIn 1.3s cubic-bezier(0.16,1,0.3,1) both; }
+.vp-copy > *:nth-child(1) { animation-delay: 0.12s; }
+.vp-copy > *:nth-child(2) { animation-delay: 0.30s; }
+.vp-copy > *:nth-child(3) { animation-delay: 0.50s; }
+.vp-copy > *:nth-child(4) { animation-delay: 0.70s; }
+.vp-copy > *:nth-child(5) { animation-delay: 0.90s; }
+@media (prefers-reduced-motion: reduce) { .vp-copy > * { animation: none; opacity: 1; } }
+@media (max-width: 1100px) { .feat-grid { grid-template-columns: repeat(2,1fr) !important; } }
+@media (max-width: 980px) {
+  .svc-hero-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
+  .svc-hero-media { order: 2; }
+  .why-grid { grid-template-columns: 1fr !important; gap: 34px !important; }
+  .why-head { position: static !important; top: auto !important; }
+  .stat-band { grid-template-columns: repeat(2,1fr) !important; }
+}
+@media (max-width: 760px) {
+  .feat-grid { grid-template-columns: 1fr !important; }
+  .work-grid { grid-template-columns: 1fr 1fr !important; }
+  .why-cols { grid-template-columns: 1fr !important; }
+  .svc-hero-chips { flex-wrap: wrap !important; }
+  .svc-hero-h1 { font-size: clamp(38px,10vw,54px) !important; }
+}
+@media (max-width: 520px) {
+  .work-grid { grid-template-columns: 1fr !important; }
+  .stat-band { grid-template-columns: 1fr !important; }
+  .svc-hero-ctas { flex-direction: column !important; align-items: stretch !important; }
+  .svc-hero-ctas > a { justify-content: center !important; }
+}
+
 /* Growth Partner landing page (root /<slug>) */
 @keyframes portalFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .pillar { transition: transform 0.36s cubic-bezier(0.22,1,0.36,1), box-shadow 0.36s ease, border-color 0.26s ease, background 0.26s ease; will-change: transform; }

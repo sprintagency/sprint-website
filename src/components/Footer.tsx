@@ -13,11 +13,11 @@ const col: { title: string; links: FooterLink[] }[] = [
   {
     title: "[ SERVICES ]",
     links: [
-      { label: "Brand Identity", href: "/#why" },
-      { label: "Digital & Social", href: "/#why" },
-      { label: "Web Design", href: "/#why" },
-      { label: "Video & Motion", href: "/#showreel" },
-      { label: "Print Design", href: "/#why" },
+      { label: "Brand Identity", href: "/brand-identity-fort-worth" },
+      { label: "Digital & Social", href: "/social-media-management-fort-worth" },
+      { label: "Web Design", href: "/web-design-fort-worth" },
+      { label: "Video & Motion", href: "/video-production-fort-worth" },
+      { label: "Print Design", href: "/print-design-fort-worth" },
       { label: "Digital Marketing", href: "/#why" },
     ],
   },
