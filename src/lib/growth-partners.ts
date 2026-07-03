@@ -6,6 +6,9 @@ export type Partner = {
   name: string;
   role: string;
   avatar: string;
+  // Optional extra recipient(s) to notify (alongside the default inbox) when a
+  // lead comes through this partner's discovery page.
+  notify?: string[];
 };
 
 export const PARTNERS: Record<string, Partner> = {
@@ -20,6 +23,7 @@ export const PARTNERS: Record<string, Partner> = {
     name: "Isabel Cable",
     role: "Growth Partner",
     avatar: "/assets/team/isabel-cable.webp",
+    notify: ["isabel.cable@accessfortworth.com"],
   },
   "james-kerr": {
     id: "james-kerr",

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import { PARTNERS } from "@/lib/growth-partners";
 
 // Sender identity for outbound notifications. Configurable via env; defaults
 // to the address requested in the brief. The domain must be verified in Resend.
@@ -128,11 +129,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, delivered: false, saved });
   }
 
+  // Route to the default inbox, plus any partner-specific recipients attributed
+  // to the discovery page this lead came from.
+  const partner = body.partnerId ? PARTNERS[body.partnerId] : undefined;
+  const recipients = Array.from(new Set([TO, ...(partner?.notify || [])]));
+
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
       from: FROM,
-      to: TO,
+      to: recipients,
       replyTo: email,
       subject: `New enquiry — ${name}${body.topic ? ` (${body.topic})` : ""}`,
       html,
