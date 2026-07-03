@@ -80,7 +80,7 @@ export default function Hero() {
           maxWidth: 1360,
           margin: "0 auto",
           width: "100%",
-          padding: "40px 48px",
+          padding: "132px 48px 48px",
           flex: 1,
           display: "flex",
           alignItems: "center",
@@ -143,6 +143,7 @@ export default function Hero() {
           </div>
 
           <div
+            className="hero-rating"
             style={{
               display: "flex",
               alignItems: "center",

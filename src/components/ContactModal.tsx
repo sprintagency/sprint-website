@@ -15,15 +15,16 @@ import {
   HEADINGS,
   TIMELINES,
   TOPIC_OPTIONS,
+  isRecruit,
   resolveIntent,
   validEmail,
   type TopicKey,
 } from "@/lib/contact-form";
 
-const STEP_LABELS: Record<number, string> = {
-  1: "Your details",
-  2: "Your project",
-  3: "Anything else",
+const stepLabel = (step: number, recruit: boolean): string => {
+  if (step === 1) return "Your details";
+  if (step === 2) return recruit ? "Your background" : "Your project";
+  return "Anything else";
 };
 
 /* ------------------------------------------------------------------ */
@@ -47,6 +48,7 @@ const emptyForm = {
   detail: "",
   budget: "",
   timeline: "",
+  portfolio: "",
   message: "",
 };
 
@@ -179,6 +181,9 @@ export default function ContactModal() {
   if (!open) return null;
 
   const detailCfg = topic ? DETAILS[topic] : null;
+  const recruit = isRecruit(topic);
+  const portfolioLabel =
+    topic === "careers" ? "Portfolio or LinkedIn" : "Portfolio or website";
   const firstName = form.name.trim().split(" ")[0];
 
   return (
@@ -323,7 +328,7 @@ export default function ContactModal() {
                   marginBottom: 20,
                 }}
               >
-                Step {step} of 3 &middot; {STEP_LABELS[step]}
+                Step {step} of 3 &middot; {stepLabel(step, recruit)}
               </div>
 
               {/* STEP 1 */}
@@ -380,20 +385,22 @@ export default function ContactModal() {
               {/* STEP 2 */}
               {step === 2 && (
                 <div>
-                  <div style={{ marginBottom: 20 }}>
-                    <label style={labelStyle} className="s-mono">
-                      What can we help with? <span style={{ color: "var(--sprint-lime)" }}>*</span>
-                    </label>
-                    <CustomSelect
-                      value={topic ? TOPIC_OPTIONS.find((o) => o.value === topic)?.label || "" : ""}
-                      placeholder="Select an option"
-                      options={TOPIC_OPTIONS.map((o) => o.label)}
-                      onChange={(label) => {
-                        const t = TOPIC_OPTIONS.find((o) => o.label === label)?.value ?? "";
-                        selectTopic(t as TopicKey);
-                      }}
-                    />
-                  </div>
+                  {!recruit && (
+                    <div style={{ marginBottom: 20 }}>
+                      <label style={labelStyle} className="s-mono">
+                        What can we help with? <span style={{ color: "var(--sprint-lime)" }}>*</span>
+                      </label>
+                      <CustomSelect
+                        value={topic ? TOPIC_OPTIONS.find((o) => o.value === topic)?.label || "" : ""}
+                        placeholder="Select an option"
+                        options={TOPIC_OPTIONS.map((o) => o.label)}
+                        onChange={(label) => {
+                          const t = TOPIC_OPTIONS.find((o) => o.label === label)?.value ?? "";
+                          selectTopic(t as TopicKey);
+                        }}
+                      />
+                    </div>
+                  )}
 
                   {detailCfg && (
                     <div style={{ marginBottom: 20 }}>
@@ -407,26 +414,40 @@ export default function ContactModal() {
                     </div>
                   )}
 
-                  <div className="cm-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
-                    <div>
-                      <label style={labelStyle} className="s-mono">Budget</label>
-                      <CustomSelect
-                        value={form.budget}
-                        placeholder="Select a range"
-                        options={BUDGETS}
-                        onChange={(v) => set("budget", v)}
+                  {recruit && (
+                    <div style={{ marginBottom: 20 }}>
+                      <label style={labelStyle} className="s-mono">{portfolioLabel}</label>
+                      <input
+                        type="url"
+                        placeholder="https://"
+                        value={form.portfolio}
+                        onChange={(e) => set("portfolio", e.target.value)}
                       />
                     </div>
-                    <div>
-                      <label style={labelStyle} className="s-mono">Timeline</label>
-                      <CustomSelect
-                        value={form.timeline}
-                        placeholder="Select timing"
-                        options={TIMELINES}
-                        onChange={(v) => set("timeline", v)}
-                      />
+                  )}
+
+                  {!recruit && (
+                    <div className="cm-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
+                      <div>
+                        <label style={labelStyle} className="s-mono">Budget</label>
+                        <CustomSelect
+                          value={form.budget}
+                          placeholder="Select a range"
+                          options={BUDGETS}
+                          onChange={(v) => set("budget", v)}
+                        />
+                      </div>
+                      <div>
+                        <label style={labelStyle} className="s-mono">Timeline</label>
+                        <CustomSelect
+                          value={form.timeline}
+                          placeholder="Select timing"
+                          options={TIMELINES}
+                          onChange={(v) => set("timeline", v)}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               )}
 

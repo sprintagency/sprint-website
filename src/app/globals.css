@@ -376,6 +376,7 @@ details.faq-item[open] .faq-q { color: #ffffff; }
   .hero-copy { max-width: 100% !important; }
   .hero-cta { flex-direction: column !important; align-items: stretch !important; }
   .hero-cta > a { justify-content: center !important; }
+  .hero-rating { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 8px !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
   .platform-cards { grid-template-columns: 1fr !important; }
   .avatar-cluster { transform: scale(0.84); }

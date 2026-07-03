@@ -9,6 +9,7 @@ import {
   HEADINGS,
   TIMELINES,
   TOPIC_OPTIONS,
+  isRecruit,
   resolveIntent,
   validEmail,
   type TopicKey,
@@ -31,6 +32,7 @@ const emptyForm = {
   detail: "",
   budget: "",
   timeline: "",
+  portfolio: "",
   message: "",
 };
 
@@ -64,6 +66,9 @@ export default function ContactView() {
   }, []);
 
   const detailCfg = topic ? DETAILS[topic] : null;
+  const recruit = isRecruit(topic);
+  const portfolioLabel =
+    topic === "careers" ? "Portfolio or LinkedIn" : "Portfolio or website";
   const firstName = form.name.trim().split(" ")[0];
 
   const submit = async () => {
@@ -364,6 +369,7 @@ export default function ContactView() {
                   </div>
                 </div>
 
+                {!recruit && (
                 <div style={{ marginBottom: 22 }}>
                   <label className="s-mono" style={{ ...monoLabel, marginBottom: 12 }}>
                     What can we help with? <span style={{ color: "var(--sprint-lime)" }}>*</span>
@@ -396,6 +402,7 @@ export default function ContactView() {
                     })}
                   </div>
                 </div>
+                )}
 
                 {detailCfg && (
                   <div style={{ marginBottom: 22 }}>
@@ -409,29 +416,43 @@ export default function ContactView() {
                   </div>
                 )}
 
-                <div
-                  className="contact-2col"
-                  style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 22 }}
-                >
-                  <div>
-                    <label className="s-mono" style={monoLabel}>Budget</label>
-                    <CustomSelect
-                      value={form.budget}
-                      placeholder="Select a range"
-                      options={BUDGETS}
-                      onChange={(v) => set("budget", v)}
+                {recruit && (
+                  <div style={{ marginBottom: 22 }}>
+                    <label className="s-mono" style={monoLabel}>{portfolioLabel}</label>
+                    <input
+                      type="url"
+                      placeholder="https://"
+                      value={form.portfolio}
+                      onChange={(e) => set("portfolio", e.target.value)}
                     />
                   </div>
-                  <div>
-                    <label className="s-mono" style={monoLabel}>Timeline</label>
-                    <CustomSelect
-                      value={form.timeline}
-                      placeholder="Select timing"
-                      options={TIMELINES}
-                      onChange={(v) => set("timeline", v)}
-                    />
+                )}
+
+                {!recruit && (
+                  <div
+                    className="contact-2col"
+                    style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 22 }}
+                  >
+                    <div>
+                      <label className="s-mono" style={monoLabel}>Budget</label>
+                      <CustomSelect
+                        value={form.budget}
+                        placeholder="Select a range"
+                        options={BUDGETS}
+                        onChange={(v) => set("budget", v)}
+                      />
+                    </div>
+                    <div>
+                      <label className="s-mono" style={monoLabel}>Timeline</label>
+                      <CustomSelect
+                        value={form.timeline}
+                        placeholder="Select timing"
+                        options={TIMELINES}
+                        onChange={(v) => set("timeline", v)}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div style={{ marginBottom: 14 }}>
                   <label className="s-mono" style={monoLabel}>Tell us more</label>

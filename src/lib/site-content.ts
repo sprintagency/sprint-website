@@ -68,35 +68,35 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       "It has been an absolute pleasure working with the team at Sprint. They have assisted through a large project and ensured that we stay on track with it.",
     name: "Petro Haasbroek",
-    title: "[ MARKETING MANAGER, COBA ]",
+    title: "MARKETING MANAGER, COBA",
     img: "/assets/testimonials/petro.webp",
   },
   {
     quote:
       "From the start of the creative process to the delivery of the final, Sprint were an exemplary creative partner.",
     name: "David Camacho",
-    title: "[ COMMUNICATIONS, SIEMENS US ]",
+    title: "COMMUNICATIONS, SIEMENS US",
     img: "/assets/testimonials/david.webp",
   },
   {
     quote:
       "Sprint are highly professional and quick to respond to our rapidly changing demands, with useful, value adding suggestions and editing.",
     name: "Matt Richardson",
-    title: "[ H&S DIRECTOR, DALKIA ]",
+    title: "H&S DIRECTOR, DALKIA",
     img: "/assets/testimonials/matt.webp",
   },
   {
     quote:
       "Aledo Soccer Club wouldn't have been possible without Sprint. From the logo and brand identity to sign-ups and event marketing, they helped bring everything together from day one.",
     name: "Denin Spriggs",
-    title: "[ DIRECTOR, ALEDO SOCCER CLUB ]",
+    title: "DIRECTOR, ALEDO SOCCER CLUB",
     img: "/assets/testimonials/denin.webp",
   },
   {
     quote:
       "Sprint helped us refresh and align the brand across multiple areas of the business. This resulted in a consistently booked-out schedule for the taco truck.",
     name: "Sarah Kerr",
-    title: "[ MANAGER, TACO HEADS STOCKYARDS ]",
+    title: "MANAGER, TACO HEADS STOCKYARDS",
     img: "/assets/testimonials/sarah.webp",
   },
 ];
