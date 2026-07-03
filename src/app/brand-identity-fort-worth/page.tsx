@@ -87,31 +87,31 @@ const collageCard = {
 
 const HERO_COLLAGE = [
   {
-    src: "https://cdn.prod.website-files.com/690772527cd6438e3bbda289/6910e069833f0aade044123c_ff_landscape_02.webp",
+    src: "/assets/case-studies/ff-landscape-02.webp",
     alt: "Frontrunner Fieldhouse brand environment",
     wrap: { position: "absolute", top: 0, left: "5%", width: "60%", transform: "rotate(-3deg)", zIndex: 1 },
     card: { border: "1px solid rgba(255,255,255,0.14)", boxShadow: "0 30px 60px -28px rgba(0,0,0,0.8)", animation: "vpFloat 8s ease-in-out infinite" },
   },
   {
-    src: "https://cdn.prod.website-files.com/690772527cd6438e3bbda289/6a2e9e14872c0f8f4f878a36_ff_phone.webp",
+    src: "/assets/case-studies/ff-phone.webp",
     alt: "Frontrunner Fieldhouse mobile identity",
     wrap: { position: "absolute", top: "7%", right: "1%", width: "32%", transform: "rotate(3.5deg)", zIndex: 3 },
     card: { border: "1px solid rgba(255,255,255,0.16)", boxShadow: "0 30px 60px -26px rgba(0,0,0,0.82)", animation: "vpFloat 6.4s ease-in-out infinite", animationDelay: "-1.2s" },
   },
   {
-    src: "https://cdn.prod.website-files.com/690772527cd6438e3bbda289/6910e95873ec949d79a236b6_ff_landscape_03.webp",
+    src: "/assets/case-studies/ff-landscape-03.webp",
     alt: "Frontrunner Fieldhouse signage and environment",
     wrap: { position: "absolute", top: "33%", left: "27%", width: "56%", transform: "rotate(-1.5deg)", zIndex: 2 },
     card: { border: "1px solid rgba(255,255,255,0.14)", boxShadow: "0 30px 60px -28px rgba(0,0,0,0.8)", animation: "vpFloat 7.6s ease-in-out infinite", animationDelay: "-3s" },
   },
   {
-    src: "https://cdn.prod.website-files.com/690772527cd6438e3bbda289/6a2e9f88ff6ee0eb74e9cc99_ff_cards.webp",
+    src: "/assets/case-studies/ff-cards.webp",
     alt: "Frontrunner Fieldhouse brand collateral",
     wrap: { position: "absolute", bottom: 0, left: "1%", width: "36%", transform: "rotate(1.5deg)", zIndex: 4 },
     card: { border: "1px solid rgba(255,255,255,0.16)", boxShadow: "0 34px 68px -28px rgba(0,0,0,0.85)", animation: "vpFloat 7.2s ease-in-out infinite", animationDelay: "-2.4s" },
   },
   {
-    src: "https://cdn.prod.website-files.com/690772527cd6438e3bbda289/6910e66a259f2b8b99be0212_ff_tee_01.webp",
+    src: "/assets/case-studies/ff-tee-01.webp",
     alt: "Frontrunner Fieldhouse branded merchandise",
     wrap: { position: "absolute", bottom: "3%", right: "5%", width: "27%", transform: "rotate(4deg)", zIndex: 3 },
     card: { border: "1px solid rgba(255,255,255,0.16)", boxShadow: "0 30px 60px -26px rgba(0,0,0,0.82)", animation: "vpFloat 6.9s ease-in-out infinite", animationDelay: "-0.6s" },
@@ -259,7 +259,7 @@ export default function BrandIdentityFortWorthPage() {
           <div style={{ position: "relative" }}>
             <div style={{ position: "relative", aspectRatio: "16 / 9", borderRadius: 14, overflow: "hidden", border: "1px solid rgba(255,255,255,0.14)", boxShadow: "0 40px 90px -44px rgba(0,0,0,0.85)", background: "#0c1321" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img decoding="async" src="https://cdn.prod.website-files.com/690772527cd6438e3bbda289/69eb69d77a4ee9a6c220894d_asc_square_casestudy_pba.webp" alt="Aledo Soccer Club kit and identity" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+              <img decoding="async" src="/assets/case-studies/asc-casestudy-pba.webp" alt="Aledo Soccer Club kit and identity" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
               <div style={{ position: "absolute", left: 14, top: 14, zIndex: 2, display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 12px", borderRadius: 6, background: "rgba(12,19,33,0.7)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", pointerEvents: "none" }}>
                 <span style={dot} />
                 <span className="s-mono" style={{ fontSize: 11, letterSpacing: "0.06em", color: "rgba(255,255,255,0.85)" }}>IDENTITY &amp; KIT</span>
@@ -269,7 +269,7 @@ export default function BrandIdentityFortWorthPage() {
             <div style={{ position: "absolute", bottom: -22, right: -16, width: "38%", transform: "rotate(4deg)", zIndex: 2 }}>
               <div className="collage-card" style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.16)", boxShadow: "0 26px 56px -24px rgba(0,0,0,0.85)", animation: "vpFloat 6.8s ease-in-out infinite" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img decoding="async" src="https://cdn.prod.website-files.com/690772527cd6438e3bbda289/69eb6a3bff327a8544e42c0a_asc_square_casestudy_v01%20copy.webp" alt="Aledo Soccer Club identity poster" loading="lazy" style={{ display: "block", width: "100%", height: "auto" }} />
+                <img decoding="async" src="/assets/case-studies/asc-casestudy-v01.webp" alt="Aledo Soccer Club identity poster" loading="lazy" style={{ display: "block", width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>
