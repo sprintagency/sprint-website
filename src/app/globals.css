@@ -334,6 +334,9 @@ details.faq-item[open] .faq-q { color: #ffffff; }
   .hero-media-frame > div { width: 100% !important; height: auto !important; }
   .hero-strip { margin-top: 40px !important; padding-bottom: 20px !important; }
   .why-grid { grid-template-columns: 1fr !important; }
+  /* On mobile the card goes full-width; show screenshots at natural aspect instead of hard-cropping to a fixed height. */
+  .why-imgcard { height: auto !important; }
+  .why-img { height: auto !important; object-fit: contain !important; }
   .showreel-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   .svc-float { display: none !important; }
   .svc-mobile { display: block !important; }

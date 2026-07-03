@@ -67,6 +67,16 @@ const arrowChip: CSSProperties = {
   borderRadius: 3,
 };
 
+// Match the modal / contact page: uppercase mono field labels.
+const gpLabel: CSSProperties = {
+  display: "block",
+  fontSize: 11,
+  letterSpacing: "0.06em",
+  textTransform: "uppercase",
+  color: "rgba(255,255,255,0.55)",
+  marginBottom: 7,
+};
+
 export default function GrowthPartnerView({ partner: initialPartner }: { partner: Partner }) {
   const [partner, setPartner] = useState<Partner>(initialPartner);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -505,21 +515,21 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                   <>
                     <div className="cm-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
                       <div>
-                        <label>Name <span style={{ color: "var(--sprint-lime)" }}>*</span></label>
+                        <label className="s-mono" style={gpLabel}>Name <span style={{ color: "var(--sprint-lime)" }}>*</span></label>
                         <input type="text" placeholder="Your name" value={form.name} onChange={(e) => set("name", e.target.value)} />
                       </div>
                       <div>
-                        <label>Email <span style={{ color: "var(--sprint-lime)" }}>*</span></label>
+                        <label className="s-mono" style={gpLabel}>Email <span style={{ color: "var(--sprint-lime)" }}>*</span></label>
                         <input type="email" placeholder="you@company.com" value={form.email} onChange={(e) => set("email", e.target.value)} />
                       </div>
                     </div>
                     <div className="cm-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 16 }}>
                       <div>
-                        <label>Company</label>
+                        <label className="s-mono" style={gpLabel}>Company</label>
                         <input type="text" placeholder="Company name" value={form.company} onChange={(e) => set("company", e.target.value)} />
                       </div>
                       <div>
-                        <label>Phone</label>
+                        <label className="s-mono" style={gpLabel}>Phone</label>
                         <input type="tel" placeholder="Optional" value={form.phone} onChange={(e) => set("phone", e.target.value)} />
                       </div>
                     </div>
@@ -529,7 +539,7 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                 {step === 2 && (
                   <>
                     <div style={{ marginBottom: 16 }}>
-                      <label>What can we help with? <span style={{ color: "var(--sprint-lime)" }}>*</span></label>
+                      <label className="s-mono" style={gpLabel}>What can we help with? <span style={{ color: "var(--sprint-lime)" }}>*</span></label>
                       <CustomSelect
                         value={topic ? TOPIC_OPTIONS.find((o) => o.value === topic)?.label || "" : ""}
                         placeholder="Select an option"
@@ -544,7 +554,7 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                     </div>
                     {detailCfg && (
                       <div style={{ marginBottom: 16 }}>
-                        <label>{detailCfg.label}</label>
+                        <label className="s-mono" style={gpLabel}>{detailCfg.label}</label>
                         <CustomSelect
                           value={form.detail}
                           placeholder="Select one"
@@ -555,11 +565,11 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                     )}
                     <div className="cm-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 16 }}>
                       <div>
-                        <label>Budget</label>
+                        <label className="s-mono" style={gpLabel}>Budget</label>
                         <CustomSelect value={form.budget} placeholder="Select a range" options={GP_BUDGETS} onChange={(v) => set("budget", v)} />
                       </div>
                       <div>
-                        <label>Timeline</label>
+                        <label className="s-mono" style={gpLabel}>Timeline</label>
                         <CustomSelect value={form.timeline} placeholder="Select timing" options={GP_TIMELINES} onChange={(v) => set("timeline", v)} />
                       </div>
                     </div>
@@ -568,7 +578,7 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
 
                 {step === 3 && (
                   <div style={{ marginBottom: 16 }}>
-                    <label>Tell us more</label>
+                    <label className="s-mono" style={gpLabel}>Tell us more</label>
                     <textarea
                       placeholder="A few lines on your goals, project, or question."
                       value={form.message}
@@ -607,7 +617,9 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                   )}
                   {step === 3 ? (
                     <button
-                      type="submit"
+                      key="gp-send"
+                      type="button"
+                      onClick={() => submit()}
                       className="book-cta"
                       disabled={submitting}
                       style={{
@@ -633,6 +645,7 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                     </button>
                   ) : (
                     <button
+                      key="gp-continue"
                       type="button"
                       onClick={next}
                       className="book-cta"
@@ -919,8 +932,8 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
               style={{
                 position: "relative",
                 zIndex: 1,
-                padding: 8,
-                borderRadius: 16,
+                padding: 3,
+                borderRadius: 12,
                 background: "rgba(255,255,255,0.05)",
                 border: "1px solid rgba(255,255,255,0.12)",
                 backdropFilter: "blur(20px)",
@@ -936,7 +949,7 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                   display: "block",
                   width: "100%",
                   height: "auto",
-                  borderRadius: 10,
+                  borderRadius: 9,
                   border: "1px solid rgba(255,255,255,0.08)",
                 }}
               />

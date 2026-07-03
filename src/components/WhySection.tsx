@@ -211,9 +211,9 @@ export default function WhySection() {
         {/* Card 2 */}
         <div style={cardBase}>
           <div style={cardGlow} />
-          <div style={imgCard}>
+          <div className="why-imgcard" style={imgCard}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/card-new-request.webp" alt="Sprint new request" style={imgInner} />
+            <img className="why-img" src="/assets/card-new-request.webp" alt="Sprint new request" style={imgInner} />
           </div>
           <div style={{ padding: "0 14px" }}>
             <h3 style={h3}>Delivered in days, not weeks</h3>
@@ -227,9 +227,9 @@ export default function WhySection() {
         {/* Card 3 */}
         <div style={cardBase}>
           <div style={cardGlow} />
-          <div style={imgCard}>
+          <div className="why-imgcard" style={imgCard}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/card-review.webp" alt="Sprint deliverable review" style={imgInner} />
+            <img className="why-img" src="/assets/card-review.webp" alt="Sprint deliverable review" style={imgInner} />
           </div>
           <div style={{ padding: "0 14px" }}>
             <h3 style={h3}>One platform to run it all</h3>

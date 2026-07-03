@@ -333,8 +333,8 @@ export default function BrandIdentityFortWorthPage() {
             </div>
           </div>
           <div className="portal-media" style={{ position: "relative" }}>
-            <div style={{ position: "relative", borderRadius: 14, padding: 10, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 90px -50px rgba(0,0,0,0.85)" }}>
-              <div style={{ borderRadius: 8, overflow: "hidden", background: "#0c1321", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div style={{ position: "relative", borderRadius: 12, padding: 3, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 90px -50px rgba(0,0,0,0.85)" }}>
+              <div style={{ borderRadius: 9, overflow: "hidden", background: "#0c1321", border: "1px solid rgba(255,255,255,0.08)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/brand-hub-screen.webp" alt="Sprint client portal Brand Hub showing logos, color palette and typography" style={{ display: "block", width: "100%", height: "auto" }} />
               </div>
