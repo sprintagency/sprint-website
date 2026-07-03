@@ -249,7 +249,8 @@ body.cm-open { overflow:hidden; }
 @media (max-width: 980px) {
   .svc-hero-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
   .svc-hero-media { order: 2; }
-  .why-grid { grid-template-columns: 1fr !important; gap: 34px !important; }
+  .why-grid { grid-template-columns: minmax(0,1fr) !important; gap: 34px !important; }
+  .why-grid > div { min-width: 0 !important; }
   .why-head { position: static !important; top: auto !important; }
   .stat-band { grid-template-columns: repeat(2,1fr) !important; }
 }
@@ -333,7 +334,10 @@ details.faq-item[open] .faq-q { color: #ffffff; }
   .hero-media-frame { height: auto !important; width: 100% !important; }
   .hero-media-frame > div { width: 100% !important; height: auto !important; }
   .hero-strip { margin-top: 40px !important; padding-bottom: 20px !important; }
-  .why-grid { grid-template-columns: 1fr !important; }
+  /* minmax(0,1fr) + min-width:0 stop an intrinsic-width image from forcing the
+     single column wider than the viewport (which pushed cards off-centre). */
+  .why-grid { grid-template-columns: minmax(0,1fr) !important; }
+  .why-grid > div { min-width: 0 !important; }
   /* On mobile the card goes full-width; show screenshots at natural aspect instead of hard-cropping to a fixed height. */
   .why-imgcard { height: auto !important; }
   .why-img { height: auto !important; object-fit: contain !important; }
@@ -347,7 +351,9 @@ details.faq-item[open] .faq-q { color: #ffffff; }
     max-height: 236px !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
-    padding: 6px 2px !important;
+    /* Tall top/bottom padding (~half the frame) is scroll buffer so the first
+       and last cards can be swiped into the clear centre of the masked frame. */
+    padding: 70px 2px !important;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 14%, #000 34%, #000 66%, rgba(0,0,0,0.15) 86%, transparent 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 14%, #000 34%, #000 66%, rgba(0,0,0,0.15) 86%, transparent 100%);
     scrollbar-width: none;
