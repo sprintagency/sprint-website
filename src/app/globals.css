@@ -338,9 +338,8 @@ details.faq-item[open] .faq-q { color: #ffffff; }
      single column wider than the viewport (which pushed cards off-centre). */
   .why-grid { grid-template-columns: minmax(0,1fr) !important; }
   .why-grid > div { min-width: 0 !important; }
-  /* On mobile the card goes full-width; show screenshots at natural aspect instead of hard-cropping to a fixed height. */
-  .why-imgcard { height: auto !important; }
-  .why-img { height: auto !important; object-fit: contain !important; }
+  /* The image frame carries its own aspect-ratio (360/206), so it scales to the
+     full-width card automatically; keep the screenshot filling the bezel (cover). */
   .showreel-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   .svc-float { display: none !important; }
   .svc-mobile { display: block !important; }

@@ -38,16 +38,21 @@ const body: CSSProperties = {
 };
 
 // Floating glass image card that lifts up out of the card (needs overflow:visible).
+// The bezel (padding + radius) is a constant % of the frame's own width so these
+// smaller screenshots read as the same physical screen as the larger hero portal
+// frame (~1.16% padding on a ~861px frame). box-sizing:border-box keeps the
+// padding inside the aspect-ratio box; aspect-ratio 360/206 sets the frame size.
 const imgCard: CSSProperties = {
   position: "relative",
   zIndex: 2,
-  height: 206,
+  boxSizing: "border-box",
+  aspectRatio: "360 / 206",
   marginTop: -40,
   marginBottom: 26,
-  padding: 3,
-  borderRadius: 12,
-  background: "rgba(255,255,255,0.06)",
-  border: "1px solid rgba(255,255,255,0.16)",
+  padding: "1.16%",
+  borderRadius: "1.4%",
+  background: "rgba(255,255,255,0.05)",
+  border: "1px solid rgba(255,255,255,0.10)",
   backdropFilter: "blur(20px)",
   WebkitBackdropFilter: "blur(20px)",
   boxShadow: "0 32px 66px -20px rgba(0,0,0,0.88)",
@@ -59,7 +64,7 @@ const imgInner: CSSProperties = {
   height: "100%",
   objectFit: "cover",
   objectPosition: "center top",
-  borderRadius: 9,
+  borderRadius: "0.7%",
   border: "1px solid rgba(255,255,255,0.08)",
 };
 
