@@ -880,13 +880,16 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
         style={{
           position: "relative",
           zIndex: 10,
-          overflow: "hidden",
+          // overflow visible so the blurred ambient glows fade out naturally
+          // instead of getting hard-clipped at the section box (the page root
+          // already clips overflow-x, so no horizontal scroll results).
+          overflow: "visible",
           maxWidth: 1360,
           margin: "0 auto",
           padding: "60px 48px 90px",
         }}
       >
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, overflow: "visible" }}>
           <div
             style={{
               position: "absolute",
