@@ -102,7 +102,9 @@
 }
 
 /* Global default: Geist sits tight. */
-html { letter-spacing: -0.03rem; scroll-behavior: smooth; }
+/* scroll-padding-top clears the fixed header (~77px) so in-page anchor jumps
+   (Services -> #showreel, Why Sprint, Work, Pricing) don't land under it. */
+html { letter-spacing: -0.03rem; scroll-behavior: smooth; scroll-padding-top: 96px; }
 code, kbd, samp, pre { letter-spacing: var(--tracking-mono); }
 
 *, *::before, *::after { box-sizing: border-box; }
