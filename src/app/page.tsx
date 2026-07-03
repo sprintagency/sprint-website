@@ -26,15 +26,15 @@ export default function Home() {
       <div
         style={{
           position: "absolute",
-          top: -260,
-          right: -160,
-          width: 1100,
-          height: 1100,
+          top: -320,
+          right: -220,
+          width: 1360,
+          height: 1280,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle,rgba(93,107,255,0.28) 0%,rgba(138,92,255,0.10) 38%,rgba(12,19,33,0) 70%)",
+            "radial-gradient(circle,rgba(150,110,255,0.42) 0%,rgba(120,96,246,0.20) 40%,rgba(93,107,255,0.08) 60%,rgba(12,19,33,0) 76%)",
           pointerEvents: "none",
-          filter: "blur(4px)",
+          filter: "blur(10px)",
           zIndex: 0,
         }}
       />
