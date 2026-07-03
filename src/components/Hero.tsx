@@ -30,15 +30,15 @@ export default function Hero() {
         <div
           style={{
             position: "absolute",
-            top: -180,
-            right: -140,
-            width: 1200,
-            height: 1120,
-            maxWidth: "78vw",
+            top: -140,
+            right: -110,
+            width: 1080,
+            height: 1020,
+            maxWidth: "72vw",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle,rgba(150,110,255,0.36),rgba(138,92,255,0.16) 44%,rgba(12,19,33,0) 72%)",
-            filter: "blur(36px)",
+              "radial-gradient(circle,rgba(93,107,255,0.30),rgba(138,92,255,0.12) 42%,rgba(12,19,33,0) 70%)",
+            filter: "blur(34px)",
           }}
         />
         <div
