@@ -24,7 +24,7 @@ const FLOATS: Float[] = [
     anim: "floatA 7.2s ease-in-out 0.5s infinite",
   },
   {
-    label: "Digital & Social",
+    label: "Social Media",
     icon: "/assets/icons/monitor.svg",
     pos: { bottom: 78, left: -26, zIndex: 2 },
     anim: "floatB 8s ease-in-out 1s infinite",
@@ -56,7 +56,7 @@ const MOBILE_CHIPS = [
   { label: "Video & Motion", icon: "/assets/icons/clapperboard.svg" },
   { label: "Web Design", icon: "/assets/icons/app-window.svg" },
   { label: "Print Design", icon: "/assets/icons/printer.svg" },
-  { label: "Digital & Social", icon: "/assets/icons/monitor.svg" },
+  { label: "Social Media", icon: "/assets/icons/monitor.svg" },
 ];
 
 const floatChip: CSSProperties = {

@@ -14,7 +14,7 @@ const col: { title: string; links: FooterLink[] }[] = [
     title: "[ SERVICES ]",
     links: [
       { label: "Brand Identity", href: "/brand-identity-fort-worth" },
-      { label: "Digital & Social", href: "/social-media-management-fort-worth" },
+      { label: "Social Media", href: "/social-media-management-fort-worth" },
       { label: "Web Design", href: "/web-design-fort-worth" },
       { label: "Video & Motion", href: "/video-production-fort-worth" },
       { label: "Print Design", href: "/print-design-fort-worth" },

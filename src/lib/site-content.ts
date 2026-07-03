@@ -21,7 +21,7 @@ export type ServiceChip = { label: string; icon: string };
 export const SERVICE_CHIPS: ServiceChip[] = [
   { label: "Digital Marketing", icon: "/assets/icons/megaphone.svg" },
   { label: "Brand Identity", icon: "/assets/icons/palette.svg" },
-  { label: "Digital & Social", icon: "/assets/icons/monitor.svg" },
+  { label: "Social Media", icon: "/assets/icons/monitor.svg" },
   { label: "Video & Motion", icon: "/assets/icons/clapperboard.svg" },
   { label: "Print Design", icon: "/assets/icons/printer.svg" },
   { label: "Web Design", icon: "/assets/icons/app-window.svg" },
