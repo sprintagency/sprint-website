@@ -182,7 +182,7 @@ export default function PricingBlocks() {
           cta={
             <a
               className="cta cta-ghost"
-              href="https://buy.stripe.com/eVq9AU2bbezJ3kXgTo3oA0g"
+              href="https://portal.madebysprint.com/auth/signup"
               target="_blank"
               rel="noopener"
               style={ghostCta}
@@ -224,7 +224,7 @@ export default function PricingBlocks() {
           cta={
             <a
               className="cta cta-ghost"
-              href="https://buy.stripe.com/cNi14o3ffbnxbRt5aG3oA0f"
+              href="https://portal.madebysprint.com/auth/signup"
               target="_blank"
               rel="noopener"
               style={ghostCta}
@@ -264,7 +264,7 @@ export default function PricingBlocks() {
           cta={
             <a
               className="cta cta-lime"
-              href="https://buy.stripe.com/6oUeVe1773V58Fhav03oA0e"
+              href="https://portal.madebysprint.com/auth/signup"
               target="_blank"
               rel="noopener"
               style={limeCta}
