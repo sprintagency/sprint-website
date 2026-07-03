@@ -641,7 +641,7 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
                       }}
                     >
                       {submitting ? "Sending…" : "Book my discovery call"}
-                      {!submitting && <span style={arrowChip}>&#8594;</span>}
+                      {!submitting && <span style={arrowChip}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }} aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>}
                     </button>
                   ) : (
                     <button
@@ -1185,7 +1185,7 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
               }}
             >
               See it in your demo
-              <span style={arrowChip}>&#8594;</span>
+              <span style={arrowChip}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }} aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
             </a>
           </div>
         </div>
