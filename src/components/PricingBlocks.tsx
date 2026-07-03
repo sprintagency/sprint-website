@@ -167,7 +167,7 @@ export default function PricingBlocks() {
           blurb="Everything a founder needs to launch and look sharp."
           includesLabel="Includes"
           includes={[
-            "1 active request at a time",
+            "1 active design request",
             "Brand, digital & print design",
             "Unlimited revisions",
             "Dashboard & asset library",
@@ -206,7 +206,7 @@ export default function PricingBlocks() {
           blurb="For brands scaling their marketing across every channel."
           includesLabel="Includes"
           includes={[
-            "2 active requests",
+            "2 active design requests",
             "Brand, digital & print design",
             "Unlimited revisions",
             "Dashboard & asset library",
@@ -247,12 +247,12 @@ export default function PricingBlocks() {
             </>
           }
           blurb="Full service creative firepower, including video and motion."
-          includesLabel="Everything in Growth, plus"
+          includesLabel="Includes"
           includes={[
-            "2 active requests",
+            "Everything in Growth",
             "1 active video request",
             "Motion & animation",
-            "Quarterly brand reviews",
+            "Social media management",
           ]}
           cardStyle={{
             background:
