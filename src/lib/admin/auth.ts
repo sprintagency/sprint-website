@@ -48,8 +48,10 @@ function loginLimiter(): Ratelimit | null {
   _loginLimiter = redis
     ? new Ratelimit({
         redis,
-        // 5 sign-in attempts per IP per 10 minutes.
-        limiter: Ratelimit.slidingWindow(5, "10 m"),
+        // 10 sign-in attempts per IP per 10 minutes. Still infeasible to
+        // brute-force a real password, but forgiving for a fumbled login.
+        // A successful sign-in resets the counter (see resetLoginLimit).
+        limiter: Ratelimit.slidingWindow(10, "10 m"),
         prefix: "rl:seo:login",
         analytics: false,
       })
@@ -88,6 +90,17 @@ async function limit(rl: Ratelimit | null, key: string): Promise<RateResult> {
 
 export const rateLimitLogin = (ip: string) => limit(loginLimiter(), ip);
 export const rateLimitApi = (ip: string) => limit(apiLimiter(), ip);
+
+/** Clear an IP's login attempt counter (called after a successful sign-in). */
+export async function resetLoginLimit(ip: string): Promise<void> {
+  const rl = loginLimiter();
+  if (!rl) return;
+  try {
+    await rl.resetUsedTokens(ip);
+  } catch {
+    /* best effort */
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Cloudflare Turnstile verification.

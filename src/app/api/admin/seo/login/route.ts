@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
   clientIp,
   rateLimitLogin,
+  resetLoginLimit,
   verifyTurnstile,
   turnstileConfigured,
   turnstileSiteKey,
@@ -69,6 +70,10 @@ export async function POST(req: Request) {
       { status: 503 },
     );
   }
+
+  // Successful sign-in clears this IP's attempt counter so a legitimate admin
+  // can never lock themselves out by fumbling a few logins.
+  await resetLoginLimit(ip);
 
   return NextResponse.json({ ok: true, token: session.token, exp: session.exp });
 }
