@@ -5,6 +5,7 @@ import { siteConfig, absoluteUrl, real } from "@/lib/seo/config";
 import { graph, baseGraph } from "@/lib/seo/schema";
 import JsonLd from "@/components/JsonLd";
 import Analytics from "@/components/Analytics";
+import CookieConsent from "@/components/CookieConsent";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -95,6 +96,7 @@ export default function RootLayout({
         <JsonLd data={graph(...baseGraph())} />
         {children}
         <Analytics />
+        <CookieConsent />
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { Eyebrow } from "./primitives";
 import { siteConfig, real } from "@/lib/seo/config";
+import CookieSettingsLink from "./CookieSettingsLink";
 
 const loc = siteConfig.primaryLocation;
 // NAP string kept identical to the LocalBusiness schema and Google Business
@@ -172,6 +173,7 @@ export default function Footer() {
           <a href="/cookies" className="footer-link" style={legalStyle}>
             Cookies
           </a>
+          <CookieSettingsLink style={legalStyle} />
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <a
