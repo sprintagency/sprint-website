@@ -1,5 +1,12 @@
 import type { CSSProperties } from "react";
 import { Eyebrow } from "./primitives";
+import { siteConfig, real } from "@/lib/seo/config";
+
+const loc = siteConfig.primaryLocation;
+// NAP string kept identical to the LocalBusiness schema and Google Business
+// Profile so the citation matches character-for-character (a ranking factor).
+const NAP = `${siteConfig.siteName}, ${loc.streetAddress}, ${loc.addressLocality}, ${loc.addressRegion} ${loc.postalCode}, USA`;
+const phone = real(siteConfig.contact.phoneDisplay);
 
 type FooterLink = {
   label: string;
@@ -207,37 +214,56 @@ export default function Footer() {
         >
           © 2026 SPRINT
         </span>
-        <a
-          href="https://maps.google.com/?q=3409+Clayton+Rd+E,+Fort+Worth,+TX+76116"
-          target="_blank"
-          rel="noopener"
-          className="footer-link"
+        {/* Full NAP (Name, Address, Phone) in crawlable text, linked to the
+            Fort Worth hub. Formatting matches the LocalBusiness schema exactly. */}
+        <address
           style={{
-            display: "inline-flex",
+            fontStyle: "normal",
+            display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            gap: 7,
-            color: "rgba(255,255,255,0.4)",
-            textDecoration: "none",
+            gap: 6,
           }}
         >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{ flex: "none" }}
+          <a
+            href="/fort-worth"
+            className="footer-link"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 7,
+              color: "rgba(255,255,255,0.4)",
+              textDecoration: "none",
+            }}
           >
-            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-          <span className="s-mono" style={{ fontSize: 11.5, letterSpacing: "0.04em" }}>
-            3409 Clayton Rd E, Fort Worth, TX 76116, USA
-          </span>
-        </a>
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ flex: "none" }}
+            >
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <span className="s-mono" style={{ fontSize: 11.5, letterSpacing: "0.04em" }}>
+              {NAP}
+            </span>
+          </a>
+          {phone ? (
+            <a
+              href={`tel:${siteConfig.contact.phone.replace(/[^+\d]/g, "")}`}
+              className="footer-link"
+              style={{ fontSize: 11.5, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
+            >
+              {phone}
+            </a>
+          ) : null}
+        </address>
       </div>
     </footer>
   );

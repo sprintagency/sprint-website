@@ -4,13 +4,22 @@ import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 import PricingBlocks from "@/components/PricingBlocks";
 import FinalCTA from "@/components/FinalCTA";
+import JsonLd from "@/components/JsonLd";
 import { CLIENT_LOGOS, SHOWREEL_VIDEO } from "@/lib/site-content";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { getService } from "@/lib/seo/services";
+import { graph, serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
-  title: "Video Production in Fort Worth — Sprint",
-  description:
-    "Animated and live action video, produced without the wait. Sprint is a bolt on video team for brands that need broadcast standard results on a simple monthly retainer. Strategy, scripting, filming, animation, and editing, all handled by one team.",
-};
+const SERVICE = getService("video-production")!;
+
+export function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: SERVICE.href,
+    title: "Video Production in Fort Worth, Texas",
+    description:
+      "Animated and live action video, produced without the wait. Sprint is a bolt on video team for brands that need broadcast standard results on a simple monthly retainer. Strategy, scripting, filming, animation, and editing, all handled by one team.",
+  });
+}
 
 const chipStyle = {
   display: "inline-flex",
@@ -118,6 +127,17 @@ export default function VideoProductionFortWorthPage() {
       />
 
       <Header />
+
+      <JsonLd
+        data={graph(
+          serviceSchema(SERVICE),
+          faqSchema(FAQS),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Video Production in Fort Worth", path: SERVICE.href },
+          ]),
+        )}
+      />
 
       {/* HERO */}
       <section className="px" style={{ position: "relative", zIndex: 10, maxWidth: 1360, margin: "0 auto", padding: "150px 48px 96px" }}>

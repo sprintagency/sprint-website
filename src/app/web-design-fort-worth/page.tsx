@@ -4,13 +4,22 @@ import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 import PricingBlocks from "@/components/PricingBlocks";
 import FinalCTA from "@/components/FinalCTA";
+import JsonLd from "@/components/JsonLd";
 import { CLIENT_LOGOS } from "@/lib/site-content";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { getService } from "@/lib/seo/services";
+import { graph, serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
-  title: "Web Design in Fort Worth — Sprint",
-  description:
-    "Conversion optimized websites for Fort Worth businesses. Designed and shipped in weeks, not quarters, with unlimited revisions on one simple monthly rate.",
-};
+const SERVICE = getService("web-design")!;
+
+export function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: SERVICE.href,
+    title: "Web Design in Fort Worth, Texas",
+    description:
+      "Conversion optimized websites for Fort Worth businesses. Designed and shipped in weeks, not quarters, with unlimited revisions on one simple monthly rate.",
+  });
+}
 
 const chipStyle = {
   display: "inline-flex",
@@ -116,6 +125,17 @@ export default function WebDesignFortWorthPage() {
       />
 
       <Header />
+
+      <JsonLd
+        data={graph(
+          serviceSchema(SERVICE),
+          faqSchema(FAQS),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Web Design in Fort Worth", path: SERVICE.href },
+          ]),
+        )}
+      />
 
       {/* HERO */}
       <section className="px" style={{ position: "relative", zIndex: 10, maxWidth: 1360, margin: "0 auto", padding: "150px 48px 96px" }}>

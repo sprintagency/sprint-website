@@ -2,12 +2,19 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
+import JsonLd from "@/components/JsonLd";
 import { Eyebrow, CtaArrow } from "@/components/primitives";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { graph, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
-  title: "FAQ — Sprint",
-  description: "Frequently asked questions about working with Sprint.",
-};
+export function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: "/faq",
+    title: "FAQ",
+    description:
+      "Frequently asked questions about working with Made by Sprint: how the monthly retainer works, what is included, turnaround times, and getting started.",
+  });
+}
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -89,6 +96,16 @@ export default function FaqPage() {
       />
 
       <Header />
+
+      <JsonLd
+        data={graph(
+          faqSchema(FAQS),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "FAQ", path: "/faq" },
+          ]),
+        )}
+      />
 
       <section
         id="faq"

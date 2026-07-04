@@ -109,6 +109,7 @@ export default function Hero() {
           </h1>
 
           <p
+            className="hero-lead"
             style={{
               fontSize: 19,
               lineHeight: 1.55,
@@ -118,9 +119,9 @@ export default function Hero() {
               letterSpacing: "-0.01em",
             }}
           >
-            Creative services and business platforms powered by AI, built to
-            save you time, freeing your team to move faster and focus on what
-            matters.
+            Made by Sprint is a creative agency in Fort Worth, Texas. We pair
+            creative services with business platforms powered by AI, built to
+            save you time and free your team to focus on what matters.
           </p>
 
           <div

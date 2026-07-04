@@ -5,13 +5,22 @@ import ContactModal from "@/components/ContactModal";
 import PricingBlocks from "@/components/PricingBlocks";
 import FinalCTA from "@/components/FinalCTA";
 import CaseStudyTabs from "@/components/CaseStudyTabs";
+import JsonLd from "@/components/JsonLd";
 import { CLIENT_LOGOS } from "@/lib/site-content";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { getService } from "@/lib/seo/services";
+import { graph, serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
-  title: "Brand Identity in Fort Worth — Sprint",
-  description:
-    "Strategic brand identity, without the complexity. Sprint is a dedicated branding team for Fort Worth businesses that want to stand out and grow. Positioning, logo systems, visual identity, and guidelines, all handled by one team on a simple monthly plan.",
-};
+const SERVICE = getService("brand-identity")!;
+
+export function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: SERVICE.href,
+    title: "Brand Identity in Fort Worth, Texas",
+    description:
+      "Strategic brand identity, without the complexity. Sprint is a dedicated branding team for Fort Worth businesses that want to stand out and grow. Positioning, logo systems, visual identity, and guidelines, all handled by one team on a simple monthly plan.",
+  });
+}
 
 const chipStyle = {
   display: "inline-flex",
@@ -162,6 +171,17 @@ export default function BrandIdentityFortWorthPage() {
       />
 
       <Header />
+
+      <JsonLd
+        data={graph(
+          serviceSchema(SERVICE),
+          faqSchema(FAQS),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Brand Identity in Fort Worth", path: SERVICE.href },
+          ]),
+        )}
+      />
 
       {/* HERO */}
       <section className="px" style={{ position: "relative", zIndex: 10, maxWidth: 1360, margin: "0 auto", padding: "132px 48px 52px" }}>

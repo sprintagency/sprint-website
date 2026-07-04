@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import CustomSelect from "./CustomSelect";
+import MapFacade from "./MapFacade";
+import { siteConfig } from "@/lib/seo/config";
 import {
   BUDGETS,
   DEFAULT_HEADING,
@@ -262,6 +264,25 @@ export default function ContactView() {
                 <div style={{ fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.9)" }}>
                   Within one business day
                 </div>
+              </div>
+              <div>
+                <div
+                  className="s-mono"
+                  style={{ fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.42)", marginBottom: 8 }}
+                >
+                  Studio
+                </div>
+                <a
+                  href="/fort-worth"
+                  className="footer-link"
+                  style={{ color: "#ffffff", textDecoration: "none", fontSize: 16, fontWeight: 500, lineHeight: 1.5, display: "block" }}
+                >
+                  {siteConfig.primaryLocation.streetAddress}
+                  <br />
+                  {siteConfig.primaryLocation.addressLocality},{" "}
+                  {siteConfig.primaryLocation.addressRegion}{" "}
+                  {siteConfig.primaryLocation.postalCode}
+                </a>
               </div>
               <div>
                 <div
@@ -575,6 +596,15 @@ export default function ContactView() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Fort Worth studio map (lazy, privacy-friendly facade) */}
+        <div style={{ marginTop: 8 }}>
+          <MapFacade
+            query={`${siteConfig.siteName}, ${siteConfig.primaryLocation.streetAddress}, ${siteConfig.primaryLocation.addressLocality}, ${siteConfig.primaryLocation.addressRegion} ${siteConfig.primaryLocation.postalCode}`}
+            label="Find our Fort Worth studio"
+            height={320}
+          />
         </div>
       </section>
     </div>

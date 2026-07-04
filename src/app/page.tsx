@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WhySection from "@/components/WhySection";
@@ -9,6 +10,18 @@ import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 import ScrollEffects from "@/components/ScrollEffects";
+import JsonLd from "@/components/JsonLd";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { graph, webPageSchema } from "@/lib/seo/schema";
+import { siteConfig } from "@/lib/seo/config";
+
+export function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: "/",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+  });
+}
 
 export default function Home() {
   return (
@@ -37,6 +50,17 @@ export default function Home() {
           filter: "blur(4px)",
           zIndex: 0,
         }}
+      />
+
+      <JsonLd
+        data={graph(
+          webPageSchema({
+            path: "/",
+            name: siteConfig.defaultTitle,
+            description: siteConfig.defaultDescription,
+            speakableSelectors: [".hero-h1", ".hero-lead"],
+          }),
+        )}
       />
 
       <Header />
