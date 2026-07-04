@@ -57,9 +57,17 @@ schema; lazy privacy-friendly Google Map facade (`src/components/MapFacade.tsx`)
 on `/fort-worth` and `/contact`.
 
 **Mini SEO CMS (Phase 7)** — `page_seo` table (`supabase/page_seo.sql`),
-secret-gated API (`src/app/api/admin/seo/route.ts`), brand-styled editor at
-`/admin/seo` (title/description with 60/160 counters, OG image, canonical,
-noindex toggle). Gated by `ADMIN_SEO_SECRET`; disabled until that env var is set.
+brand-styled editor at `/admin/seo` (title/description with 60/160 counters, OG
+image, canonical, noindex toggle). Sign-in flow: `POST /api/admin/seo/login`
+checks `ADMIN_EMAIL`/`ADMIN_PASSWORD` + a Cloudflare Turnstile token behind
+per-IP rate limiting (Upstash), then issues an 8h HMAC-signed session token
+(`ADMIN_SESSION_SECRET`) used as a Bearer credential on the read/write API
+(`src/app/api/admin/seo/route.ts`). Security helpers: `src/lib/admin/auth.ts`.
+Graceful degradation: no Turnstile keys -> human check skipped; no Upstash keys
+-> rate limiting skipped; no `ADMIN_SESSION_SECRET` -> sign-in fails closed.
+Needed env: `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` (set),
+`TURNSTILE_SITE_KEY`/`TURNSTILE_SECRET_KEY` and `UPSTASH_REDIS_REST_URL`/
+`UPSTASH_REDIS_REST_TOKEN` (add to enable captcha + rate limiting).
 
 **Headers/analytics** — security headers in `next.config.ts`; disabled analytics
 hook (`src/components/Analytics.tsx`) awaiting a consented provider.

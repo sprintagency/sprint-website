@@ -1,13 +1,25 @@
 "use client";
 
-import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { EDITABLE_PAGES } from "@/lib/seo/pages";
 
-// Mini SEO CMS editor. Brand-styled, gated by the same shared secret as the
-// admin API (ADMIN_SEO_SECRET). The secret is entered once and held in memory
-// (and sessionStorage) for the session; it is sent as the x-admin-secret
-// header on every request. Edit title/description/OG image/canonical/noindex
-// per page, with live character counters (title 60, description 160).
+// Mini SEO CMS editor. Brand-styled. Sign-in posts email + password and a
+// Cloudflare Turnstile "check you are human" token to /api/admin/seo/login,
+// which (behind per-IP rate limiting) returns a short-lived signed session
+// token. That token is held in sessionStorage and sent as an Authorization:
+// Bearer header on the read/write calls, so the captcha is solved once per
+// session, not on every request. Edit title/description/OG image/canonical/
+// noindex per page, with live character counters (title 60, description 160).
+
+type Turnstile = {
+  render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+  reset: (id?: string) => void;
+};
+declare global {
+  interface Window {
+    turnstile?: Turnstile;
+  }
+}
 
 type Row = {
   path: string;
@@ -78,22 +90,32 @@ function counter(len: number, max: number): CSSProperties {
 export default function SeoAdminPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
   const [authed, setAuthed] = useState(false);
+  const [busy, setBusy] = useState(false);
   const [rows, setRows] = useState<Record<string, Row>>({});
   const [status, setStatus] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
 
-  const authHeaders = (e: string, p: string) => ({
-    "x-admin-email": e,
-    "x-admin-password": p,
-  });
+  // Turnstile ("check you are human") state.
+  const [siteKey, setSiteKey] = useState<string | null>(null);
+  const [captchaRequired, setCaptchaRequired] = useState(false);
+  const [capToken, setCapToken] = useState("");
+  const capRef = useRef<HTMLDivElement | null>(null);
+  const widgetId = useRef<string | null>(null);
 
-  const load = useCallback(async (e: string, p: string) => {
+  const load = useCallback(async (tok: string) => {
     setError("");
     try {
-      const r = await fetch("/api/admin/seo", { headers: authHeaders(e, p) });
+      const r = await fetch("/api/admin/seo", {
+        headers: { Authorization: `Bearer ${tok}` },
+      });
       if (r.status === 401) {
-        setError("Those credentials were not accepted.");
+        setError("Your session has expired. Please sign in again.");
+        return false;
+      }
+      if (r.status === 429) {
+        setError("Too many requests. Please wait a moment and try again.");
         return false;
       }
       if (!r.ok) {
@@ -122,23 +144,102 @@ export default function SeoAdminPage() {
     }
   }, []);
 
+  // Load the sign-in config (Turnstile site key) and restore any live session.
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const e = sessionStorage.getItem("seoEmail");
-    const p = sessionStorage.getItem("seoPassword");
-    if (e && p) {
-      setEmail(e);
-      setPassword(p);
-      load(e, p).then((ok) => setAuthed(ok));
+    fetch("/api/admin/seo/login")
+      .then((r) => r.json())
+      .then((c: { turnstileSiteKey?: string | null; captchaRequired?: boolean }) => {
+        setSiteKey(c.turnstileSiteKey || null);
+        setCaptchaRequired(Boolean(c.captchaRequired));
+      })
+      .catch(() => {});
+
+    const tok = sessionStorage.getItem("seoToken");
+    if (tok) {
+      setToken(tok);
+      load(tok).then((ok) => {
+        if (ok) setAuthed(true);
+        else sessionStorage.removeItem("seoToken");
+      });
     }
   }, [load]);
 
+  const resetCaptcha = useCallback(() => {
+    setCapToken("");
+    if (window.turnstile && widgetId.current) {
+      try {
+        window.turnstile.reset(widgetId.current);
+      } catch {
+        /* ignore */
+      }
+    }
+  }, []);
+
+  // Render the Turnstile widget on the sign-in screen once we have a site key.
+  useEffect(() => {
+    if (authed || !siteKey) return;
+    const renderWidget = () => {
+      if (!window.turnstile || !capRef.current || widgetId.current) return;
+      widgetId.current = window.turnstile.render(capRef.current, {
+        sitekey: siteKey,
+        theme: "dark",
+        callback: (t: string) => setCapToken(t),
+        "error-callback": () => setCapToken(""),
+        "expired-callback": () => setCapToken(""),
+      });
+    };
+    if (window.turnstile) {
+      renderWidget();
+      return;
+    }
+    const scriptId = "cf-turnstile-script";
+    if (!document.getElementById(scriptId)) {
+      const s = document.createElement("script");
+      s.id = scriptId;
+      s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      s.async = true;
+      s.defer = true;
+      s.onload = renderWidget;
+      document.head.appendChild(s);
+    } else {
+      const poll = setInterval(() => {
+        if (window.turnstile) {
+          clearInterval(poll);
+          renderWidget();
+        }
+      }, 150);
+      return () => clearInterval(poll);
+    }
+  }, [authed, siteKey]);
+
   const signIn = async () => {
-    const ok = await load(email, password);
-    if (ok) {
-      setAuthed(true);
-      sessionStorage.setItem("seoEmail", email);
-      sessionStorage.setItem("seoPassword", password);
+    if (busy) return;
+    setError("");
+    setBusy(true);
+    try {
+      const r = await fetch("/api/admin/seo/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, turnstileToken: capToken }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        setError(j.error || "Sign in failed.");
+        resetCaptcha();
+        return;
+      }
+      const tok = j.token as string;
+      sessionStorage.setItem("seoToken", tok);
+      setToken(tok);
+      const ok = await load(tok);
+      setAuthed(ok);
+      if (ok) setPassword("");
+    } catch {
+      setError("Network error signing in.");
+      resetCaptcha();
+    } finally {
+      setBusy(false);
     }
   };
 
@@ -150,9 +251,20 @@ export default function SeoAdminPage() {
     try {
       const r = await fetch("/api/admin/seo", {
         method: "PUT",
-        headers: { "Content-Type": "application/json", ...authHeaders(email, password) },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(rows[path]),
       });
+      if (r.status === 401) {
+        setStatus((s) => ({ ...s, [path]: "" }));
+        setAuthed(false);
+        setToken("");
+        sessionStorage.removeItem("seoToken");
+        setError("Your session has expired. Please sign in again.");
+        return;
+      }
       if (!r.ok) {
         const j = await r.json().catch(() => ({}));
         setStatus((s) => ({ ...s, [path]: j.error || "Save failed" }));
@@ -166,6 +278,7 @@ export default function SeoAdminPage() {
   };
 
   if (!authed) {
+    const blockedByCaptcha = captchaRequired && !capToken;
     return (
       <div style={shell}>
         <div style={{ ...wrap, maxWidth: 400 }}>
@@ -182,7 +295,7 @@ export default function SeoAdminPage() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && signIn()}
+            onKeyDown={(e) => e.key === "Enter" && !blockedByCaptcha && signIn()}
           />
           <input
             type="password"
@@ -191,11 +304,13 @@ export default function SeoAdminPage() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && signIn()}
+            onKeyDown={(e) => e.key === "Enter" && !blockedByCaptcha && signIn()}
           />
+          {siteKey && <div ref={capRef} style={{ marginTop: 16 }} />}
           {error && <div style={{ color: "#ff8a8a", fontSize: 13, marginTop: 12 }}>{error}</div>}
           <button
             onClick={signIn}
+            disabled={busy || blockedByCaptcha}
             style={{
               marginTop: 16,
               background: "#b5e602",
@@ -205,10 +320,11 @@ export default function SeoAdminPage() {
               padding: "12px 20px",
               fontWeight: 600,
               fontSize: 14,
-              cursor: "pointer",
+              cursor: busy || blockedByCaptcha ? "not-allowed" : "pointer",
+              opacity: busy || blockedByCaptcha ? 0.55 : 1,
             }}
           >
-            Sign in
+            {busy ? "Signing in…" : "Sign in"}
           </button>
         </div>
       </div>

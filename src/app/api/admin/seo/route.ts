@@ -1,26 +1,29 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { EDITABLE_PAGES } from "@/lib/seo/pages";
+import { verifySession, clientIp, rateLimitApi } from "@/lib/admin/auth";
 
-// Admin API for the mini SEO CMS. Gated by an email + password so it can run
-// without a full auth system. Writes use the Supabase service-role key
-// (server-only). Reads/writes fail gracefully if Supabase is not configured.
-//
-// Auth: send credentials in the `x-admin-email` and `x-admin-password` headers.
-// They are compared against ADMIN_EMAIL and ADMIN_PASSWORD. If either env var is
-// unset, the API is disabled (fail closed).
+// Admin API for the mini SEO CMS. Reads/writes are gated by a signed session
+// token (Authorization: Bearer <token>) issued by POST /api/admin/seo/login
+// after an email/password + Cloudflare Turnstile check. Every call is also
+// rate limited per IP. Writes use the Supabase service-role key (server-only).
+// Everything fails gracefully if Supabase is not configured.
 
 export const dynamic = "force-dynamic";
 
 const VALID_PATHS = new Set(EDITABLE_PAGES.map((p) => p.path));
 
 function authorized(req: Request): boolean {
-  const email = process.env.ADMIN_EMAIL;
-  const password = process.env.ADMIN_PASSWORD;
-  if (!email || !password) return false; // disabled until configured
-  return (
-    req.headers.get("x-admin-email") === email &&
-    req.headers.get("x-admin-password") === password
+  return verifySession(req.headers.get("authorization"));
+}
+
+/** 429 helper when the per-IP API limit is exceeded. */
+async function rateLimited(req: Request): Promise<NextResponse | null> {
+  const rl = await rateLimitApi(clientIp(req));
+  if (rl.ok) return null;
+  return NextResponse.json(
+    { error: "Too many requests. Please slow down." },
+    { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
   );
 }
 
@@ -42,6 +45,8 @@ function clean(v: unknown): string | null {
 }
 
 export async function GET(req: Request) {
+  const limited = await rateLimited(req);
+  if (limited) return limited;
   if (!authorized(req))
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const supabase = serviceClient();
@@ -56,6 +61,8 @@ export async function GET(req: Request) {
 }
 
 export async function PUT(req: Request) {
+  const limited = await rateLimited(req);
+  if (limited) return limited;
   if (!authorized(req))
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
