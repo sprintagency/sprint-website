@@ -10,7 +10,7 @@
 
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
-import { siteConfig, absoluteUrl, real } from "./config";
+import { siteConfig, absoluteUrl } from "./config";
 
 export type PageSeo = {
   path: string;
@@ -80,7 +80,7 @@ export type BuildMetadataInput = {
   path: string;
   title: string;
   description: string;
-  /** Override OG/Twitter image (else siteConfig default). Site-relative or absolute. */
+  /** Override the OG image (else siteConfig default). Site-relative or absolute. */
   image?: string;
   imageAlt?: string;
   /** OG type; defaults to "website". */
@@ -93,10 +93,6 @@ export type BuildMetadataInput = {
 
 function toAbsolute(image: string): string {
   return image.startsWith("http") ? image : absoluteUrl(image);
-}
-
-function twitterSite() {
-  return real(siteConfig.twitterHandle);
 }
 
 const robotsIndex: Metadata["robots"] = {
@@ -126,7 +122,7 @@ export async function buildMetadata(input: BuildMetadataInput): Promise<Metadata
 
   const title = cms?.seo_title?.trim() || input.title;
   const description = cms?.seo_description?.trim() || input.description;
-  // Brand suffix for the <title> and OG/Twitter titles. Avoid double-branding
+  // Brand suffix for the <title> and OG title. Avoid double-branding
   // if the supplied/override title already names Sprint.
   const fullTitle = /sprint/i.test(title)
     ? title
@@ -170,14 +166,8 @@ export async function buildMetadata(input: BuildMetadataInput): Promise<Metadata
           }
         : {}),
     },
-    twitter: {
-      card: "summary_large_image",
-      title: fullTitle,
-      description,
-      ...(image ? { images: [image] } : {}),
-      ...(twitterSite()
-        ? { site: siteConfig.twitterHandle, creator: siteConfig.twitterHandle }
-        : {}),
-    },
+    // No Twitter/X account: explicitly null so Next does not auto-generate
+    // twitter:* tags from the Open Graph data. OG tags cover X link previews.
+    twitter: null,
   };
 }

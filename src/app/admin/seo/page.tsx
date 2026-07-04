@@ -76,18 +76,24 @@ function counter(len: number, max: number): CSSProperties {
 }
 
 export default function SeoAdminPage() {
-  const [secret, setSecret] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
   const [rows, setRows] = useState<Record<string, Row>>({});
   const [status, setStatus] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
 
-  const load = useCallback(async (key: string) => {
+  const authHeaders = (e: string, p: string) => ({
+    "x-admin-email": e,
+    "x-admin-password": p,
+  });
+
+  const load = useCallback(async (e: string, p: string) => {
     setError("");
     try {
-      const r = await fetch("/api/admin/seo", { headers: { "x-admin-secret": key } });
+      const r = await fetch("/api/admin/seo", { headers: authHeaders(e, p) });
       if (r.status === 401) {
-        setError("That secret was not accepted.");
+        setError("Those credentials were not accepted.");
         return false;
       }
       if (!r.ok) {
@@ -117,18 +123,22 @@ export default function SeoAdminPage() {
   }, []);
 
   useEffect(() => {
-    const saved = typeof window !== "undefined" ? sessionStorage.getItem("seoSecret") : null;
-    if (saved) {
-      setSecret(saved);
-      load(saved).then((ok) => setAuthed(ok));
+    if (typeof window === "undefined") return;
+    const e = sessionStorage.getItem("seoEmail");
+    const p = sessionStorage.getItem("seoPassword");
+    if (e && p) {
+      setEmail(e);
+      setPassword(p);
+      load(e, p).then((ok) => setAuthed(ok));
     }
   }, [load]);
 
   const signIn = async () => {
-    const ok = await load(secret);
+    const ok = await load(email, password);
     if (ok) {
       setAuthed(true);
-      sessionStorage.setItem("seoSecret", secret);
+      sessionStorage.setItem("seoEmail", email);
+      sessionStorage.setItem("seoPassword", password);
     }
   };
 
@@ -140,7 +150,7 @@ export default function SeoAdminPage() {
     try {
       const r = await fetch("/api/admin/seo", {
         method: "PUT",
-        headers: { "Content-Type": "application/json", "x-admin-secret": secret },
+        headers: { "Content-Type": "application/json", ...authHeaders(email, password) },
         body: JSON.stringify(rows[path]),
       });
       if (!r.ok) {
@@ -163,14 +173,24 @@ export default function SeoAdminPage() {
             SEO editor<span style={{ color: "#b5e602" }}>.</span>
           </h1>
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, marginBottom: 20 }}>
-            Enter the admin secret to edit per-page SEO.
+            Sign in to edit per-page SEO.
           </p>
           <input
+            type="email"
+            autoComplete="username"
+            style={{ ...input, marginBottom: 12 }}
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && signIn()}
+          />
+          <input
             type="password"
+            autoComplete="current-password"
             style={input}
-            placeholder="Admin secret"
-            value={secret}
-            onChange={(e) => setSecret(e.target.value)}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && signIn()}
           />
           {error && <div style={{ color: "#ff8a8a", fontSize: 13, marginTop: 12 }}>{error}</div>}
@@ -188,7 +208,7 @@ export default function SeoAdminPage() {
               cursor: "pointer",
             }}
           >
-            Unlock
+            Sign in
           </button>
         </div>
       </div>

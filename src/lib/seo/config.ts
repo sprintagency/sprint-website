@@ -54,7 +54,10 @@ export type ServiceArea = {
 };
 
 export const siteConfig = {
-  siteUrl: "https://madebysprint.com",
+  // Canonical host is www: the live site redirects the apex to www, so
+  // canonicals/sitemap/OG all use www to match the served host (no redirect
+  // hop). www is also the DNS-robust choice (the apex cannot use a CNAME).
+  siteUrl: "https://www.madebysprint.com",
   siteName: "Made by Sprint",
   shortName: "Sprint",
   legalName: "Hollinger Creative LTD",
@@ -76,16 +79,14 @@ export const siteConfig = {
   themeColor: "#0c1321",
 
   // ---- Social ----------------------------------------------------------
-  // twitterHandle drives the twitter:site/creator tags. PLACEHOLDER until the
-  // real handle is confirmed.
-  twitterHandle: "@madebysprint", // confirmed from the design handoff
+  // No Twitter/X account, so no twitter handle and no X profile. Link previews
+  // on every platform fall back to the Open Graph tags.
   socialProfiles: [
     // Confirmed live (pulled from the existing site footer):
     "https://www.linkedin.com/company/sprint-creative-agency/",
     "https://www.instagram.com/madebysprint",
     // PLACEHOLDER — add the real URLs (or delete the lines) once confirmed:
     "PLACEHOLDER_FACEBOOK_URL",
-    "PLACEHOLDER_X_URL",
     "PLACEHOLDER_YOUTUBE_URL",
   ],
 

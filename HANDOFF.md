@@ -39,8 +39,12 @@ as parseable JSON-LD.
 
 **Crawl/platform** — `app/robots.ts`, `app/sitemap.ts` (Supabase-guarded,
 excludes partners + CMS-noindexed paths), `app/manifest.ts`, dynamic
-`app/opengraph-image.tsx` + `app/twitter-image.tsx` (always-valid branded
-default), `app/apple-icon.tsx`. Existing `app/icon.svg` serves the favicon.
+`app/opengraph-image.tsx` (always-valid branded default), `app/apple-icon.tsx`.
+Existing `app/icon.svg` serves the favicon. No Twitter/X account is referenced
+anywhere (no handle, no twitter:site/creator, no X profile). Next.js still
+auto-mirrors the Open Graph tags into account-less twitter:card tags and cannot
+separate them from OG previews; removing them entirely would also remove rich
+previews when the site is shared on X.
 
 **AEO** — `/llms.txt` and `/llms-full.txt` route handlers (generated from
 config + services, lead with the Fort Worth entity statement); speakable schema;
@@ -119,9 +123,9 @@ Still needed from Graham:
 4. **Price range** (e.g. `$$` or a retainer range) — `priceRange`.
 5. **Google Business Profile URL** — `primaryLocation.gbpUrl` (used for
    `hasMap`; currently falls back to a Maps search URL).
-6. **Social URLs**: Facebook, X, YouTube profile URLs (`socialProfiles`), and
-   Graham's LinkedIn (`founderProfile.sameAs`). The Twitter handle
-   (`twitterHandle`) is confirmed as `@madebysprint`.
+6. **Social URLs**: Facebook and YouTube profile URLs (`socialProfiles`), and
+   Graham's LinkedIn (`founderProfile.sameAs`). No Twitter/X account, so Twitter
+   has been removed from the SEO layer entirely.
 7. **Verification codes**: Google Search Console + Bing (`verification`).
 8. **Confirm the Fort Worth street address** is correct for schema/GBP (it was
    taken from the live footer, not independently confirmed).

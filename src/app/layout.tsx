@@ -66,15 +66,8 @@ export const metadata: Metadata = {
     // og:image is supplied site-wide by app/opengraph-image.tsx (file
     // convention). Per-page overrides come through buildMetadata.
   },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.defaultTitle,
-    description: siteConfig.defaultDescription,
-    // twitter:image supplied by app/twitter-image.tsx (file convention).
-    ...(real(siteConfig.twitterHandle)
-      ? { site: siteConfig.twitterHandle, creator: siteConfig.twitterHandle }
-      : {}),
-  },
+  // No Twitter/X account: null prevents Next auto-generating twitter:* tags.
+  twitter: null,
   ...(Object.keys(verification).length ? { verification } : {}),
 };
 

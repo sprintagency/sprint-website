@@ -2,21 +2,26 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { EDITABLE_PAGES } from "@/lib/seo/pages";
 
-// Admin API for the mini SEO CMS. Gated by a shared secret so it can run
+// Admin API for the mini SEO CMS. Gated by an email + password so it can run
 // without a full auth system. Writes use the Supabase service-role key
 // (server-only). Reads/writes fail gracefully if Supabase is not configured.
 //
-// Auth: send the secret in the `x-admin-secret` header. It is compared against
-// ADMIN_SEO_SECRET. If that env var is unset, the API is disabled (fail closed).
+// Auth: send credentials in the `x-admin-email` and `x-admin-password` headers.
+// They are compared against ADMIN_EMAIL and ADMIN_PASSWORD. If either env var is
+// unset, the API is disabled (fail closed).
 
 export const dynamic = "force-dynamic";
 
 const VALID_PATHS = new Set(EDITABLE_PAGES.map((p) => p.path));
 
 function authorized(req: Request): boolean {
-  const secret = process.env.ADMIN_SEO_SECRET;
-  if (!secret) return false; // disabled until configured
-  return req.headers.get("x-admin-secret") === secret;
+  const email = process.env.ADMIN_EMAIL;
+  const password = process.env.ADMIN_PASSWORD;
+  if (!email || !password) return false; // disabled until configured
+  return (
+    req.headers.get("x-admin-email") === email &&
+    req.headers.get("x-admin-password") === password
+  );
 }
 
 function serviceClient() {
