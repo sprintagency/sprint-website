@@ -5,6 +5,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: "/terms",
+    image: "/og/og-home.png",
     title: "Terms & Conditions",
     description:
       "The terms and conditions governing Sprint's subscription-based creative services.",

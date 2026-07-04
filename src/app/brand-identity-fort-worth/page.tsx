@@ -16,6 +16,7 @@ const SERVICE = getService("brand-identity")!;
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: SERVICE.href,
+    image: "/og/og-brand-identity.png",
     title: "Brand Identity in Fort Worth, Texas",
     description:
       "Strategic brand identity, without the complexity. Sprint is a dedicated branding team for Fort Worth businesses that want to stand out and grow. Positioning, logo systems, visual identity, and guidelines, all handled by one team on a simple monthly plan.",

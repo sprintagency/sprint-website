@@ -78,7 +78,7 @@ export const siteConfig = {
   // ---- Social ----------------------------------------------------------
   // twitterHandle drives the twitter:site/creator tags. PLACEHOLDER until the
   // real handle is confirmed.
-  twitterHandle: "PLACEHOLDER_TWITTER", // e.g. "@madebysprint"
+  twitterHandle: "@madebysprint", // confirmed from the design handoff
   socialProfiles: [
     // Confirmed live (pulled from the existing site footer):
     "https://www.linkedin.com/company/sprint-creative-agency/",
@@ -154,13 +154,14 @@ export const siteConfig = {
   priceRange: "PLACEHOLDER_PRICE_RANGE", // e.g. "$$" or "$1,500-$6,000/mo"
 
   // ---- Open Graph ------------------------------------------------------
-  // Default share image. A dynamic, always-valid branded default is generated
-  // by app/opengraph-image.tsx and served at /opengraph-image. To use custom
-  // artwork instead, either replace app/opengraph-image.tsx or set a per-page
-  // og_image_url in the SEO CMS (Phase 7).
-  ogImage: "/opengraph-image",
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
+  // Real per-page share cards live in /public/og (supplied in the design
+  // handoff). Home card is the site-wide default used for schema and any page
+  // without its own card. app/opengraph-image.tsx remains a generated fallback.
+  // NOTE: the supplied cards are 909x525; 1200x630 is the recommended size, so
+  // a re-export at 1200x630 would render crisper (see HANDOFF.md).
+  ogImage: "/og/og-home.png",
+  ogImageWidth: 909,
+  ogImageHeight: 525,
   ogImageAlt: "Made by Sprint — creative agency in Fort Worth, Texas",
   logo: "/assets/sprint-logo-white.svg",
   logoSquare: "/icon.png", // square logo for schema (generated in Phase 4)

@@ -10,6 +10,7 @@ import { graph, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: "/faq",
+    image: "/og/og-faq.png",
     title: "FAQ",
     description:
       "Frequently asked questions about working with Made by Sprint: how the monthly retainer works, what is included, turnaround times, and getting started.",

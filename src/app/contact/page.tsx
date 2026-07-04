@@ -7,6 +7,7 @@ import { graph, breadcrumbSchema } from "@/lib/seo/schema";
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: "/contact",
+    image: "/og/og-contact.png",
     title: "Contact",
     description:
       "Contact Made by Sprint, a creative agency in Fort Worth, Texas. Tell us what you need and we'll come back with a clear next step, usually within one business day.",

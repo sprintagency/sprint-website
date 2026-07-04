@@ -119,8 +119,9 @@ Still needed from Graham:
 4. **Price range** (e.g. `$$` or a retainer range) — `priceRange`.
 5. **Google Business Profile URL** — `primaryLocation.gbpUrl` (used for
    `hasMap`; currently falls back to a Maps search URL).
-6. **Social URLs**: X/Twitter handle (`twitterHandle`), Facebook, X, YouTube
-   (`socialProfiles`), and Graham's LinkedIn (`founderProfile.sameAs`).
+6. **Social URLs**: Facebook, X, YouTube profile URLs (`socialProfiles`), and
+   Graham's LinkedIn (`founderProfile.sameAs`). The Twitter handle
+   (`twitterHandle`) is confirmed as `@madebysprint`.
 7. **Verification codes**: Google Search Console + Bing (`verification`).
 8. **Confirm the Fort Worth street address** is correct for schema/GBP (it was
    taken from the live footer, not independently confirmed).
@@ -169,9 +170,20 @@ once live, copy the profile URL into `primaryLocation.gbpUrl`.
 - **"Digital Marketing"** appears in the footer/home but has no dedicated
   service page; it is not in the service registry. Add a page + registry entry
   if it should rank on its own.
-- **OG artwork:** a branded dynamic default is generated at `/opengraph-image`.
-  Replace `app/opengraph-image.tsx` or set per-page `og_image_url` in the CMS
-  for bespoke art.
+- **OG artwork:** real per-page cards from the design handoff are wired from
+  `/public/og` (home, each service, /fort-worth, contact, faq, growth partner;
+  legal pages reuse the home card). They are **909x525**; re-export at the
+  recommended **1200x630** for crisper rendering, then the dimensions in
+  `siteConfig.ogImageWidth/Height` should be updated to match. A generated
+  default remains at `/opengraph-image` as a fallback.
+- **Canonical host / SSL:** SSL is healthy (valid Let's Encrypt cert, HTTPS
+  enforced, HSTS). BUT the apex `madebysprint.com` currently 308-redirects to
+  `www.madebysprint.com`, while every canonical/sitemap/OG URL uses the apex
+  (non-www) per the brief. Decide the canonical host: either set the apex as
+  primary in Vercel (recommended, matches the brief and all canonicals), or if
+  www should be canonical, change `siteConfig.siteUrl` to
+  `https://www.madebysprint.com`. Until aligned, canonicals point at a URL that
+  redirects.
 - **favicon.ico:** the site uses `app/icon.svg` (modern browsers). Add a
   `favicon.ico` if legacy support is needed.
 - **UK office `addressRegion`** is set to "Scotland" (from "registered in

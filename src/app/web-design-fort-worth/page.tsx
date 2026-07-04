@@ -15,6 +15,7 @@ const SERVICE = getService("web-design")!;
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: SERVICE.href,
+    image: "/og/og-web-design.png",
     title: "Web Design in Fort Worth, Texas",
     description:
       "Conversion optimized websites for Fort Worth businesses. Designed and shipped in weeks, not quarters, with unlimited revisions on one simple monthly rate.",

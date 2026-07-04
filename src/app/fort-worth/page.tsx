@@ -21,6 +21,7 @@ import {
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: "/fort-worth",
+    image: "/og/og-services.png",
     title: "Creative Agency in Fort Worth, Texas",
     description:
       "Made by Sprint is a creative agency in Fort Worth, Texas. Brand, web design, video, social, and print on one flat monthly retainer, serving the Fort Worth metro and beyond since 2011.",

@@ -18,6 +18,7 @@ import { siteConfig } from "@/lib/seo/config";
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: "/",
+    image: "/og/og-home.png",
     title: siteConfig.defaultTitle,
     description: siteConfig.defaultDescription,
   });

@@ -15,6 +15,7 @@ const SERVICE = getService("video-production")!;
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: SERVICE.href,
+    image: "/og/og-video-production.png",
     title: "Video Production in Fort Worth, Texas",
     description:
       "Animated and live action video, produced without the wait. Sprint is a bolt on video team for brands that need broadcast standard results on a simple monthly retainer. Strategy, scripting, filming, animation, and editing, all handled by one team.",

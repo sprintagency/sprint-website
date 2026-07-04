@@ -24,6 +24,7 @@ export async function generateMetadata({
   // nofollow, and excluded from the sitemap. Never index these.
   return buildMetadata({
     path: `/${p.id}`,
+    image: "/og/og-growth-partner.png",
     title: `Book a discovery call with ${p.name} — Sprint`,
     description:
       "Tell us about your business and your Sprint growth partner will be in touch within one business day.",

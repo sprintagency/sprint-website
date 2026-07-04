@@ -15,6 +15,7 @@ const SERVICE = getService("print-design")!;
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: SERVICE.href,
+    image: "/og/og-print-design.png",
     title: "Print Design in Fort Worth, Texas",
     description:
       "Professional print design for Fort Worth businesses. From concept to final print ready files, delivered fast, with unlimited revisions on one simple monthly rate.",

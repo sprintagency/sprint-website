@@ -5,6 +5,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 export function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     path: "/privacy",
+    image: "/og/og-home.png",
     title: "Privacy Policy",
     description:
       "How Hollinger Creative LTD (trading as Made by Sprint) collects, uses and protects your personal data.",
