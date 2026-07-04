@@ -70,7 +70,7 @@ export default function Header() {
             style={{ display: "flex", alignItems: "center", gap: 22 }}
           >
             <a
-              href="https://portal.madebysprint.com/auth/signup"
+              href="https://portal.madebysprint.com/auth/login"
               target="_blank"
               rel="noopener noreferrer"
               className="navlink mm-hide-mobile"
@@ -194,7 +194,7 @@ export default function Header() {
           </a>
         ))}
         <a
-          href="https://portal.madebysprint.com/auth/signup"
+          href="https://portal.madebysprint.com/auth/login"
           target="_blank"
           rel="noopener noreferrer"
           className="mm-link"
