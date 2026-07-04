@@ -262,7 +262,7 @@ export default function Showreel() {
               margin: "0 0 24px",
             }}
           >
-            Full service creative, in motion<span className="s-dot">.</span>
+            Full service creative, in&#160;motion<span className="s-dot">.</span>
           </h2>
           <p
             style={{

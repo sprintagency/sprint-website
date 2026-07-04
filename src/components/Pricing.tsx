@@ -26,7 +26,7 @@ export default function Pricing() {
             margin: "0 0 30px",
           }}
         >
-          Plans that fit how you work<span className="s-dot">.</span>
+          Plans that fit how you{" "}work<span className="s-dot">.</span>
         </h2>
       </div>
 

@@ -108,7 +108,7 @@ export default function PlatformSection() {
               margin: "0 0 26px",
             }}
           >
-            Need a platform like Sprint?
+            Need a platform like{" "}Sprint?
           </h2>
           <p
             style={{
