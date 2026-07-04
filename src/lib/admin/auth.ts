@@ -52,7 +52,9 @@ function loginLimiter(): Ratelimit | null {
         // brute-force a real password, but forgiving for a fumbled login.
         // A successful sign-in resets the counter (see resetLoginLimit).
         limiter: Ratelimit.slidingWindow(10, "10 m"),
-        prefix: "rl:seo:login",
+        // Prefix carries a version suffix: bump it to reset every IP's counter
+        // (the old keys expire on their own).
+        prefix: "rl:seo:login:v2",
         analytics: false,
       })
     : null;
