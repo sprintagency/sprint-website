@@ -10,6 +10,7 @@ import { CLIENT_LOGOS } from "@/lib/site-content";
 import { SERVICES } from "@/lib/seo/services";
 import { siteConfig } from "@/lib/seo/config";
 import { buildMetadata } from "@/lib/seo/metadata";
+import SocialMeta from "@/components/SocialMeta";
 import {
   graph,
   serviceSchema,
@@ -18,14 +19,16 @@ import {
   webPageSchema,
 } from "@/lib/seo/schema";
 
+const SEO = {
+  path: "/fort-worth",
+  image: "/og/og-services.png",
+  title: "Creative Agency in Fort Worth, Texas",
+  description:
+    "Made by Sprint is a creative agency in Fort Worth, Texas. Brand, web design, video, social, and print on one flat monthly retainer, serving the Fort Worth metro and beyond since 2011.",
+};
+
 export function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    path: "/fort-worth",
-    image: "/og/og-services.png",
-    title: "Creative Agency in Fort Worth, Texas",
-    description:
-      "Made by Sprint is a creative agency in Fort Worth, Texas. Brand, web design, video, social, and print on one flat monthly retainer, serving the Fort Worth metro and beyond since 2011.",
-  });
+  return buildMetadata(SEO);
 }
 
 const loc = siteConfig.primaryLocation;
@@ -112,6 +115,7 @@ export default function FortWorthPage() {
         }}
       />
 
+      <SocialMeta {...SEO} />
       <Header />
 
       <JsonLd

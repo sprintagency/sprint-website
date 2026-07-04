@@ -5,16 +5,19 @@ import ContactModal from "@/components/ContactModal";
 import JsonLd from "@/components/JsonLd";
 import { Eyebrow, CtaArrow } from "@/components/primitives";
 import { buildMetadata } from "@/lib/seo/metadata";
+import SocialMeta from "@/components/SocialMeta";
 import { graph, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
+const SEO = {
+  path: "/faq",
+  image: "/og/og-faq.png",
+  title: "FAQ",
+  description:
+    "Frequently asked questions about working with Made by Sprint: how the monthly retainer works, what is included, turnaround times, and getting started.",
+};
+
 export function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    path: "/faq",
-    image: "/og/og-faq.png",
-    title: "FAQ",
-    description:
-      "Frequently asked questions about working with Made by Sprint: how the monthly retainer works, what is included, turnaround times, and getting started.",
-  });
+  return buildMetadata(SEO);
 }
 
 const FAQS: { q: string; a: string }[] = [
@@ -96,6 +99,7 @@ export default function FaqPage() {
         }}
       />
 
+      <SocialMeta {...SEO} />
       <Header />
 
       <JsonLd

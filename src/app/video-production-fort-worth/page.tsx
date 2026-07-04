@@ -7,19 +7,22 @@ import FinalCTA from "@/components/FinalCTA";
 import JsonLd from "@/components/JsonLd";
 import { CLIENT_LOGOS, SHOWREEL_VIDEO } from "@/lib/site-content";
 import { buildMetadata } from "@/lib/seo/metadata";
+import SocialMeta from "@/components/SocialMeta";
 import { getService } from "@/lib/seo/services";
 import { graph, serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const SERVICE = getService("video-production")!;
 
+const SEO = {
+  path: SERVICE.href,
+  image: "/og/og-video-production.png",
+  title: "Video Production in Fort Worth, Texas",
+  description:
+    "Animated and live action video, produced without the wait. Sprint is a bolt on video team for brands that need broadcast standard results on a simple monthly retainer. Strategy, scripting, filming, animation, and editing, all handled by one team.",
+};
+
 export function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    path: SERVICE.href,
-    image: "/og/og-video-production.png",
-    title: "Video Production in Fort Worth, Texas",
-    description:
-      "Animated and live action video, produced without the wait. Sprint is a bolt on video team for brands that need broadcast standard results on a simple monthly retainer. Strategy, scripting, filming, animation, and editing, all handled by one team.",
-  });
+  return buildMetadata(SEO);
 }
 
 const chipStyle = {
@@ -127,6 +130,7 @@ export default function VideoProductionFortWorthPage() {
         }}
       />
 
+      <SocialMeta {...SEO} />
       <Header />
 
       <JsonLd

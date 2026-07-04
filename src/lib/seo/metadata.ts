@@ -9,6 +9,7 @@
 // ============================================================================
 
 import type { Metadata } from "next";
+import { cache } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { siteConfig, absoluteUrl } from "./config";
 
@@ -33,28 +34,30 @@ function supabaseEnv() {
 /**
  * Fetch the SEO override row for a path. Returns null on any failure or when
  * Supabase is not configured, so callers can fall straight through to
- * defaults. Cached per-path for the request via Next's fetch-less memoization
- * would require React cache(); we keep it simple and let Next dedupe the
- * generateMetadata calls per route.
+ * defaults. Wrapped in React `cache()` so the row is fetched once per request
+ * even though both `buildMetadata` (generateMetadata) and `<SocialMeta>` (the
+ * component tree) resolve the same path.
  */
-export async function getPageSeo(path: string): Promise<PageSeo | null> {
-  const env = supabaseEnv();
-  if (!env) return null;
-  try {
-    const supabase = createClient(env.url, env.key, {
-      auth: { persistSession: false },
-    });
-    const { data, error } = await supabase
-      .from("page_seo")
-      .select("path, seo_title, seo_description, og_image_url, canonical_url, noindex")
-      .eq("path", path)
-      .maybeSingle();
-    if (error || !data) return null;
-    return data as PageSeo;
-  } catch {
-    return null;
-  }
-}
+export const getPageSeo = cache(
+  async (path: string): Promise<PageSeo | null> => {
+    const env = supabaseEnv();
+    if (!env) return null;
+    try {
+      const supabase = createClient(env.url, env.key, {
+        auth: { persistSession: false },
+      });
+      const { data, error } = await supabase
+        .from("page_seo")
+        .select("path, seo_title, seo_description, og_image_url, canonical_url, noindex")
+        .eq("path", path)
+        .maybeSingle();
+      if (error || !data) return null;
+      return data as PageSeo;
+    } catch {
+      return null;
+    }
+  },
+);
 
 /** Return the list of paths flagged noindex in the CMS (for sitemap exclusion). */
 export async function getNoindexPaths(): Promise<Set<string>> {
@@ -113,11 +116,26 @@ const robotsNoindex: Metadata["robots"] = {
   googleBot: { index: false, follow: false },
 };
 
+export type ResolvedPageMeta = {
+  fullTitle: string;
+  description: string;
+  canonical: string;
+  /** Absolute OG image URL, or undefined if none. */
+  image?: string;
+  imageAlt: string;
+  type: "website" | "article" | "profile";
+  noindex: boolean;
+};
+
 /**
- * Build a page's Metadata, merging CMS overrides over the supplied defaults.
- * Use from a `generateMetadata` export so the async CMS read can run.
+ * Resolve a page's SEO values, layering CMS overrides over the supplied
+ * defaults. Shared by `buildMetadata` (the <head> title/description/robots)
+ * and `<SocialMeta>` (the Open Graph tags) so the two never drift, and the
+ * Supabase read is deduped via the cached `getPageSeo`.
  */
-export async function buildMetadata(input: BuildMetadataInput): Promise<Metadata> {
+export async function resolvePageMeta(
+  input: BuildMetadataInput,
+): Promise<ResolvedPageMeta> {
   const cms = input.skipCms ? null : await getPageSeo(input.path);
 
   const title = cms?.seo_title?.trim() || input.title;
@@ -127,47 +145,46 @@ export async function buildMetadata(input: BuildMetadataInput): Promise<Metadata
   const fullTitle = /sprint/i.test(title)
     ? title
     : `${title} | ${siteConfig.siteName}`;
-  // Only override the site-wide default OG image (app/opengraph-image.tsx)
-  // when a real per-page image is supplied via the CMS or the caller.
-  const imageOverride = cms?.og_image_url?.trim() || input.image;
-  const image = imageOverride ? toAbsolute(imageOverride) : undefined;
+  // Fall back to the site-wide default OG card when no per-page image is set.
+  const imageSrc = cms?.og_image_url?.trim() || input.image || siteConfig.ogImage;
+  const image = imageSrc ? toAbsolute(imageSrc) : undefined;
   const imageAlt = input.imageAlt || siteConfig.ogImageAlt;
   const canonical = cms?.canonical_url?.trim() || absoluteUrl(input.path);
   const noindex = input.noindex || cms?.noindex === true;
 
   return {
-    title: { absolute: fullTitle },
+    fullTitle,
     description,
+    canonical,
+    image,
+    imageAlt,
+    type: input.type || "website",
+    noindex,
+  };
+}
+
+/**
+ * Build a page's Metadata, merging CMS overrides over the supplied defaults.
+ * Use from a `generateMetadata` export so the async CMS read can run.
+ *
+ * NOTE: Open Graph tags are deliberately NOT emitted here. Next.js
+ * auto-generates twitter:* tags from any `openGraph` in the Metadata object,
+ * and there is no way to suppress them while keeping OG. Since the business has
+ * no Twitter/X account, OG is rendered separately by <SocialMeta> and the
+ * Metadata object carries only title/description/canonical/robots.
+ */
+export async function buildMetadata(input: BuildMetadataInput): Promise<Metadata> {
+  const r = await resolvePageMeta(input);
+  return {
+    title: { absolute: r.fullTitle },
+    description: r.description,
     alternates: {
-      canonical,
+      canonical: r.canonical,
       languages: {
-        "en-US": canonical,
-        "en-GB": canonical,
+        "en-US": r.canonical,
+        "en-GB": r.canonical,
       },
     },
-    robots: noindex ? robotsNoindex : robotsIndex,
-    openGraph: {
-      type: input.type || "website",
-      siteName: siteConfig.siteName,
-      locale: siteConfig.locale,
-      url: canonical,
-      title: fullTitle,
-      description,
-      ...(image
-        ? {
-            images: [
-              {
-                url: image,
-                width: siteConfig.ogImageWidth,
-                height: siteConfig.ogImageHeight,
-                alt: imageAlt,
-              },
-            ],
-          }
-        : {}),
-    },
-    // No Twitter/X account: explicitly null so Next does not auto-generate
-    // twitter:* tags from the Open Graph data. OG tags cover X link previews.
-    twitter: null,
+    robots: r.noindex ? robotsNoindex : robotsIndex,
   };
 }

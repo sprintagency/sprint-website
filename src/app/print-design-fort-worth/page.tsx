@@ -7,19 +7,22 @@ import FinalCTA from "@/components/FinalCTA";
 import JsonLd from "@/components/JsonLd";
 import { CLIENT_LOGOS } from "@/lib/site-content";
 import { buildMetadata } from "@/lib/seo/metadata";
+import SocialMeta from "@/components/SocialMeta";
 import { getService } from "@/lib/seo/services";
 import { graph, serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const SERVICE = getService("print-design")!;
 
+const SEO = {
+  path: SERVICE.href,
+  image: "/og/og-print-design.png",
+  title: "Print Design in Fort Worth, Texas",
+  description:
+    "Professional print design for Fort Worth businesses. From concept to final print ready files, delivered fast, with unlimited revisions on one simple monthly rate.",
+};
+
 export function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    path: SERVICE.href,
-    image: "/og/og-print-design.png",
-    title: "Print Design in Fort Worth, Texas",
-    description:
-      "Professional print design for Fort Worth businesses. From concept to final print ready files, delivered fast, with unlimited revisions on one simple monthly rate.",
-  });
+  return buildMetadata(SEO);
 }
 
 const chipStyle = {
@@ -125,6 +128,7 @@ export default function PrintDesignFortWorthPage() {
         }}
       />
 
+      <SocialMeta {...SEO} />
       <Header />
 
       <JsonLd

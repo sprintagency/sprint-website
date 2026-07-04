@@ -8,19 +8,22 @@ import CaseStudyTabs from "@/components/CaseStudyTabs";
 import JsonLd from "@/components/JsonLd";
 import { CLIENT_LOGOS } from "@/lib/site-content";
 import { buildMetadata } from "@/lib/seo/metadata";
+import SocialMeta from "@/components/SocialMeta";
 import { getService } from "@/lib/seo/services";
 import { graph, serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const SERVICE = getService("brand-identity")!;
 
+const SEO = {
+  path: SERVICE.href,
+  image: "/og/og-brand-identity.png",
+  title: "Brand Identity in Fort Worth, Texas",
+  description:
+    "Strategic brand identity, without the complexity. Sprint is a dedicated branding team for Fort Worth businesses that want to stand out and grow. Positioning, logo systems, visual identity, and guidelines, all handled by one team on a simple monthly plan.",
+};
+
 export function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    path: SERVICE.href,
-    image: "/og/og-brand-identity.png",
-    title: "Brand Identity in Fort Worth, Texas",
-    description:
-      "Strategic brand identity, without the complexity. Sprint is a dedicated branding team for Fort Worth businesses that want to stand out and grow. Positioning, logo systems, visual identity, and guidelines, all handled by one team on a simple monthly plan.",
-  });
+  return buildMetadata(SEO);
 }
 
 const chipStyle = {
@@ -171,6 +174,7 @@ export default function BrandIdentityFortWorthPage() {
         }}
       />
 
+      <SocialMeta {...SEO} />
       <Header />
 
       <JsonLd

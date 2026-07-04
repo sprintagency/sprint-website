@@ -7,19 +7,22 @@ import FinalCTA from "@/components/FinalCTA";
 import JsonLd from "@/components/JsonLd";
 import { CLIENT_LOGOS } from "@/lib/site-content";
 import { buildMetadata } from "@/lib/seo/metadata";
+import SocialMeta from "@/components/SocialMeta";
 import { getService } from "@/lib/seo/services";
 import { graph, serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const SERVICE = getService("social-media-management")!;
 
+const SEO = {
+  path: SERVICE.href,
+  image: "/og/og-social-media.png",
+  title: "Social Media Management in Fort Worth, Texas",
+  description:
+    "Social media management for Fort Worth businesses. From content planning and creation to posting and engagement, we keep your brand active and visible, with unlimited revisions on one simple monthly rate.",
+};
+
 export function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    path: SERVICE.href,
-    image: "/og/og-social-media.png",
-    title: "Social Media Management in Fort Worth, Texas",
-    description:
-      "Social media management for Fort Worth businesses. From content planning and creation to posting and engagement, we keep your brand active and visible, with unlimited revisions on one simple monthly rate.",
-  });
+  return buildMetadata(SEO);
 }
 
 const chipStyle = {
@@ -125,6 +128,7 @@ export default function SocialMediaManagementFortWorthPage() {
         }}
       />
 
+      <SocialMeta {...SEO} />
       <Header />
 
       <JsonLd

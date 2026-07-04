@@ -1,8 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import GrowthPartnerView from "@/components/GrowthPartnerView";
-import { PARTNERS, resolvePartner } from "@/lib/growth-partners";
+import SocialMeta from "@/components/SocialMeta";
+import { PARTNERS, resolvePartner, type Partner } from "@/lib/growth-partners";
 import { buildMetadata } from "@/lib/seo/metadata";
+
+// Growth Partner discovery pages are private/attributed: always noindex,
+// nofollow, and excluded from the sitemap. Shared so generateMetadata and the
+// page render identical Open Graph values.
+function partnerSeo(p: Partner) {
+  return {
+    path: `/${p.id}`,
+    image: "/og/og-growth-partner.png",
+    title: `Book a discovery call with ${p.name}`,
+    description:
+      "Tell us about your business and your Sprint growth partner will be in touch within one business day.",
+    noindex: true,
+    skipCms: true,
+  };
+}
 
 // Partner discovery pages live at the root as /<slug> (e.g. /james-kerr).
 // Only the known partner slugs are valid; any other top-level path 404s.
@@ -19,18 +35,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { partner } = await params;
   if (!PARTNERS[partner.toLowerCase()]) return {};
-  const p = resolvePartner(partner);
-  // Growth Partner discovery pages are private/attributed: always noindex,
-  // nofollow, and excluded from the sitemap. Never index these.
-  return buildMetadata({
-    path: `/${p.id}`,
-    image: "/og/og-growth-partner.png",
-    title: `Book a discovery call with ${p.name} — Sprint`,
-    description:
-      "Tell us about your business and your Sprint growth partner will be in touch within one business day.",
-    noindex: true,
-    skipCms: true,
-  });
+  return buildMetadata(partnerSeo(resolvePartner(partner)));
 }
 
 export default async function PartnerPage({
@@ -40,5 +45,11 @@ export default async function PartnerPage({
 }) {
   const { partner } = await params;
   if (!PARTNERS[partner.toLowerCase()]) notFound();
-  return <GrowthPartnerView partner={resolvePartner(partner)} />;
+  const p = resolvePartner(partner);
+  return (
+    <>
+      <SocialMeta {...partnerSeo(p)} />
+      <GrowthPartnerView partner={p} />
+    </>
+  );
 }

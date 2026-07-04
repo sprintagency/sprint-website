@@ -55,19 +55,10 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  openGraph: {
-    type: "website",
-    siteName: siteConfig.siteName,
-    locale: siteConfig.locale,
-    alternateLocale: siteConfig.altLocale,
-    url: absoluteUrl("/"),
-    title: siteConfig.defaultTitle,
-    description: siteConfig.defaultDescription,
-    // og:image is supplied site-wide by app/opengraph-image.tsx (file
-    // convention). Per-page overrides come through buildMetadata.
-  },
-  // No Twitter/X account: null prevents Next auto-generating twitter:* tags.
-  twitter: null,
+  // Open Graph is intentionally NOT set here (nor via app/opengraph-image).
+  // Next.js derives twitter:* tags from any Metadata `openGraph`, and the
+  // business has no Twitter/X account. OG tags are rendered per page by
+  // <SocialMeta> instead, so no twitter:* tags are ever emitted.
   ...(Object.keys(verification).length ? { verification } : {}),
 };
 

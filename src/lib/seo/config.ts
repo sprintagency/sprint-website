@@ -68,7 +68,7 @@ export const siteConfig = {
   // ---- Titles & descriptions -------------------------------------------
   // Kept in the existing site voice ("… — Sprint" for page titles), but the
   // template uses the full brand name for stronger entity association.
-  defaultTitle: "Made by Sprint — Creative agency in Fort Worth, Texas",
+  defaultTitle: "Made by Sprint: Creative agency in Fort Worth, Texas",
   titleTemplate: "%s | Made by Sprint",
   defaultDescription:
     "Made by Sprint is a Fort Worth, Texas creative agency delivering brand, web design, video production, social, and print on flat monthly retainers. Serving the Fort Worth metro and the UK since 2011.",
@@ -157,13 +157,15 @@ export const siteConfig = {
   // ---- Open Graph ------------------------------------------------------
   // Real per-page share cards live in /public/og (supplied in the design
   // handoff). Home card is the site-wide default used for schema and any page
-  // without its own card. app/opengraph-image.tsx remains a generated fallback.
+  // without its own card. Open Graph tags are rendered by <SocialMeta> (see
+  // src/components/SocialMeta.tsx), not the Metadata API, so Next never
+  // auto-generates twitter:* tags (the business has no Twitter/X account).
   // NOTE: the supplied cards are 909x525; 1200x630 is the recommended size, so
   // a re-export at 1200x630 would render crisper (see HANDOFF.md).
   ogImage: "/og/og-home.png",
   ogImageWidth: 909,
   ogImageHeight: 525,
-  ogImageAlt: "Made by Sprint — creative agency in Fort Worth, Texas",
+  ogImageAlt: "Made by Sprint, a creative agency in Fort Worth, Texas",
   logo: "/assets/sprint-logo-white.svg",
   logoSquare: "/icon.png", // square logo for schema (generated in Phase 4)
 

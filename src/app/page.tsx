@@ -12,16 +12,19 @@ import ContactModal from "@/components/ContactModal";
 import ScrollEffects from "@/components/ScrollEffects";
 import JsonLd from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo/metadata";
+import SocialMeta from "@/components/SocialMeta";
 import { graph, webPageSchema } from "@/lib/seo/schema";
 import { siteConfig } from "@/lib/seo/config";
 
+const SEO = {
+  path: "/",
+  image: "/og/og-home.png",
+  title: siteConfig.defaultTitle,
+  description: siteConfig.defaultDescription,
+};
+
 export function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    path: "/",
-    image: "/og/og-home.png",
-    title: siteConfig.defaultTitle,
-    description: siteConfig.defaultDescription,
-  });
+  return buildMetadata(SEO);
 }
 
 export default function Home() {
@@ -64,6 +67,7 @@ export default function Home() {
         )}
       />
 
+      <SocialMeta {...SEO} />
       <Header />
       <Hero />
       <WhySection />
