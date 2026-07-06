@@ -204,10 +204,14 @@ export default function Hero() {
               background: "#0c1321",
             }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/hero-dashboard-v01.webp"
-              alt="Sprint client portal dashboard"
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              poster="/assets/hero-dashboard-v01.webp"
+              aria-label="Sprint client portal dashboard"
               style={{
                 display: "block",
                 width: "100%",
@@ -215,7 +219,21 @@ export default function Hero() {
                 objectFit: "cover",
                 objectPosition: "center top",
               }}
-            />
+            >
+              <source src="/assets/hero-animation.mp4" type="video/mp4" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/hero-dashboard-v01.webp"
+                alt="Sprint client portal dashboard"
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                }}
+              />
+            </video>
           </div>
         </div>
       </div>
