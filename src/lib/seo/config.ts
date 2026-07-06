@@ -160,11 +160,11 @@ export const siteConfig = {
   // without its own card. Open Graph tags are rendered by <SocialMeta> (see
   // src/components/SocialMeta.tsx), not the Metadata API, so Next never
   // auto-generates twitter:* tags (the business has no Twitter/X account).
-  // NOTE: the supplied cards are 909x525; 1200x630 is the recommended size, so
-  // a re-export at 1200x630 would render crisper (see HANDOFF.md).
+  // Cards are exported at the recommended 1200x630 (1.91:1) so social
+  // platforms unfurl them without letterboxing.
   ogImage: "/og/og-home.png",
-  ogImageWidth: 909,
-  ogImageHeight: 525,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
   ogImageAlt: "Made by Sprint, a creative agency in Fort Worth, Texas",
   logo: "/assets/sprint-logo-white.svg",
   logoSquare: "/icon.png", // square logo for schema (generated in Phase 4)
