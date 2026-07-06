@@ -80,7 +80,10 @@ export default function CookieConsent() {
         We use essential cookies to run the site and, with your consent, Google
         Analytics to understand how it is used. You can reject analytics cookies
         without affecting your visit. See our{" "}
-        <a href="/cookies" style={{ color: "var(--sprint-lime)", textDecoration: "underline" }}>
+        <a
+          href="/cookies"
+          style={{ color: "var(--sprint-lime)", textDecoration: "underline", whiteSpace: "nowrap" }}
+        >
           Cookies Policy
         </a>
         .
