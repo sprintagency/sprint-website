@@ -62,7 +62,7 @@ export default function CookieConsent() {
         right: 16,
         bottom: 16,
         zIndex: 1000,
-        maxWidth: 620,
+        maxWidth: 680,
         margin: "0 auto",
         background: "#131c2e",
         border: "1px solid rgba(255,255,255,0.14)",
@@ -77,9 +77,8 @@ export default function CookieConsent() {
       }}
     >
       <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.78)" }}>
-        We use essential cookies to run the site and, with your consent, Google
-        Analytics to understand how it is used. You can reject analytics cookies
-        without affecting your visit. See our{" "}
+        We use essential cookies to run the site, plus Google Analytics if you
+        consent. You can reject analytics without affecting your visit. See our{" "}
         <a
           href="/cookies"
           style={{ color: "var(--sprint-lime)", textDecoration: "underline", whiteSpace: "nowrap" }}
