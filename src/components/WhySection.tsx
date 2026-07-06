@@ -138,12 +138,13 @@ export default function WhySection() {
                 height={200}
                 loading="lazy"
                 style={{
-                  width: 82,
-                  height: 82,
+                  width: 76,
+                  height: 76,
                   borderRadius: "50%",
                   objectFit: "cover",
                   boxShadow: avatarShadow,
-                  marginTop: 14,
+                  marginTop: 12,
+                  zIndex: 2,
                   animation: "floatB 7s ease-in-out 0s infinite",
                 }}
               />
@@ -154,14 +155,14 @@ export default function WhySection() {
                 height={200}
                 loading="lazy"
                 style={{
-                  width: 96,
-                  height: 96,
+                  width: 76,
+                  height: 76,
                   borderRadius: "50%",
                   objectFit: "cover",
                   boxShadow: avatarShadow,
-                  marginLeft: -6,
-                  marginTop: -8,
-                  zIndex: 3,
+                  marginLeft: -12,
+                  marginTop: -12,
+                  zIndex: 4,
                   animation: "floatA 7.6s ease-in-out 0.5s infinite",
                 }}
               />
@@ -172,14 +173,14 @@ export default function WhySection() {
                 height={200}
                 loading="lazy"
                 style={{
-                  width: 88,
-                  height: 88,
+                  width: 76,
+                  height: 76,
                   borderRadius: "50%",
                   objectFit: "cover",
                   boxShadow: avatarShadow,
-                  marginLeft: -6,
-                  marginTop: 4,
-                  zIndex: 2,
+                  marginLeft: -12,
+                  marginTop: 10,
+                  zIndex: 5,
                   animation: "floatB 8.3s ease-in-out 1s infinite",
                 }}
               />
@@ -190,15 +191,33 @@ export default function WhySection() {
                 height={200}
                 loading="lazy"
                 style={{
-                  width: 80,
-                  height: 80,
+                  width: 76,
+                  height: 76,
                   borderRadius: "50%",
                   objectFit: "cover",
                   boxShadow: avatarShadow,
-                  marginLeft: -6,
+                  marginLeft: -12,
                   marginTop: -12,
-                  zIndex: 1,
+                  zIndex: 3,
                   animation: "floatA 6.6s ease-in-out 0.3s infinite",
+                }}
+              />
+              <img
+                src="/assets/team/jamie.webp"
+                alt="Jamie"
+                width={200}
+                height={200}
+                loading="lazy"
+                style={{
+                  width: 76,
+                  height: 76,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  boxShadow: avatarShadow,
+                  marginLeft: -12,
+                  marginTop: 12,
+                  zIndex: 1,
+                  animation: "floatB 7.9s ease-in-out 0.8s infinite",
                 }}
               />
               {/* eslint-enable @next/next/no-img-element */}
