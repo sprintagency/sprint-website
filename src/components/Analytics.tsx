@@ -11,7 +11,12 @@
 import Script from "next/script";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { getConsent, CONSENT_EVENT, type ConsentValue } from "@/lib/analytics/consent";
+import {
+  getConsent,
+  isConsentRequired,
+  CONSENT_EVENT,
+  type ConsentValue,
+} from "@/lib/analytics/consent";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -24,16 +29,23 @@ declare global {
 
 export default function Analytics() {
   const [consent, setConsent] = useState<ConsentValue | null>(null);
+  // Defaults to true (SSR / pre-effect) so GA never loads before we have
+  // confirmed the visitor's region does not require consent.
+  const [required, setRequired] = useState(true);
 
   useEffect(() => {
     setConsent(getConsent());
+    setRequired(isConsentRequired());
     const onChange = (e: Event) =>
       setConsent((e as CustomEvent<ConsentValue>).detail);
     window.addEventListener(CONSENT_EVENT, onChange);
     return () => window.removeEventListener(CONSENT_EVENT, onChange);
   }, []);
 
-  if (!GA_ID || consent !== "granted") return null;
+  // Load GA when the visitor has explicitly granted consent, or when their
+  // region requires no banner and they have not opted out.
+  const enabled = consent === "granted" || (!required && consent !== "denied");
+  if (!GA_ID || !enabled) return null;
 
   return (
     <>

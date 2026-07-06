@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import {
   getConsent,
   setConsent,
+  isConsentRequired,
   clearAnalyticsCookies,
   CONSENT_OPEN_EVENT,
   type ConsentValue,
@@ -31,7 +32,10 @@ export default function CookieConsent() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (getConsent() === null) setOpen(true);
+    // Auto-open on first visit only where the region requires opt-in. Elsewhere
+    // (US and rest of world) analytics runs without a banner; the footer
+    // "Cookie settings" link can still reopen it so anyone can opt out.
+    if (isConsentRequired() && getConsent() === null) setOpen(true);
     const onOpen = () => setOpen(true);
     window.addEventListener(CONSENT_OPEN_EVENT, onOpen);
     return () => window.removeEventListener(CONSENT_OPEN_EVENT, onOpen);
@@ -41,12 +45,18 @@ export default function CookieConsent() {
 
   const choose = (value: ConsentValue) => {
     const prior = getConsent();
+    // GA may already be running: either from a prior grant, or automatically in
+    // a region that needs no banner and where the visitor had not opted out.
+    const wasActive =
+      prior === "granted" || (!isConsentRequired() && prior !== "denied");
     setConsent(value);
     setOpen(false);
-    // If the visitor is changing an earlier choice, reload so Google Analytics
-    // is fully torn down (on withdrawal) or initialized cleanly (on grant).
-    if (prior !== null && prior !== value) {
-      if (value === "denied") clearAnalyticsCookies();
+    // Reload so Google Analytics is fully torn down (on withdrawal) or
+    // initialized cleanly (when re-granting after a denial).
+    if (value === "denied") {
+      clearAnalyticsCookies();
+      if (wasActive) location.reload();
+    } else if (prior === "denied") {
       location.reload();
     }
   };

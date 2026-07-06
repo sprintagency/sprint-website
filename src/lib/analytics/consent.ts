@@ -12,6 +12,10 @@ export type ConsentValue = "granted" | "denied";
 /** Cookie that records the analytics consent choice. Named in /cookies. */
 export const CONSENT_COOKIE = "cookie_consent";
 
+/** Cookie set by middleware from the visitor's country: "0" when no banner is
+ *  required (US and rest of world), otherwise consent is required (EU/EEA/UK). */
+export const CONSENT_REQUIRED_COOKIE = "consent_required";
+
 /** ~6 months, matching the duration stated in the Cookies Policy. */
 const CONSENT_MAX_AGE = 60 * 60 * 24 * 180;
 
@@ -29,6 +33,17 @@ export function getConsent(): ConsentValue | null {
     .find((c) => c.startsWith(`${CONSENT_COOKIE}=`));
   const value = row?.slice(CONSENT_COOKIE.length + 1);
   return value === "granted" || value === "denied" ? value : null;
+}
+
+/** Whether this visitor's region requires prior opt-in before analytics loads.
+ *  Reads the middleware-set cookie; defaults to true when unknown so a
+ *  consent-required visitor is never tracked by mistake. */
+export function isConsentRequired(): boolean {
+  if (typeof document === "undefined") return true;
+  const row = document.cookie
+    .split("; ")
+    .find((c) => c.startsWith(`${CONSENT_REQUIRED_COOKIE}=`));
+  return row?.slice(CONSENT_REQUIRED_COOKIE.length + 1) !== "0";
 }
 
 /** Persist the choice and notify listeners (Analytics reacts to this). */
