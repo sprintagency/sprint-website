@@ -47,6 +47,39 @@ export default function ScrollEffects() {
       }
     }
 
+    // ---- platform capability cards: mobile scroll indicator ----
+    // The masked, scrollbar-less list hides that it scrolls; a lime thumb on the
+    // rail tracks position so mobile visitors know there's more below.
+    if (cardsGrid) {
+      const rail = cardsGrid.parentElement?.querySelector<HTMLElement>(
+        ".platform-scroll-rail",
+      );
+      const thumb = rail?.querySelector<HTMLElement>(".platform-scroll-thumb");
+      if (rail && thumb) {
+        const updateThumb = () => {
+          const { scrollTop, scrollHeight, clientHeight } = cardsGrid;
+          const max = scrollHeight - clientHeight;
+          // Not scrollable (desktop grid, or too few cards) -> keep it hidden.
+          if (max <= 1) {
+            rail.classList.remove("is-active");
+            return;
+          }
+          rail.classList.add("is-active");
+          const thumbPct = Math.max((clientHeight / scrollHeight) * 100, 14);
+          const topPct = (scrollTop / max) * (100 - thumbPct);
+          thumb.style.height = thumbPct + "%";
+          thumb.style.top = topPct + "%";
+        };
+        cardsGrid.addEventListener("scroll", updateThumb, { passive: true });
+        window.addEventListener("resize", updateThumb);
+        updateThumb();
+        cleanups.push(() =>
+          cardsGrid.removeEventListener("scroll", updateThumb),
+        );
+        cleanups.push(() => window.removeEventListener("resize", updateThumb));
+      }
+    }
+
     // ---- why grid: staggered reveal (desktop only) ----
     const whyGrid = document.querySelector<HTMLElement>(".why-grid");
     if (whyGrid && desktop && !reduced) {

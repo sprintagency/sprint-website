@@ -146,6 +146,7 @@ export default function PlatformSection() {
         </div>
 
         {/* capability cards */}
+        <div className="platform-cards-wrap" style={{ position: "relative" }}>
         <div
           className="platform-cards"
           style={{
@@ -207,6 +208,12 @@ export default function PlatformSection() {
               </p>
             </div>
           ))}
+        </div>
+          {/* Mobile-only scroll indicator: hidden on desktop, driven by
+             ScrollEffects to track the masked capability list's scroll. */}
+          <div className="platform-scroll-rail" aria-hidden="true">
+            <div className="platform-scroll-thumb" />
+          </div>
         </div>
       </div>
     </section>
