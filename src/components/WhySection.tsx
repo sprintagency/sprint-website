@@ -227,7 +227,7 @@ export default function WhySection() {
             <h3 style={h3}>A senior team on demand</h3>
             <p style={body}>
               Brand, digital, print and video specialists working as your
-              department, with no recruiting, retainers, or overhead.
+              department, with no recruiting or overhead.
             </p>
           </div>
         </div>
