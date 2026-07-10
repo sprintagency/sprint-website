@@ -11,3 +11,7 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# MCP config holds a personal API key (Context7) — keep the real file local,
+# commit only .mcp.json.example. API keys are per-account, never share them.
+.mcp.json

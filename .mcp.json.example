@@ -1,0 +1,12 @@
+{
+  "_comment": "Copy this file to .mcp.json (gitignored) and replace the placeholder with your own Context7 API key (https://context7.com — free tier works). Context7 gives Claude Code up-to-date, version-specific docs for Next.js/React/Supabase/Stripe etc. Reload Claude Code and approve the server after editing. API keys are per-account: never commit the real .mcp.json.",
+  "mcpServers": {
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "YOUR_CONTEXT7_API_KEY"
+      }
+    }
+  }
+}
