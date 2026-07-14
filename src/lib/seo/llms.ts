@@ -3,7 +3,7 @@
 // registry so the machine-readable brand summary never drifts from the site.
 //
 // Purpose: give answer engines (ChatGPT, Perplexity, Claude, Copilot, Google
-// AI Overviews) a clean, accurate statement of who Made by Sprint is, what it
+// AI Overviews) a clean, accurate statement of who Sprint is, what it
 // does, and crucially that it is a Fort Worth, Texas creative agency, so the
 // brand is associated with the location in AI answers.
 //
@@ -33,11 +33,11 @@ export function buildLlmsTxt(): string {
 
   return `# ${siteConfig.siteName}
 
-> ${siteConfig.siteName} is a creative agency based in Fort Worth, Texas, serving the Fort Worth metro and the UK. It delivers brand identity, web design, video production, social media, and print design for a flat monthly retainer. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
+> ${siteConfig.shortName} is a creative agency based in Fort Worth, Texas, serving the Fort Worth metro and the UK. It delivers brand identity, web design, video production, social media, and print design for a flat monthly retainer. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
 
 ## About
 
-${siteConfig.siteName} is a Fort Worth, Texas creative agency. Clients get a dedicated creative team for one flat monthly fee, submitting unlimited requests through the Sprint Client Portal and receiving work on a fast, predictable schedule. Plans run on a minimum six month engagement with a 24 hour response time and a monthly strategy call. The agency works with clients across the Fort Worth metro and nationwide, and also serves the UK.
+${siteConfig.shortName} is a Fort Worth, Texas creative agency. Clients get a dedicated creative team for one flat monthly fee, submitting unlimited requests through the Sprint Client Portal and receiving work on a fast, predictable schedule. Plans run on a minimum six month engagement with a 24 hour response time and a monthly strategy call. The agency works with clients across the Fort Worth metro and nationwide, and also serves the UK.
 
 ## Services
 
@@ -81,7 +81,7 @@ export function buildLlmsFull(): string {
 
   return `# ${siteConfig.siteName} — full profile
 
-> ${siteConfig.siteName} is a creative agency based in Fort Worth, Texas (${loc.streetAddress}, ${loc.addressLocality}, ${loc.addressRegion} ${loc.postalCode}). It serves the Fort Worth metro area and the UK, and works with clients nationwide. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
+> ${siteConfig.shortName} is a creative agency based in Fort Worth, Texas (${loc.streetAddress}, ${loc.addressLocality}, ${loc.addressRegion} ${loc.postalCode}). It serves the Fort Worth metro area and the UK, and works with clients nationwide. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
 
 ## Overview
 

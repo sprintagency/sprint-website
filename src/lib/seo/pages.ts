@@ -25,7 +25,7 @@ export const EDITABLE_PAGES: EditablePage[] = [
     label: "Fort Worth hub",
     defaultTitle: "Creative Agency in Fort Worth, Texas",
     defaultDescription:
-      "Made by Sprint is a creative agency in Fort Worth, Texas. Brand, web design, video, social, and print on one flat monthly retainer.",
+      "Sprint is a creative agency in Fort Worth, Texas. Brand, web design, video, social, and print on one flat monthly retainer.",
   },
   ...SERVICES.map((s) => ({
     path: s.href,
@@ -38,14 +38,14 @@ export const EDITABLE_PAGES: EditablePage[] = [
     label: "FAQ",
     defaultTitle: "FAQ",
     defaultDescription:
-      "Frequently asked questions about working with Made by Sprint.",
+      "Frequently asked questions about working with Sprint Creative Agency.",
   },
   {
     path: "/contact",
     label: "Contact",
     defaultTitle: "Contact",
     defaultDescription:
-      "Contact Made by Sprint, a creative agency in Fort Worth, Texas.",
+      "Contact Sprint Creative Agency, a creative agency in Fort Worth, Texas.",
   },
   {
     path: "/terms",
@@ -59,13 +59,13 @@ export const EDITABLE_PAGES: EditablePage[] = [
     label: "Privacy Policy",
     defaultTitle: "Privacy Policy",
     defaultDescription:
-      "How Hollinger Creative LTD (trading as Made by Sprint) collects, uses and protects your personal data.",
+      "How Hollinger Creative LTD (trading as Sprint) collects, uses and protects your personal data.",
   },
   {
     path: "/cookies",
     label: "Cookies Policy",
     defaultTitle: "Cookies Policy",
     defaultDescription:
-      "How Hollinger Creative LTD (trading as Made by Sprint) uses cookies and similar technologies.",
+      "How Hollinger Creative LTD (trading as Sprint) uses cookies and similar technologies.",
   },
 ];

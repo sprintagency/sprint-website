@@ -1,7 +1,7 @@
 // Renders Open Graph <meta> tags for a page. React 19 hoists these into
 // <head>. We render OG ourselves (instead of via the Next.js Metadata API)
 // because Next auto-generates twitter:* tags from any Metadata `openGraph`,
-// and Made by Sprint has no Twitter/X account. This keeps rich link previews
+// and Sprint has no Twitter/X account. This keeps rich link previews
 // (Facebook, LinkedIn, Slack, iMessage, X) via Open Graph with zero twitter:*
 // tags. CMS overrides are applied through the shared resolvePageMeta().
 import { resolvePageMeta, type BuildMetadataInput } from "@/lib/seo/metadata";

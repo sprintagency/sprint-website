@@ -58,20 +58,20 @@ export const siteConfig = {
   // canonicals/sitemap/OG all use www to match the served host (no redirect
   // hop). www is also the DNS-robust choice (the apex cannot use a CNAME).
   siteUrl: "https://www.madebysprint.com",
-  siteName: "Made by Sprint",
+  siteName: "Sprint Creative Agency",
   shortName: "Sprint",
   legalName: "Hollinger Creative LTD",
-  tradingName: "Made by Sprint",
+  tradingName: "Sprint",
   foundingYear: "2011",
   founder: "Graham Hollinger",
 
   // ---- Titles & descriptions -------------------------------------------
   // Kept in the existing site voice ("… — Sprint" for page titles), but the
   // template uses the full brand name for stronger entity association.
-  defaultTitle: "Made by Sprint: Creative agency in Fort Worth, Texas",
-  titleTemplate: "%s | Made by Sprint",
+  defaultTitle: "Sprint Creative Agency: Creative agency in Fort Worth, Texas",
+  titleTemplate: "%s | Sprint Creative Agency",
   defaultDescription:
-    "Made by Sprint is a Fort Worth, Texas creative agency delivering brand, web design, video production, social, and print on flat monthly retainers. Serving the Fort Worth metro and the UK since 2011.",
+    "Sprint is a Fort Worth, Texas creative agency delivering brand, web design, video production, social, and print on flat monthly retainers. Serving the Fort Worth metro and the UK since 2011.",
 
   // ---- Locale ----------------------------------------------------------
   locale: "en_US", // primary market is Fort Worth, Texas
@@ -165,7 +165,7 @@ export const siteConfig = {
   ogImage: "/og/og-home.png",
   ogImageWidth: 1200,
   ogImageHeight: 630,
-  ogImageAlt: "Made by Sprint, a creative agency in Fort Worth, Texas",
+  ogImageAlt: "Sprint Creative Agency, a creative agency in Fort Worth, Texas",
   logo: "/assets/sprint-logo-white.svg",
   logoSquare: "/icon.png", // square logo for schema (generated in Phase 4)
 

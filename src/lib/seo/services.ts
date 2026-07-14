@@ -1,5 +1,5 @@
 // ============================================================================
-// Service registry — the canonical list of services Made by Sprint sells.
+// Service registry — the canonical list of services Sprint sells.
 //
 // This is the single source that powers: the /fort-worth hub, Service JSON-LD,
 // the sitemap, footer links, llms.txt, and cross-linking between service and

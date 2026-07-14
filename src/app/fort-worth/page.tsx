@@ -24,7 +24,7 @@ const SEO = {
   image: "/og/og-services.png",
   title: "Creative Agency in Fort Worth, Texas",
   description:
-    "Made by Sprint is a creative agency in Fort Worth, Texas. Brand, web design, video, social, and print on one flat monthly retainer, serving the Fort Worth metro and beyond since 2011.",
+    "Sprint is a creative agency in Fort Worth, Texas. Brand, web design, video, social, and print on one flat monthly retainer, serving the Fort Worth metro and beyond since 2011.",
 };
 
 export function generateMetadata(): Promise<Metadata> {
@@ -36,8 +36,8 @@ const napAddress = `${loc.streetAddress}, ${loc.addressLocality}, ${loc.addressR
 
 const LOCAL_FAQS = [
   {
-    q: "Where is Made by Sprint based?",
-    a: `Made by Sprint is a creative agency based in Fort Worth, Texas, at ${napAddress}. We work with businesses across the Fort Worth metro and nationwide.`,
+    q: "Where is Sprint based?",
+    a: `Sprint is a creative agency based in Fort Worth, Texas, at ${napAddress}. We work with businesses across the Fort Worth metro and nationwide.`,
   },
   {
     q: "Which areas around Fort Worth do you serve?",
@@ -124,7 +124,7 @@ export default function FortWorthPage() {
             path: "/fort-worth",
             name: "Creative Agency in Fort Worth, Texas",
             description:
-              "Made by Sprint is a creative agency in Fort Worth, Texas, offering brand, web, video, social, and print on a monthly retainer.",
+              "Sprint is a creative agency in Fort Worth, Texas, offering brand, web, video, social, and print on a monthly retainer.",
             speakableSelectors: [".fw-h1", ".fw-lead"],
           }),
           ...SERVICES.map((s) => serviceSchema(s)),
@@ -175,7 +175,7 @@ export default function FortWorthPage() {
                 maxWidth: 640,
               }}
             >
-              Made by Sprint is a creative agency based in Fort Worth, Texas. We
+              Sprint is a creative agency based in Fort Worth, Texas. We
               give local businesses a full creative department, brand identity,
               web design, video production, social media, and print, on one flat
               monthly retainer. Established 2011, serving the Fort Worth metro

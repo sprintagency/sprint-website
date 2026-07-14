@@ -13,7 +13,7 @@ const SEO = {
   image: "/og/og-faq.png",
   title: "FAQ",
   description:
-    "Frequently asked questions about working with Made by Sprint: how the monthly retainer works, what is included, turnaround times, and getting started.",
+    "Frequently asked questions about working with Sprint Creative Agency: how the monthly retainer works, what is included, turnaround times, and getting started.",
 };
 
 export function generateMetadata(): Promise<Metadata> {

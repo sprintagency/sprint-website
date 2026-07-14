@@ -143,7 +143,7 @@ Still needed from Graham:
 NAP (must match the site footer character-for-character once the phone is added):
 
 ```
-Made by Sprint
+Sprint
 3409 Clayton Rd E, Fort Worth, TX 76116, USA
 Phone: [ADD ONCE CONFIRMED]
 ```
@@ -155,7 +155,7 @@ Phone: [ADD ONCE CONFIRMED]
   Management, Print Design
 - **Description (under 750 chars):**
 
-> Made by Sprint is a creative agency in Fort Worth, Texas. We give local
+> Sprint is a creative agency in Fort Worth, Texas. We give local
 > businesses a full creative department on one flat monthly retainer: brand
 > identity, web design, video production, social media, and print design, all
 > handled by one team. Established 2011, we work with businesses across Fort

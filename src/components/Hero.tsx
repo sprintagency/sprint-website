@@ -119,7 +119,7 @@ export default function Hero() {
               letterSpacing: "-0.01em",
             }}
           >
-            Made by Sprint is a creative agency in Fort Worth, Texas. We pair
+            Sprint is a creative agency in Fort Worth, Texas. We pair
             creative services with business platforms powered by AI, built to
             save you time and free your team to focus on what matters.
           </p>
