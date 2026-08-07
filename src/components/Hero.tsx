@@ -88,7 +88,7 @@ export default function Hero() {
       >
         <div className="hero-copy" style={{ maxWidth: 560 }}>
           <Eyebrow style={{ marginBottom: 26 }}>
-            [ CREATIVE + AI SOLUTIONS ]
+            [ CREATIVE + BUSINESS SYSTEMS ]
           </Eyebrow>
 
           <h1
@@ -96,16 +96,19 @@ export default function Hero() {
             style={{
               fontFamily: "var(--font-sans)",
               fontWeight: 600,
-              fontSize: "clamp(44px,5vw,76px)",
+              // Scaled down from clamp(44px,5vw,76px): the headline is set with
+              // nowrap + a manual break, and the longest line grew from 15 to 23
+              // characters, so it must shrink to clear the hero video.
+              fontSize: "clamp(38px,4.3vw,62px)",
               lineHeight: 0.94,
               letterSpacing: "-0.035em",
               margin: "0 0 26px",
               whiteSpace: "nowrap",
             }}
           >
-            Creative &amp; tech
+            The creative agency for
             <br />
-            that work<span className="s-dot">.</span>
+            modern businesses<span className="s-dot">.</span>
           </h1>
 
           <p
