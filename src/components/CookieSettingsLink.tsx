@@ -17,6 +17,10 @@ export default function CookieSettingsLink({ style }: { style?: CSSProperties })
         padding: 0,
         cursor: "pointer",
         font: "inherit",
+        // The browser default stylesheet forces `letter-spacing: normal` on
+        // buttons, and the `font` shorthand does not restore it. Without this
+        // the label tracks wider than the sibling footer links.
+        letterSpacing: "inherit",
         ...style,
       }}
     >

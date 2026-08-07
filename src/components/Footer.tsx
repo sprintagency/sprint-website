@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Link from "next/link";
 import { Eyebrow } from "./primitives";
 import { siteConfig, real } from "@/lib/seo/config";
 import CookieSettingsLink from "./CookieSettingsLink";
@@ -86,14 +87,14 @@ export default function Footer() {
         }}
       >
         <div style={{ maxWidth: 300 }}>
-          <a href="/" aria-label="Sprint home" style={{ display: "inline-block" }}>
+          <Link href="/" aria-label="Sprint home" style={{ display: "inline-block" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/assets/sprint-logo-white.svg"
               alt="Sprint"
               style={{ height: 26, width: "auto", display: "block", marginBottom: 22 }}
             />
-          </a>
+          </Link>
           <p
             style={{
               fontSize: 15,
@@ -164,15 +165,15 @@ export default function Footer() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 22, flexWrap: "wrap" }}>
-          <a href="/terms" className="footer-link" style={legalStyle}>
+          <Link href="/terms" className="footer-link" style={legalStyle}>
             Terms
-          </a>
-          <a href="/privacy" className="footer-link" style={legalStyle}>
+          </Link>
+          <Link href="/privacy" className="footer-link" style={legalStyle}>
             Privacy
-          </a>
-          <a href="/cookies" className="footer-link" style={legalStyle}>
+          </Link>
+          <Link href="/cookies" className="footer-link" style={legalStyle}>
             Cookies
-          </a>
+          </Link>
           <CookieSettingsLink style={legalStyle} />
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -227,7 +228,7 @@ export default function Footer() {
             gap: 6,
           }}
         >
-          <a
+          <Link
             href="/fort-worth"
             className="footer-link"
             style={{
@@ -255,7 +256,7 @@ export default function Footer() {
             <span className="s-mono" style={{ fontSize: 11.5, letterSpacing: "0.04em" }}>
               {NAP}
             </span>
-          </a>
+          </Link>
           {phone ? (
             <a
               href={`tel:${siteConfig.contact.phone.replace(/[^+\d]/g, "")}`}

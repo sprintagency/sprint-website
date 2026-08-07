@@ -7,6 +7,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
+import Link from "next/link";
 import CustomSelect from "./CustomSelect";
 import {
   BUDGETS,
@@ -268,7 +269,7 @@ export default function ContactWizard({
             Close
           </button>
         ) : (
-          <a
+          <Link
             href="/"
             className="footer-link"
             style={{
@@ -282,7 +283,7 @@ export default function ContactWizard({
             }}
           >
             <span style={{ fontSize: 16 }}>&larr;</span> Back to site
-          </a>
+          </Link>
         )}
       </div>
     );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties } from "react";
+import Link from "next/link";
 import Footer from "./Footer";
 import CustomSelect from "./CustomSelect";
 import { TOPIC_OPTIONS, validEmail, type TopicKey } from "@/lib/contact-form";
@@ -218,14 +219,14 @@ export default function GrowthPartnerView({ partner: initialPartner }: { partner
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 56 }}>
-            <a href="/" className="logo-link" aria-label="Sprint home">
+            <Link href="/" className="logo-link" aria-label="Sprint home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/sprint-logo-white.svg"
                 alt="Sprint"
                 style={{ height: 26, width: "auto", display: "block" }}
               />
-            </a>
+            </Link>
             <nav className="nav-links" style={{ display: "flex", alignItems: "center", gap: 34 }}>
               {NAV.map((l) => (
                 <a key={l.label} href={l.href} className="navlink" style={{ fontSize: 15, fontWeight: 500 }}>

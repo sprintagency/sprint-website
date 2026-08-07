@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { NAV_LINKS } from "@/lib/site-content";
 
 export default function Header() {
@@ -41,14 +42,14 @@ export default function Header() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 56 }}>
-            <a href="/" className="logo-link" aria-label="Sprint home">
+            <Link href="/" className="logo-link" aria-label="Sprint home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/sprint-logo-white.svg"
                 alt="Sprint"
                 style={{ height: 26, width: "auto", display: "block" }}
               />
-            </a>
+            </Link>
             <nav
               className="nav-links"
               style={{ display: "flex", alignItems: "center", gap: 34 }}
