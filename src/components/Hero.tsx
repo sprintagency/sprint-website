@@ -107,7 +107,10 @@ export default function Hero() {
               // collide with the video. Wrapping is the safe failure mode.
             }}
           >
-            The creative agency for
+            {/* The explicit space matters: JSX strips the whitespace around
+                these newlines, so without it the words run together wherever
+                the <br> is hidden (mobile). */}
+            The creative agency for{" "}
             <br />
             modern businesses<span className="s-dot">.</span>
           </h1>
