@@ -182,7 +182,13 @@ export default function Hero() {
           position: "absolute",
           top: "50%",
           transform: "translateY(-50%)",
-          left: "clamp(640px,50vw,920px)",
+          // The copy column is centred inside the 1360px hero-inner, so it
+          // drifts right as the window widens. This left offset used to be
+          // viewport-based and capped at 920px, so above ~2080px the column
+          // caught up with the video and the headline sat on top of it.
+          // Keep the original position wherever it is already clear, and push
+          // the video right only when the 560px copy column would reach it.
+          left: "max(clamp(640px,50vw,920px), calc(max(48px, (100vw - 1360px) / 2 + 48px) + 600px))",
           height: "min(60vh,600px)",
           zIndex: 1,
         }}
