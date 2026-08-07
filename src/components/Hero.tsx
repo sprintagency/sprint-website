@@ -96,14 +96,15 @@ export default function Hero() {
             style={{
               fontFamily: "var(--font-sans)",
               fontWeight: 600,
-              // Scaled down from clamp(44px,5vw,76px): the headline is set with
-              // nowrap + a manual break, and the longest line grew from 15 to 23
-              // characters, so it must shrink to clear the hero video.
-              fontSize: "clamp(38px,4.3vw,62px)",
+              // Sized so the longest line ("The creative agency for") stays
+              // inside the 560px hero-copy column and clears the hero video,
+              // which is pinned at left: clamp(640px,50vw,920px).
+              fontSize: "clamp(32px,3.6vw,52px)",
               lineHeight: 0.94,
               letterSpacing: "-0.035em",
               margin: "0 0 26px",
-              whiteSpace: "nowrap",
+              // No nowrap: nowrap lets the text overflow its box invisibly and
+              // collide with the video. Wrapping is the safe failure mode.
             }}
           >
             The creative agency for
