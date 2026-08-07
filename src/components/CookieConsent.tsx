@@ -8,6 +8,7 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
   getConsent,
   setConsent,
@@ -89,12 +90,12 @@ export default function CookieConsent() {
       <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.78)" }}>
         We use essential cookies to run the site, plus Google Analytics if you
         consent. You can reject analytics without affecting your visit. See our{" "}
-        <a
+        <Link
           href="/cookies"
           style={{ color: "var(--sprint-lime)", textDecoration: "underline", whiteSpace: "nowrap" }}
         >
           Cookies Policy
-        </a>
+        </Link>
         .
       </p>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>

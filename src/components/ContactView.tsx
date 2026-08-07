@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import ContactWizard from "./ContactWizard";
 import ContactModal from "./ContactModal";
 import Header from "./Header";
@@ -172,7 +173,7 @@ export default function ContactView() {
                 >
                   Studio
                 </div>
-                <a
+                <Link
                   href="/fort-worth"
                   className="footer-link"
                   style={{
@@ -189,7 +190,7 @@ export default function ContactView() {
                   {siteConfig.primaryLocation.addressLocality},{" "}
                   {siteConfig.primaryLocation.addressRegion}{" "}
                   {siteConfig.primaryLocation.postalCode}
-                </a>
+                </Link>
               </div>
             </div>
           </div>
