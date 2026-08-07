@@ -18,8 +18,12 @@ references in `design_handoff_sprint_site/`.
 
 ## Running & verifying
 - **Dev:** `npm run dev`. **Build:** `npm run build`. **Lint:** `npm run lint`.
-  (No dedicated test scripts beyond lint; a `test/` dir exists — check it before
-  assuming coverage.) Get a clean `build` + `lint` before calling a change done.
+- Lint runs the ESLint CLI (`eslint .`) against the flat config in
+  `eslint.config.mjs`, which extends `next/core-web-vitals` and `next/typescript`.
+  Do not switch back to `next lint`: it is deprecated and removed in Next.js 16.
+- There is no test suite.
+  The root `test` is a stray text file, not a test directory.
+- Get a clean `build` + `lint` before calling a change done.
 
 ## Hard conventions (Sprint org rules — apply everywhere)
 - **No em/en dashes** in any copy. Use comma, period, colon, or " · ".
