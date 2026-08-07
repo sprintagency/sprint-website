@@ -400,13 +400,12 @@ details.faq-item[open] .faq-q { color: #ffffff; }
   .trust-cell { justify-content: flex-start !important; }
 }
 @media (max-width: 640px) {
-  /* Below 640px the headline wraps freely. Drop the desktop line break and let
-     the browser balance the lines, otherwise the forced break strands "for" on
-     a line of its own. */
+  /* Below 640px the headline wraps freely and is set large for presence, so it
+     runs to about four lines on a phone. Drop the desktop line break, which
+     would otherwise strand "for" on a line of its own. */
   .hero-h1 {
     white-space: normal !important;
-    font-size: clamp(28px,8.2vw,40px) !important;
-    text-wrap: balance;
+    font-size: clamp(36px,13.2vw,52px) !important;
   }
   .hero-h1 br { display: none !important; }
   .hero-copy { max-width: 100% !important; }

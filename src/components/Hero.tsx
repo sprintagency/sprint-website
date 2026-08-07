@@ -99,7 +99,7 @@ export default function Hero() {
               // Sized so the longest line ("The creative agency for") stays
               // inside the 560px hero-copy column and clears the hero video,
               // which is pinned at left: clamp(640px,50vw,920px).
-              fontSize: "clamp(32px,3.6vw,52px)",
+              fontSize: "clamp(40px,3.6vw,52px)",
               lineHeight: 0.94,
               letterSpacing: "-0.035em",
               margin: "0 0 26px",
