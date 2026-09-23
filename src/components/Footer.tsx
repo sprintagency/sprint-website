@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Eyebrow } from "./primitives";
 import { siteConfig, real } from "@/lib/seo/config";
 import CookieSettingsLink from "./CookieSettingsLink";
+import { PORTAL_PATH } from "@/lib/portal-content";
 
 const loc = siteConfig.primaryLocation;
 // NAP string kept identical to the LocalBusiness schema and Google Business
@@ -33,6 +34,7 @@ const col: { title: string; links: FooterLink[] }[] = [
   {
     title: "[ PLATFORM ]",
     links: [
+      { label: "Sprint Portal", href: PORTAL_PATH },
       { label: "Client Portals", href: "/#platform" },
       { label: "Workflow Automation", href: "/#platform" },
       { label: "Dashboards & Reporting", href: "/#platform" },
