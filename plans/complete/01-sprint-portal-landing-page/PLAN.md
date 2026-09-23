@@ -1,3 +1,5 @@
+> STATUS: DONE (2026-09-23). Page built, lint, type check and build green, verified at 375/768/1280/1920. Residuals: PR open and not yet merged (merge deploys to production); Open Graph card is the site default until a designed portal card is dropped into public/og/ and wired in page.tsx.
+
 # 01: Sprint Portal landing page
 
 Add a single-purpose landing page at `/sprint-portal-operating-system` that sells Sprint Portal to other agencies.
@@ -237,4 +239,4 @@ Metadata checks:
 - [x] Lint and build green (tsc, eslint, next build all exit 0)
 - [x] Browser verification: 375 and 768 (pane, JS measurements), 1280 and 1920 (headless captures); phone header fixed to fit (tag hidden, short label below 640px)
 - [x] Zero em dashes in new files
-- [ ] PR opened against `main`
+- [x] PR opened against `main`
