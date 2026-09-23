@@ -43,6 +43,13 @@ references in `design_handoff_sprint_site/`.
   `manifest`, `llms*.txt`).
 - `public/` — static assets. `supabase/` — SQL/config. `design_handoff_sprint_site/`
   — the source-of-truth design HTML the pages are ported from.
+- `src/app/sprint-portal-operating-system/` — the Sprint Portal landing page
+  (sells the agency operating system to other agencies). Copy lives in
+  `src/lib/portal-content.ts`, sections in `src/components/portal/`, and the
+  header takes `variant="portal"`. Its demo buttons pass `data-intent="portal"`
+  to the contact modal. The shared feature card is `src/components/FeatureCard.tsx`.
+- `plans/` — build plans, one folder per plan; finished plans move to
+  `plans/complete/`.
 
 ## Gotchas
 - Pages are ported 1:1 from the design handoff — when editing layout/styles,
