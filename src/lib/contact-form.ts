@@ -8,12 +8,15 @@ export type TopicKey =
   | "demo"
   | "careers"
   | "freelancers"
+  | "portal"
   | "other"
   | "";
 
-// Careers & freelancers are intentionally NOT listed here: recruit mode is only
-// reachable via the footer links (data-intent="careers" / "freelancers"), not
-// user-selectable in the topic picker / grid.
+// Careers, freelancers and portal are intentionally NOT listed here. Recruit
+// mode is only reachable via the footer links (data-intent="careers" /
+// "freelancers"), and the portal lead form only via the Sprint Portal landing
+// page (data-intent="portal"). None of them is user-selectable in the picker,
+// and once in one of those modes the visitor cannot switch to another topic.
 export const TOPIC_OPTIONS: { value: Exclude<TopicKey, "">; label: string }[] = [
   { value: "creative", label: "Creative plan" },
   { value: "ai", label: "AI solution" },
@@ -38,6 +41,7 @@ export const DETAILS: Record<string, { label: string; options: string[] } | null
     options: ["Design", "Video & Motion", "Web & Development", "Social & Content", "Copywriting", "Illustration", "Something else"],
   },
   demo: null,
+  portal: null,
   other: null,
 };
 
@@ -48,6 +52,7 @@ export const HEADINGS: Record<string, string> = {
   demo: "Let’s book your demo",
   careers: "Join the team",
   freelancers: "Freelance with Sprint",
+  portal: "Let’s book your Portal demo",
   other: "Let’s talk",
 };
 
@@ -55,7 +60,29 @@ export const HEADINGS: Record<string, string> = {
 // with a discipline picker + portfolio field instead.
 export const isRecruit = (topic: TopicKey) =>
   topic === "careers" || topic === "freelancers";
+
+// The Sprint Portal lead form: no topic picker, no plan detail, no retainer
+// budget. Step 2 asks for agency size (stored in `detail`) and timeline.
+export const isPortal = (topic: TopicKey) => topic === "portal";
+
+export const PORTAL_TEAM_SIZES = [
+  "Just me",
+  "2 to 5 people",
+  "6 to 15 people",
+  "16 to 50 people",
+  "More than 50 people",
+];
+
 export const DEFAULT_HEADING = "Let’s build something great";
+
+// Intro line under the heading, keyed by topic. Only modes a visitor cannot
+// switch out of get their own line; everything else uses the default.
+export const DEFAULT_INTRO =
+  "Tell us what you need and we’ll come back with a clear next step, usually within one business day.";
+export const INTROS: Record<string, string> = {
+  portal:
+    "Tell us a little about your agency and we’ll set up a 20 minute walkthrough of the live platform, usually within one business day.",
+};
 
 export const BUDGETS = [
   "Under $5k/mo",
@@ -73,27 +100,20 @@ export const validEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
 /**
  * Maps a CTA intent (and optional plan/service) to a starting topic + detail,
- * matching the smart pre-fill in the design export. An intent may also carry
- * its own heading, shown until the visitor changes topic; otherwise the
- * heading comes from HEADINGS[topic].
+ * matching the smart pre-fill in the design export.
  */
 export function resolveIntent(
   intent?: string | null,
   plan?: string | null,
   service?: string | null,
-): { topic: TopicKey; detail: string; heading?: string } {
+): { topic: TopicKey; detail: string } {
   const it = (intent || "").toLowerCase();
   switch (it) {
     case "demo":
       return { topic: "demo", detail: "" };
-    // Sprint Portal landing page: a demo of the custom platform, filed under
-    // the AI topic so the lead lands with the other platform enquiries.
+    // Sprint Portal landing page: the locked portal lead form.
     case "portal":
-      return {
-        topic: "ai",
-        detail: "Custom platform build",
-        heading: "Let’s book your Portal demo",
-      };
+      return { topic: "portal", detail: "" };
     case "plan":
       return { topic: "creative", detail: cap(plan || "") };
     case "creative":

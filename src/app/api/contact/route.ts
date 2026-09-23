@@ -82,13 +82,16 @@ export async function POST(req: Request) {
     }
   }
 
+  // The Sprint Portal lead form stores agency size in `detail`; label it so
+  // the notification reads correctly for the sales team.
+  const isPortalLead = body.topic === "portal";
   const rows: [string, string | undefined][] = [
     ["Name", name],
     ["Email", email],
-    ["Company", body.company],
+    [isPortalLead ? "Agency" : "Company", body.company],
     ["Phone", body.phone],
-    ["Topic", body.topic],
-    ["Detail", body.detail],
+    ["Topic", isPortalLead ? "Sprint Portal demo" : body.topic],
+    [isPortalLead ? "Agency size" : "Detail", body.detail],
     ["Budget", body.budget],
     ["Timeline", body.timeline],
     ["Message", body.message],
@@ -103,7 +106,7 @@ export async function POST(req: Request) {
   ];
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#0c1321;">
-      <h2 style="margin:0 0 16px;">New website enquiry</h2>
+      <h2 style="margin:0 0 16px;">${isPortalLead ? "New Sprint Portal demo request" : "New website enquiry"}</h2>
       <table style="border-collapse:collapse;width:100%;max-width:560px;">
         ${rows
           .filter(([, v]) => v && String(v).trim())
