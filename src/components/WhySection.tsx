@@ -1,72 +1,8 @@
-import type { CSSProperties } from "react";
+import FeatureCard from "./FeatureCard";
 import { Eyebrow } from "./primitives";
-
-const cardBase: CSSProperties = {
-  position: "relative",
-  padding: "20px 20px 34px",
-  borderRadius: 4,
-  background: "#12182b",
-  border: "1px solid rgba(255,255,255,0.10)",
-  overflow: "visible",
-};
-
-const cardGlow: CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  borderRadius: 4,
-  background:
-    "radial-gradient(ellipse 120% 90% at 72% 22%,rgba(93,107,255,0.28),rgba(138,92,255,0.11) 42%,rgba(0,200,255,0.09) 64%,transparent 84%)",
-  pointerEvents: "none",
-};
 
 const avatarShadow =
   "0 0 0 2px rgba(12,18,40,0.95),0 0 0 3.5px rgba(255,255,255,0.15)";
-
-const h3: CSSProperties = {
-  fontFamily: "var(--font-sans)",
-  fontWeight: 600,
-  fontSize: 22,
-  letterSpacing: "-0.02em",
-  margin: "0 0 12px",
-};
-
-const body: CSSProperties = {
-  fontSize: 15,
-  lineHeight: 1.55,
-  color: "rgba(255,255,255,0.62)",
-  margin: 0,
-};
-
-// Floating glass image card that lifts up out of the card (needs overflow:visible).
-// The bezel (padding + radius) is a constant % of the frame's own width so these
-// smaller screenshots read as the same physical screen as the larger hero portal
-// frame (~1.16% padding on a ~861px frame). box-sizing:border-box keeps the
-// padding inside the aspect-ratio box; aspect-ratio 360/206 sets the frame size.
-const imgCard: CSSProperties = {
-  position: "relative",
-  zIndex: 2,
-  boxSizing: "border-box",
-  aspectRatio: "360 / 206",
-  marginTop: -40,
-  marginBottom: 26,
-  padding: "1.16%",
-  borderRadius: "1.4%",
-  background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(255,255,255,0.10)",
-  backdropFilter: "blur(20px)",
-  WebkitBackdropFilter: "blur(20px)",
-  boxShadow: "0 32px 66px -20px rgba(0,0,0,0.88)",
-};
-
-const imgInner: CSSProperties = {
-  display: "block",
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  objectPosition: "center top",
-  borderRadius: "0.7%",
-  border: "1px solid rgba(255,255,255,0.08)",
-};
 
 export default function WhySection() {
   return (
@@ -113,156 +49,134 @@ export default function WhySection() {
         }}
       >
         {/* Card 1 — senior team avatar cluster */}
-        <div style={cardBase}>
-          <div style={cardGlow} />
-          <div
-            style={{
-              position: "relative",
-              zIndex: 1,
-              height: 180,
-              marginBottom: 26,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+        <FeatureCard
+          title="A senior team on demand"
+          body="Brand, digital, print and video specialists working as your department, with no recruiting or overhead."
+          media={
             <div
-              className="avatar-cluster"
-              style={{ display: "flex", alignItems: "center" }}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                height: 180,
+                marginBottom: 26,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
-              {/* eslint-disable @next/next/no-img-element */}
-              <img
-                src="/assets/team/skye.webp"
-                alt="Skye"
-                width={200}
-                height={200}
-                loading="lazy"
-                style={{
-                  width: 76,
-                  height: 76,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  boxShadow: avatarShadow,
-                  marginTop: 12,
-                  zIndex: 2,
-                  animation: "floatB 7s ease-in-out 0s infinite",
-                }}
-              />
-              <img
-                src="/assets/team/graham.webp"
-                alt="Graham"
-                width={200}
-                height={200}
-                loading="lazy"
-                style={{
-                  width: 76,
-                  height: 76,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  boxShadow: avatarShadow,
-                  marginLeft: -12,
-                  marginTop: -12,
-                  zIndex: 4,
-                  animation: "floatA 7.6s ease-in-out 0.5s infinite",
-                }}
-              />
-              <img
-                src="/assets/team/trae.webp"
-                alt="Trae"
-                width={200}
-                height={200}
-                loading="lazy"
-                style={{
-                  width: 76,
-                  height: 76,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  boxShadow: avatarShadow,
-                  marginLeft: -12,
-                  marginTop: 10,
-                  zIndex: 5,
-                  animation: "floatB 8.3s ease-in-out 1s infinite",
-                }}
-              />
-              <img
-                src="/assets/team/can.webp"
-                alt="Can"
-                width={200}
-                height={200}
-                loading="lazy"
-                style={{
-                  width: 76,
-                  height: 76,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  boxShadow: avatarShadow,
-                  marginLeft: -12,
-                  marginTop: -12,
-                  zIndex: 3,
-                  animation: "floatA 6.6s ease-in-out 0.3s infinite",
-                }}
-              />
-              <img
-                src="/assets/team/jamie.webp"
-                alt="Jamie"
-                width={200}
-                height={200}
-                loading="lazy"
-                style={{
-                  width: 76,
-                  height: 76,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  boxShadow: avatarShadow,
-                  marginLeft: -12,
-                  marginTop: 12,
-                  zIndex: 1,
-                  animation: "floatB 7.9s ease-in-out 0.8s infinite",
-                }}
-              />
-              {/* eslint-enable @next/next/no-img-element */}
+              <div
+                className="avatar-cluster"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                {/* eslint-disable @next/next/no-img-element */}
+                <img
+                  src="/assets/team/skye.webp"
+                  alt="Skye"
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                  style={{
+                    width: 76,
+                    height: 76,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    boxShadow: avatarShadow,
+                    marginTop: 12,
+                    zIndex: 2,
+                    animation: "floatB 7s ease-in-out 0s infinite",
+                  }}
+                />
+                <img
+                  src="/assets/team/graham.webp"
+                  alt="Graham"
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                  style={{
+                    width: 76,
+                    height: 76,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    boxShadow: avatarShadow,
+                    marginLeft: -12,
+                    marginTop: -12,
+                    zIndex: 4,
+                    animation: "floatA 7.6s ease-in-out 0.5s infinite",
+                  }}
+                />
+                <img
+                  src="/assets/team/trae.webp"
+                  alt="Trae"
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                  style={{
+                    width: 76,
+                    height: 76,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    boxShadow: avatarShadow,
+                    marginLeft: -12,
+                    marginTop: 10,
+                    zIndex: 5,
+                    animation: "floatB 8.3s ease-in-out 1s infinite",
+                  }}
+                />
+                <img
+                  src="/assets/team/can.webp"
+                  alt="Can"
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                  style={{
+                    width: 76,
+                    height: 76,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    boxShadow: avatarShadow,
+                    marginLeft: -12,
+                    marginTop: -12,
+                    zIndex: 3,
+                    animation: "floatA 6.6s ease-in-out 0.3s infinite",
+                  }}
+                />
+                <img
+                  src="/assets/team/jamie.webp"
+                  alt="Jamie"
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                  style={{
+                    width: 76,
+                    height: 76,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    boxShadow: avatarShadow,
+                    marginLeft: -12,
+                    marginTop: 12,
+                    zIndex: 1,
+                    animation: "floatB 7.9s ease-in-out 0.8s infinite",
+                  }}
+                />
+                {/* eslint-enable @next/next/no-img-element */}
+              </div>
             </div>
-          </div>
-          <div style={{ padding: "0 14px" }}>
-            <h3 style={h3}>A senior team on demand</h3>
-            <p style={body}>
-              Brand, digital, print and video specialists working as your
-              department, with no recruiting or overhead.
-            </p>
-          </div>
-        </div>
+          }
+        />
 
         {/* Card 2 */}
-        <div style={cardBase}>
-          <div style={cardGlow} />
-          <div className="why-imgcard" style={imgCard}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="why-img" src="/assets/card-new-request.webp" alt="Sprint new request" style={imgInner} />
-          </div>
-          <div style={{ padding: "0 14px" }}>
-            <h3 style={h3}>Delivered in days, not weeks</h3>
-            <p style={body}>
-              Submit unlimited requests and we turn them around fast, one after
-              another, so your marketing never waits on creative.
-            </p>
-          </div>
-        </div>
+        <FeatureCard
+          title="Delivered in days, not weeks"
+          body="Submit unlimited requests and we turn them around fast, one after another, so your marketing never waits on creative."
+          image={{ src: "/assets/card-new-request.webp", alt: "Sprint new request" }}
+        />
 
         {/* Card 3 */}
-        <div style={cardBase}>
-          <div style={cardGlow} />
-          <div className="why-imgcard" style={imgCard}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="why-img" src="/assets/card-review.webp" alt="Sprint deliverable review" style={imgInner} />
-          </div>
-          <div style={{ padding: "0 14px" }}>
-            <h3 style={h3}>One platform to run it all</h3>
-            <p style={body}>
-              Track projects, review deliverables, message the team and manage
-              every brand asset in one workspace, built around you.
-            </p>
-          </div>
-        </div>
+        <FeatureCard
+          title="One platform to run it all"
+          body="Track projects, review deliverables, message the team and manage every brand asset in one workspace, built around you."
+          image={{ src: "/assets/card-review.webp", alt: "Sprint deliverable review" }}
+        />
       </div>
     </section>
   );

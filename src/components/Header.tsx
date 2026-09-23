@@ -3,9 +3,27 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { NAV_LINKS } from "@/lib/site-content";
+import {
+  PORTAL_DEMO_INTENT,
+  PORTAL_DEMO_LABEL,
+  PORTAL_LOGIN_URL,
+} from "@/lib/portal-content";
 
-export default function Header() {
+type HeaderProps = {
+  /**
+   * "default": the full marketing nav.
+   * "portal": the Sprint Portal landing page. Logo plus a PORTAL tag, no
+   * section links (fewer exits on a single-purpose page), Sign In, and a
+   * "Book a Portal Demo" button that presets the contact modal.
+   */
+  variant?: "default" | "portal";
+};
+
+export default function Header({ variant = "default" }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const portal = variant === "portal";
+  const ctaLabel = portal ? PORTAL_DEMO_LABEL : "Book Demo";
+  const ctaIntent = portal ? PORTAL_DEMO_INTENT : "demo";
 
   // Lock body scroll while the mobile menu is open (matches .cm-open behaviour).
   useEffect(() => {
@@ -41,7 +59,7 @@ export default function Header() {
             gap: 32,
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 56 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: portal ? 14 : 56 }}>
             <Link href="/" className="logo-link" aria-label="Sprint home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -50,28 +68,45 @@ export default function Header() {
                 style={{ height: 26, width: "auto", display: "block" }}
               />
             </Link>
-            <nav
-              className="nav-links"
-              style={{ display: "flex", alignItems: "center", gap: 34 }}
-            >
-              {NAV_LINKS.map((l, i) => (
-                <a
-                  key={i}
-                  href={l.href}
-                  className="navlink"
-                  style={{ fontSize: 15, fontWeight: 500 }}
-                >
-                  {l.label}
-                </a>
-              ))}
-            </nav>
+            {portal ? (
+              <span
+                className="s-mono portal-nav-tag"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.12em",
+                  color: "var(--sprint-lime)",
+                  border: "1px solid rgba(181,230,2,0.4)",
+                  borderRadius: 3,
+                  padding: "4px 8px",
+                  lineHeight: 1.2,
+                }}
+              >
+                PORTAL
+              </span>
+            ) : (
+              <nav
+                className="nav-links"
+                style={{ display: "flex", alignItems: "center", gap: 34 }}
+              >
+                {NAV_LINKS.map((l, i) => (
+                  <a
+                    key={i}
+                    href={l.href}
+                    className="navlink"
+                    style={{ fontSize: 15, fontWeight: 500 }}
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </nav>
+            )}
           </div>
           <div
             className="nav-actions"
             style={{ display: "flex", alignItems: "center", gap: 22 }}
           >
             <a
-              href="https://portal.madebysprint.com/auth/login"
+              href={PORTAL_LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="navlink mm-hide-mobile"
@@ -83,7 +118,7 @@ export default function Header() {
               className="cta cta-lime"
               href="#"
               data-open-contact="1"
-              data-intent="demo"
+              data-intent={ctaIntent}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -98,7 +133,17 @@ export default function Header() {
                 whiteSpace: "nowrap",
               }}
             >
-              Book Demo
+              {portal ? (
+                // Phones cannot fit logo + tag + the long label + hamburger, so
+                // below 640px the tag hides and the label shortens (globals.css).
+                // The mobile menu keeps the full "Book a Portal Demo".
+                <>
+                  <span className="portal-cta-full">{ctaLabel}</span>
+                  <span className="portal-cta-short">Book Demo</span>
+                </>
+              ) : (
+                ctaLabel
+              )}
             </a>
             <button
               className="nav-hamburger"
@@ -184,18 +229,19 @@ export default function Header() {
             </svg>
           </button>
         </div>
-        {NAV_LINKS.map((l, i) => (
-          <a
-            key={i}
-            href={l.href}
-            className="mm-link"
-            onClick={() => setMenuOpen(false)}
-          >
-            {l.label}
-          </a>
-        ))}
+        {!portal &&
+          NAV_LINKS.map((l, i) => (
+            <a
+              key={i}
+              href={l.href}
+              className="mm-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {l.label}
+            </a>
+          ))}
         <a
-          href="https://portal.madebysprint.com/auth/login"
+          href={PORTAL_LOGIN_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="mm-link"
@@ -207,7 +253,7 @@ export default function Header() {
           href="#"
           className="mm-link cta cta-lime"
           data-open-contact="1"
-          data-intent="demo"
+          data-intent={ctaIntent}
           onClick={() => setMenuOpen(false)}
           style={{
             marginTop: 26,
@@ -225,7 +271,7 @@ export default function Header() {
             borderBottom: "none",
           }}
         >
-          Book a Demo
+          {portal ? PORTAL_DEMO_LABEL : "Book a Demo"}
         </a>
       </div>
     </>

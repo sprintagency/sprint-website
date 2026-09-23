@@ -145,6 +145,55 @@ export default function ScrollEffects() {
       cleanups.push(() => window.removeEventListener("scroll", areveal));
     }
 
+    // ---- generic reveal: [data-reveal] elements and the children of
+    // [data-reveal-group] containers fade and rise in when scrolled into view
+    // (used by the Sprint Portal landing page). Styles are applied by JS only,
+    // so without JS or with reduced motion the content simply renders visible.
+    const revealSingles = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]"),
+    );
+    const revealGroups = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal-group]"),
+    );
+    if (
+      (revealSingles.length || revealGroups.length) &&
+      !reduced &&
+      "IntersectionObserver" in window
+    ) {
+      const targets = new Map<HTMLElement, HTMLElement[]>();
+      revealSingles.forEach((el) => targets.set(el, [el]));
+      revealGroups.forEach((g) =>
+        targets.set(g, Array.from(g.children) as HTMLElement[]),
+      );
+      targets.forEach((els) =>
+        els.forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(28px)";
+          el.style.transition =
+            "opacity 640ms ease, transform 640ms cubic-bezier(0.16,1,0.3,1)";
+        }),
+      );
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const els = targets.get(entry.target as HTMLElement) || [];
+            els.forEach((el, idx) => {
+              const d = idx * 70;
+              el.style.transitionDelay = d + "ms";
+              el.style.opacity = "1";
+              el.style.transform = "translateY(0)";
+              setTimeout(() => (el.style.transitionDelay = "0ms"), d + 720);
+            });
+            io.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -10% 0px" },
+      );
+      targets.forEach((_, t) => io.observe(t));
+      cleanups.push(() => io.disconnect());
+    }
+
     // ---- platform grid parallax drift ----
     const parallax = document.querySelector<HTMLElement>(
       "[data-platform-parallax]",
