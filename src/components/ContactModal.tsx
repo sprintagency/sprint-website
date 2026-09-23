@@ -2,7 +2,13 @@
 
 import { useCallback, useEffect, useState } from "react";
 import ContactWizard from "./ContactWizard";
-import { DEFAULT_HEADING, HEADINGS, resolveIntent } from "@/lib/contact-form";
+import {
+  DEFAULT_HEADING,
+  DEFAULT_INTRO,
+  HEADINGS,
+  INTROS,
+  resolveIntent,
+} from "@/lib/contact-form";
 
 /* ------------------------------------------------------------------ */
 /* Contact modal                                                       */
@@ -15,14 +21,14 @@ export default function ContactModal() {
   const [visible, setVisible] = useState(false);
   const [prefill, setPrefill] = useState<Prefill>({});
   const [heading, setHeading] = useState(DEFAULT_HEADING);
+  const [intro, setIntro] = useState(DEFAULT_INTRO);
   const [submitted, setSubmitted] = useState(false);
 
   const openContact = useCallback(
     (intent?: string, plan?: string, service?: string) => {
-      const { topic: t, heading } = resolveIntent(intent, plan, service);
-      setHeading(
-        heading || (t ? HEADINGS[t] || DEFAULT_HEADING : DEFAULT_HEADING),
-      );
+      const { topic: t } = resolveIntent(intent, plan, service);
+      setHeading(t ? HEADINGS[t] || DEFAULT_HEADING : DEFAULT_HEADING);
+      setIntro((t && INTROS[t]) || DEFAULT_INTRO);
       setSubmitted(false);
       setPrefill({ intent, plan, service });
       setOpen(true);
@@ -176,8 +182,7 @@ export default function ContactModal() {
                 maxWidth: 460,
               }}
             >
-              Tell us what you need and we&rsquo;ll come back with a clear next
-              step, usually within one business day.
+              {intro}
             </p>
           </>
         )}

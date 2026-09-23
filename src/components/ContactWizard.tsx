@@ -14,8 +14,10 @@ import {
   DEFAULT_HEADING,
   DETAILS,
   HEADINGS,
+  PORTAL_TEAM_SIZES,
   TIMELINES,
   TOPIC_OPTIONS,
+  isPortal,
   isRecruit,
   resolveIntent,
   validEmail,
@@ -43,9 +45,17 @@ const emptyForm = {
   message: "",
 };
 
-const stepLabel = (step: number, recruit: boolean): string => {
+const stepLabel = (
+  step: number,
+  recruit: boolean,
+  portal: boolean,
+): string => {
   if (step === 1) return "Your details";
-  if (step === 2) return recruit ? "Your background" : "Your project";
+  if (step === 2) {
+    if (recruit) return "Your background";
+    if (portal) return "Your agency";
+    return "Your project";
+  }
   return "Anything else";
 };
 
@@ -116,20 +126,18 @@ export default function ContactWizard({
   useEffect(() => {
     if (prefillFromUrl && typeof window !== "undefined") {
       const q = new URLSearchParams(window.location.search);
-      const { topic: t, detail, heading } = resolveIntent(
+      const { topic: t, detail } = resolveIntent(
         q.get("intent"),
         q.get("plan"),
         q.get("service"),
       );
       if (t) {
         selectTopic(t, detail || undefined);
-        if (heading) onHeadingChange?.(heading);
         return;
       }
     }
     onHeadingChange?.(
-      initial.heading ||
-        (topic ? HEADINGS[topic] || DEFAULT_HEADING : DEFAULT_HEADING),
+      topic ? HEADINGS[topic] || DEFAULT_HEADING : DEFAULT_HEADING,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -146,6 +154,9 @@ export default function ContactWizard({
 
   const detailCfg = topic ? DETAILS[topic] : null;
   const recruit = isRecruit(topic);
+  // Portal lead form: the topic is locked, so no picker is rendered and the
+  // visitor cannot turn a portal demo request into any other enquiry.
+  const portal = isPortal(topic);
   const portfolioLabel =
     topic === "careers" ? "Portfolio or LinkedIn" : "Portfolio or website";
   const firstName = form.name.trim().split(" ")[0];
@@ -247,8 +258,9 @@ export default function ContactWizard({
             maxWidth: 400,
           }}
         >
-          Thanks {firstName}. A member of the team will get back to you within
-          one business day.
+          {portal
+            ? `Thanks ${firstName}. We will be in touch within one business day to set up your walkthrough of the live platform.`
+            : `Thanks ${firstName}. A member of the team will get back to you within one business day.`}
         </p>
         {variant === "modal" ? (
           <button
@@ -336,7 +348,7 @@ export default function ContactWizard({
           marginBottom: 20,
         }}
       >
-        Step {step} of 3 &middot; {stepLabel(step, recruit)}
+        Step {step} of 3 &middot; {stepLabel(step, recruit, portal)}
       </div>
 
       {/* STEP 1 */}
@@ -413,7 +425,7 @@ export default function ContactWizard({
       {/* STEP 2 */}
       {step === 2 && (
         <div>
-          {!recruit && (
+          {!recruit && !portal && (
             <div style={{ marginBottom: 20 }}>
               <label style={labelStyle} className="s-mono">
                 What can we help with?{" "}
@@ -464,7 +476,42 @@ export default function ContactWizard({
             </div>
           )}
 
-          {!recruit && (
+          {portal && (
+            <div
+              className="cm-2col"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 16,
+                marginBottom: 20,
+              }}
+            >
+              <div>
+                <label style={labelStyle} className="s-mono">
+                  Agency size
+                </label>
+                <CustomSelect
+                  value={form.detail}
+                  placeholder="Select team size"
+                  options={PORTAL_TEAM_SIZES}
+                  onChange={(v) => set("detail", v)}
+                />
+              </div>
+              <div>
+                <label style={labelStyle} className="s-mono">
+                  When would you launch?
+                </label>
+                <CustomSelect
+                  value={form.timeline}
+                  placeholder="Select timing"
+                  options={TIMELINES}
+                  onChange={(v) => set("timeline", v)}
+                />
+              </div>
+            </div>
+          )}
+
+          {!recruit && !portal && (
             <div
               className="cm-2col"
               style={{
@@ -505,10 +552,14 @@ export default function ContactWizard({
       {step === 3 && (
         <div style={{ marginBottom: 14 }}>
           <label style={labelStyle} className="s-mono">
-            Tell us more
+            {portal ? "How does your agency run today?" : "Tell us more"}
           </label>
           <textarea
-            placeholder="A few lines on your goals, project, or question."
+            placeholder={
+              portal
+                ? "A few lines on your services, your team, and the tools you would like the portal to replace."
+                : "A few lines on your goals, project, or question."
+            }
             value={form.message}
             onChange={(e) => set("message", e.target.value)}
           />
@@ -599,7 +650,7 @@ export default function ContactWizard({
               opacity: submitting ? 0.7 : 1,
             }}
           >
-            {submitting ? "Sending…" : "Send message"}
+            {submitting ? "Sending…" : portal ? "Request my demo" : "Send message"}
           </button>
         )}
       </div>
