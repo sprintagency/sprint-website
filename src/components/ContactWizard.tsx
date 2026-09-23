@@ -116,18 +116,20 @@ export default function ContactWizard({
   useEffect(() => {
     if (prefillFromUrl && typeof window !== "undefined") {
       const q = new URLSearchParams(window.location.search);
-      const { topic: t, detail } = resolveIntent(
+      const { topic: t, detail, heading } = resolveIntent(
         q.get("intent"),
         q.get("plan"),
         q.get("service"),
       );
       if (t) {
         selectTopic(t, detail || undefined);
+        if (heading) onHeadingChange?.(heading);
         return;
       }
     }
     onHeadingChange?.(
-      topic ? HEADINGS[topic] || DEFAULT_HEADING : DEFAULT_HEADING,
+      initial.heading ||
+        (topic ? HEADINGS[topic] || DEFAULT_HEADING : DEFAULT_HEADING),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

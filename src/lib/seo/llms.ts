@@ -12,6 +12,7 @@
 
 import { siteConfig, absoluteUrl, real } from "./config";
 import { SERVICES } from "./services";
+import { PORTAL_PATH, PORTAL_SEO } from "../portal-content";
 
 const loc = siteConfig.primaryLocation;
 
@@ -54,6 +55,7 @@ ${services}
 
 - [Home](${absoluteUrl("/")})
 - [Fort Worth creative agency](${absoluteUrl("/fort-worth")})
+- [Sprint Portal, the custom agency operating system](${absoluteUrl(PORTAL_PATH)})
 - [Pricing](${absoluteUrl("/#pricing")})
 - [FAQ](${absoluteUrl("/faq")})
 - [Contact](${absoluteUrl("/contact")})
@@ -79,7 +81,7 @@ export function buildLlmsFull(): string {
         .join("\n")}`,
   ).join("\n\n");
 
-  return `# ${siteConfig.siteName} — full profile
+  return `# ${siteConfig.siteName}: full profile
 
 > ${siteConfig.shortName} is a creative agency based in Fort Worth, Texas (${loc.streetAddress}, ${loc.addressLocality}, ${loc.addressRegion} ${loc.postalCode}). It serves the Fort Worth metro area and the UK, and works with clients nationwide. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
 
@@ -100,6 +102,12 @@ ${services}
 - Every plan includes unlimited requests, a 24 hour response time, and a monthly strategy call.
 - Websites are built in Webflow for speed, stability, and easy client updates.
 - Plans run on a minimum six month engagement.
+
+## Sprint Portal
+
+URL: ${absoluteUrl(PORTAL_PATH)}
+
+${PORTAL_SEO.description} Sprint Portal covers onboarding, structured briefs, stage-based production pipelines with approval gates, native review for video, scripts, images and PDFs, billing, and client retention tools such as a per-client Brand Hub. Agencies can book a demo of the live platform.
 
 ## Contact
 

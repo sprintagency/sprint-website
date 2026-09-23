@@ -5,6 +5,7 @@
 
 import { SERVICES } from "./services";
 import { siteConfig } from "./config";
+import { PORTAL_PATH, PORTAL_SEO } from "../portal-content";
 
 export type EditablePage = {
   path: string;
@@ -33,6 +34,12 @@ export const EDITABLE_PAGES: EditablePage[] = [
     defaultTitle: `${s.name} in Fort Worth, Texas`,
     defaultDescription: s.summary,
   })),
+  {
+    path: PORTAL_PATH,
+    label: "Sprint Portal",
+    defaultTitle: PORTAL_SEO.title,
+    defaultDescription: PORTAL_SEO.description,
+  },
   {
     path: "/faq",
     label: "FAQ",

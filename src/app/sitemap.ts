@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo/config";
 import { SERVICES } from "@/lib/seo/services";
 import { getNoindexPaths } from "@/lib/seo/metadata";
+import { PORTAL_PATH } from "@/lib/portal-content";
 
 // Dynamic sitemap. Served at /sitemap.xml.
 //
@@ -28,6 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
       }),
     ),
+    { path: PORTAL_PATH, changeFrequency: "monthly", priority: 0.8 },
     { path: "/contact", changeFrequency: "yearly", priority: 0.7 },
     { path: "/faq", changeFrequency: "monthly", priority: 0.6 },
     { path: "/terms", changeFrequency: "yearly", priority: 0.3 },

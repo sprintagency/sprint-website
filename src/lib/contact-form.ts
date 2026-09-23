@@ -73,17 +73,27 @@ export const validEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
 /**
  * Maps a CTA intent (and optional plan/service) to a starting topic + detail,
- * matching the smart pre-fill in the design export.
+ * matching the smart pre-fill in the design export. An intent may also carry
+ * its own heading, shown until the visitor changes topic; otherwise the
+ * heading comes from HEADINGS[topic].
  */
 export function resolveIntent(
   intent?: string | null,
   plan?: string | null,
   service?: string | null,
-): { topic: TopicKey; detail: string } {
+): { topic: TopicKey; detail: string; heading?: string } {
   const it = (intent || "").toLowerCase();
   switch (it) {
     case "demo":
       return { topic: "demo", detail: "" };
+    // Sprint Portal landing page: a demo of the custom platform, filed under
+    // the AI topic so the lead lands with the other platform enquiries.
+    case "portal":
+      return {
+        topic: "ai",
+        detail: "Custom platform build",
+        heading: "Let’s book your Portal demo",
+      };
     case "plan":
       return { topic: "creative", detail: cap(plan || "") };
     case "creative":

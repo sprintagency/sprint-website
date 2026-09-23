@@ -19,8 +19,10 @@ export default function ContactModal() {
 
   const openContact = useCallback(
     (intent?: string, plan?: string, service?: string) => {
-      const { topic: t } = resolveIntent(intent, plan, service);
-      setHeading(t ? HEADINGS[t] || DEFAULT_HEADING : DEFAULT_HEADING);
+      const { topic: t, heading } = resolveIntent(intent, plan, service);
+      setHeading(
+        heading || (t ? HEADINGS[t] || DEFAULT_HEADING : DEFAULT_HEADING),
+      );
       setSubmitted(false);
       setPrefill({ intent, plan, service });
       setOpen(true);
