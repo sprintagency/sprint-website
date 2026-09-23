@@ -135,7 +135,7 @@ export const PORTAL_CAPABILITIES = {
     { title: "Client review system", body: "Frame-accurate video comments, drawn annotations, versioned script and PDF review" },
     { title: "Custom pipeline builder", body: "Design stage-based pipelines per service, with an approval gate at every stage" },
     { title: "Structured brief intake", body: "Plan-aware request forms that turn every brief into a live pipeline automatically" },
-    { title: "AI that knows the brand", body: "Captions, copy and campaign plans drafted from each client's own Brand Hub" },
+    { title: "Script to storyboard AI", body: "Paste a script and the AI drafts a storyboard template from it, scene by scene, ready for the team" },
   ] satisfies PortalTile[],
   /** The operations layer around it. */
   tilesLabel: "OPERATIONS LAYER",
