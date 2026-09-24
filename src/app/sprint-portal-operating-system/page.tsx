@@ -17,7 +17,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, graph, webPageSchema } from "@/lib/seo/schema";
 import { PORTAL_PATH, PORTAL_SEO } from "@/lib/portal-content";
 
-/* Sprint Portal landing page: sells the custom agency operating system to
+/* Sprint Portal landing page: sells the bespoke agency operating system to
    other agencies and drives one action, Book a Portal Demo. Copy lives in
    lib/portal-content.ts; sections in components/portal/. */
 
