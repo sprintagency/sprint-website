@@ -446,7 +446,8 @@ details.faq-item[open] .faq-q { color: #ffffff; }
 @media (max-width: 640px) {
   .portal-nav-tag, .portal-cta-full { display: none !important; }
   .portal-cta-short { display: inline; }
-  .portal-hero-h1 br { display: none !important; }
+  /* Keep "Built by an agency." on one line down to 320px wide. */
+  .portal-hero-h1 { font-size: clamp(30px, 9.6vw, 36px) !important; }
   .portal-hero-lead { font-size: 17px !important; }
   .portal-hero-cta { flex-direction: column !important; align-items: stretch !important; }
   .portal-hero-cta > a { justify-content: center !important; }

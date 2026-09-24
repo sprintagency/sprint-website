@@ -62,9 +62,9 @@ export default function PortalHero() {
               margin: "0 0 26px",
             }}
           >
-            {/* The explicit space keeps the words apart where the <br> is hidden (mobile). */}
+            {/* Always two lines: "Built by an agency." / "For your agency." */}
             {lineOne}
-            <span className="s-dot">.</span>{" "}
+            <span className="s-dot">.</span>
             <br />
             {lineTwo}
             <span className="s-dot">.</span>

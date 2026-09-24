@@ -11,7 +11,7 @@ export const PORTAL_PATH = "/sprint-portal-operating-system";
 export const PORTAL_LOGIN_URL = "https://portal.madebysprint.com/auth/login";
 
 export const PORTAL_SEO = {
-  title: "Sprint Portal | The custom agency operating system",
+  title: "Sprint Portal | The bespoke agency operating system",
   description:
     "Briefs, production, review, approval, billing and retention in one operating system. Custom built for your agency by the specialist team that runs its own on it.",
 };

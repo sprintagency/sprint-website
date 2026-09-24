@@ -55,7 +55,7 @@ ${services}
 
 - [Home](${absoluteUrl("/")})
 - [Fort Worth creative agency](${absoluteUrl("/fort-worth")})
-- [Sprint Portal, the custom agency operating system](${absoluteUrl(PORTAL_PATH)})
+- [Sprint Portal, the bespoke agency operating system](${absoluteUrl(PORTAL_PATH)})
 - [Pricing](${absoluteUrl("/#pricing")})
 - [FAQ](${absoluteUrl("/faq")})
 - [Contact](${absoluteUrl("/contact")})

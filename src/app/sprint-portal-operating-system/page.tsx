@@ -17,16 +17,16 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, graph, webPageSchema } from "@/lib/seo/schema";
 import { PORTAL_PATH, PORTAL_SEO } from "@/lib/portal-content";
 
-/* Sprint Portal landing page: sells the custom agency operating system to
+/* Sprint Portal landing page: sells the bespoke agency operating system to
    other agencies and drives one action, Book a Portal Demo. Copy lives in
    lib/portal-content.ts; sections in components/portal/. */
 
-// OG image: the site default card for now. Drop a designed 1200x630 card into
-// public/og/ and add `image: "/og/og-sprint-portal.png"` here to switch.
 const SEO = {
   path: PORTAL_PATH,
   title: PORTAL_SEO.title,
   description: PORTAL_SEO.description,
+  image: "/og/og-sprint-portal.png",
+  imageAlt: "Sprint Portal, the bespoke agency operating system. Built by an agency, for your agency.",
 };
 
 export function generateMetadata(): Promise<Metadata> {
