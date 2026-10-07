@@ -27,7 +27,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What's included in the retainer?",
-    a: "All plans cover branding and visual identity, Webflow web design, social media content and management, and print design. The business plan adds animated and live action video production. Every plan includes unlimited requests, 24 hour response time, and a monthly strategy call.",
+    a: "All plans cover branding and visual identity, web design, social media content and management, and print design. The business plan adds animated and live action video production. Every plan includes unlimited requests, 24 hour response time, and a monthly strategy call.",
   },
   {
     q: "How do we get started?",
@@ -60,10 +60,6 @@ const FAQS: { q: string; a: string }[] = [
   {
     q: "Do you manage social media accounts?",
     a: "Yes. We handle content creation, captions, scheduling, and posting across your platforms.",
-  },
-  {
-    q: "Do you only build on Webflow?",
-    a: "Yes. We build exclusively on Webflow for its design quality, performance, and how easy it makes ongoing updates for clients.",
   },
   {
     q: "What's the minimum contract length?",

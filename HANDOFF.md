@@ -163,7 +163,7 @@ Phone: [ADD ONCE CONFIRMED]
 > Keller, and Aledo, and manage the whole process remotely for clients
 > nationwide. Requests are submitted and reviewed through the Sprint Client
 > Portal, with a 24 hour response time and a monthly strategy call on every
-> plan. Websites are built in Webflow for speed and easy updates. Live video
+> plan. Websites are built for speed and easy updates. Live video
 > filming is available across the Fort Worth area.
 
 Remember to link the GBP listing to `https://madebysprint.com/fort-worth` and,
