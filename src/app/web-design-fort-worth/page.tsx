@@ -78,14 +78,13 @@ const PORTAL_FEATS = [
 
 const WHY_COLS = [
   { eyebrow: "[ LOCAL SEO ]", title: "Local SEO baked in", body: "Every page ships with structured data, local business schema, geo targeted meta, a sitemap, and the page speed tuning search engines reward." },
-  { eyebrow: "[ WEBFLOW ]", title: "Webflow, on purpose", body: "No plugins to update and no security holes. A fast, stable platform your team can actually manage." },
+  { eyebrow: "[ STABLE ]", title: "Nothing to patch", body: "No plugins to update and no security holes. A fast, stable site your team can actually manage." },
   { eyebrow: "[ CONTENT ]", title: "Copy and photography", body: "No copy or imagery yet? We write and shoot it. Most clients send a rough outline and we take it from there." },
   { eyebrow: "[ CONVERSION ]", title: "Conversion first", body: "Every section earns its place. We design around clear conversion paths, quote requests, bookings, and sign ups." },
 ];
 
 const FAQS = [
   { q: "How long does a website take?", a: "You will see a first draft within 7 days. Most sites go live in 2 to 3 weeks, depending on scope and how quickly content is ready." },
-  { q: "Do you build in Webflow?", a: "Yes. We build in Webflow, so there are no plugins to update and no security holes, and your team gets a fast, stable site that is easy to manage after launch." },
   { q: "Do you work with brands outside Fort Worth?", a: "Absolutely. We are based in Fort Worth, Texas, and build websites for clients nationwide, managing the whole process remotely through the Sprint Client Portal." },
 ];
 
@@ -155,7 +154,7 @@ export default function WebDesignFortWorthPage() {
             </p>
             <div className="svc-hero-chips" style={{ display: "flex", alignItems: "center", gap: 10, margin: "0 0 34px" }}>
               <span style={chipStyle}><span style={dot} />Fully responsive</span>
-              <span style={chipStyle}><span style={dot} />Built in Webflow</span>
+              <span style={chipStyle}><span style={dot} />Built to convert</span>
               <span style={chipStyle}><span style={dot} />Quick turnaround</span>
             </div>
             <div className="svc-hero-ctas" style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -189,7 +188,7 @@ export default function WebDesignFortWorthPage() {
                 <span style={{ width: 16, height: 16, background: "var(--sprint-lime)", WebkitMask: "url(/assets/icons/monitor.svg) center/contain no-repeat", mask: "url(/assets/icons/monitor.svg) center/contain no-repeat" }} />
               </span>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.2 }}>Built in Webflow</div>
+                <div style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.2 }}>Built to convert</div>
                 <div style={{ fontSize: 11.5, color: "rgba(255,255,255,0.55)" }}>One team, end to end.</div>
               </div>
             </div>
@@ -296,7 +295,7 @@ export default function WebDesignFortWorthPage() {
             <div className="s-eyebrow" style={{ color: "var(--sprint-lime)", marginBottom: 20 }}>[ WHY SPRINT ]</div>
             <h2 style={{ ...sectionH2, margin: "0 0 22px" }}>Web design built for Fort Worth<span className="s-dot">.</span></h2>
             <p style={{ fontSize: 16.5, lineHeight: 1.66, color: "rgba(255,255,255,0.72)", margin: "0 0 32px", maxWidth: 420 }}>
-              A Fort Worth web design studio specializing in Webflow. We engineer sites structured to convert, aligned to your brand from the first wireframe, and delivered quickly.
+              A Fort Worth web design studio. We engineer sites structured to convert, aligned to your brand from the first wireframe, and delivered quickly.
             </p>
             <a className="cta cta-lime" href="#" data-open-contact="1" data-intent="demo" style={{ display: "inline-flex", alignItems: "center", gap: 11, background: "var(--sprint-lime)", color: "#0c1321", textDecoration: "none", fontSize: 15, fontWeight: 600, padding: "13px 22px", borderRadius: 4 }}>
               Book a demo <span style={{ display: "inline-flex", width: 20, height: 20, alignItems: "center", justifyContent: "center", background: "rgba(12,19,33,0.16)", borderRadius: 3 }}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }} aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>

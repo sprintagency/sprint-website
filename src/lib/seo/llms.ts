@@ -100,7 +100,7 @@ ${services}
 - Choose a plan, onboard your brand, and submit your first request.
 - A dedicated team works your queue, one or two active tasks at a time depending on plan.
 - Every plan includes unlimited requests, a 24 hour response time, and a monthly strategy call.
-- Websites are built in Webflow for speed, stability, and easy client updates.
+- Websites are built for speed, stability, and easy client updates, with no plugins to maintain.
 - Plans run on a minimum six month engagement.
 
 ## Sprint Portal

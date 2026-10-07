@@ -33,17 +33,13 @@ export const SERVICES: Service[] = [
     name: "Web Design",
     href: "/web-design-fort-worth",
     summary:
-      "Conversion-focused Webflow websites for Fort Worth businesses, designed and shipped in weeks with unlimited revisions on one monthly rate.",
+      "Conversion-focused websites for Fort Worth businesses, designed and shipped in weeks with unlimited revisions on one monthly rate.",
     detail:
-      "Strategy, design, build, and SEO handled by one team. Sites are built in Webflow for speed and easy ongoing updates, with a first draft in 7 days and most sites live in 2 to 3 weeks.",
+      "Strategy, design, build, and SEO handled by one team. Sites are built for speed, stability, and easy ongoing updates, with a first draft in 7 days and most sites live in 2 to 3 weeks.",
     faqs: [
       {
         q: "How long does a website take?",
         a: "You will see a first draft within 7 days. Most sites go live in 2 to 3 weeks, depending on scope and how quickly content is ready.",
-      },
-      {
-        q: "Do you build in Webflow?",
-        a: "Yes. We build in Webflow, so there are no plugins to update and no security holes, and your team gets a fast, stable site that is easy to manage after launch.",
       },
       {
         q: "Do you work with brands outside Fort Worth?",
