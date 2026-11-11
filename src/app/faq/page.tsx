@@ -13,7 +13,7 @@ const SEO = {
   image: "/og/og-faq.png",
   title: "FAQ",
   description:
-    "Frequently asked questions about working with Sprint Creative Agency: how the monthly retainer works, what is included, turnaround times, and getting started.",
+    "Frequently asked questions about working with Sprint Creative Agency: how the monthly retainer works, what is included, AI software and consulting, turnaround times, and getting started.",
 };
 
 export function generateMetadata(): Promise<Metadata> {
@@ -23,11 +23,15 @@ export function generateMetadata(): Promise<Metadata> {
 const FAQS: { q: string; a: string }[] = [
   {
     q: "Who is Sprint for?",
-    a: "Growing service businesses, founders, and startups that need fast, consistent creative output without the cost or complexity of building an in house team.",
+    a: "Growing businesses, founders, and teams that need fast, consistent creative output or practical AI tools, without the cost or complexity of building an in house team.",
+  },
+  {
+    q: "Do you build AI software too?",
+    a: "Yes. Our AI team shows you where AI fits in your business, then designs and builds the custom tools, client portals, workflow automation, and internal platforms to make it work. AI projects are scoped to your needs and quoted separately from the creative plans. Start with a free AI consultation.",
   },
   {
     q: "What's included in the retainer?",
-    a: "All plans cover branding and visual identity, web design, social media content and management, and print design. The business plan adds animated and live action video production. Every plan includes unlimited requests, 24 hour response time, and a monthly strategy call.",
+    a: "All creative plans cover branding and visual identity, web and digital design, social content, and print design. The Scale plan adds animated and live action video, motion, and social media management. Every plan includes unlimited requests, 24 hour response time, and a monthly strategy call.",
   },
   {
     q: "How do we get started?",
@@ -39,7 +43,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'What is an "active task"?',
-    a: "An active task is any request currently in production. A logo, a landing page, a social post, a video edit. The startup plan runs one at a time, the business plan runs two. As each task is approved, the next one begins.",
+    a: "An active task is any request currently in production. A logo, a landing page, a social post, a video edit. The Starter plan runs one at a time, Growth runs two, and Scale adds one active video request on top. As each task is approved, the next one begins.",
   },
   {
     q: "Is there a limit on requests?",

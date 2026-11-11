@@ -88,7 +88,7 @@ export default function Hero() {
       >
         <div className="hero-copy" style={{ maxWidth: 560 }}>
           <Eyebrow style={{ marginBottom: 26 }}>
-            [ CREATIVE + BUSINESS SYSTEMS ]
+            [ CREATIVE + AI SOLUTIONS ]
           </Eyebrow>
 
           <h1
@@ -96,7 +96,7 @@ export default function Hero() {
             style={{
               fontFamily: "var(--font-sans)",
               fontWeight: 600,
-              // Sized so the longest line ("The creative agency for") stays
+              // Sized so the longest line ("modern businesses.") stays
               // inside the 560px hero-copy column and clears the hero video,
               // which is pinned at left: clamp(640px,50vw,920px).
               fontSize: "clamp(40px,3.6vw,52px)",
@@ -110,7 +110,7 @@ export default function Hero() {
             {/* The explicit space matters: JSX strips the whitespace around
                 these newlines, so without it the words run together wherever
                 the <br> is hidden (mobile). */}
-            The creative agency for{" "}
+            Creative and AI for{" "}
             <br />
             modern businesses<span className="s-dot">.</span>
           </h1>
@@ -126,9 +126,9 @@ export default function Hero() {
               letterSpacing: "-0.01em",
             }}
           >
-            Sprint is a creative agency in Fort Worth, Texas. We pair
-            creative services with business platforms powered by AI, built to
-            save you time and free your team to focus on what matters.
+            Sprint is a creative agency and AI software studio in Fort Worth,
+            Texas. We design your brand, website and video, and we build the AI
+            tools and automations that save your team time.
           </p>
 
           <div

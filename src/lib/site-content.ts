@@ -4,9 +4,9 @@
 export type NavLink = { label: string; href: string };
 
 export const NAV_LINKS: NavLink[] = [
-  { label: "Services", href: "/#showreel" },
+  { label: "Creative", href: "/#showreel" },
+  { label: "AI Solutions", href: "/#platform" },
   { label: "Why Sprint", href: "/#why" },
-  { label: "Work", href: "/#showreel" },
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/faq" },
 ];
@@ -45,15 +45,15 @@ export type PricingPlan = {
 export type Capability = { title: string; desc: string };
 
 export const CAPABILITIES: Capability[] = [
+  { title: "AI Consulting", desc: "Where AI can save your team time" },
   { title: "Client Portals", desc: "Professional self service experiences" },
   { title: "Workflow Automation", desc: "Reduce manual admin and repetitive tasks" },
   { title: "Team Collaboration", desc: "Everything in one shared workspace" },
   { title: "AI Assistants", desc: "Intelligent support built into your business" },
   { title: "Dashboards & Reporting", desc: "Live operational visibility" },
-  { title: "Secure Documents", desc: "One source of truth for your organisation" },
+  { title: "Secure Documents", desc: "One source of truth for your organization" },
   { title: "Approvals", desc: "Faster decisions with complete audit trails" },
   { title: "Integrations", desc: "Connect the tools you already use" },
-  { title: "Notifications", desc: "Keep everyone informed automatically" },
 ];
 
 export type Testimonial = {

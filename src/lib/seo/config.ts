@@ -68,10 +68,10 @@ export const siteConfig = {
   // ---- Titles & descriptions -------------------------------------------
   // Kept in the existing site voice ("… — Sprint" for page titles), but the
   // template uses the full brand name for stronger entity association.
-  defaultTitle: "Sprint Creative Agency: Creative agency in Fort Worth, Texas",
+  defaultTitle: "Sprint: Creative agency and AI studio in Fort Worth, Texas",
   titleTemplate: "%s | Sprint Creative Agency",
   defaultDescription:
-    "Sprint is a Fort Worth, Texas creative agency delivering brand, web design, video production, social, and print on flat monthly retainers. Serving the Fort Worth metro and the UK since 2011.",
+    "Sprint is a Fort Worth, Texas creative agency and AI software studio. Brand, web, video, social, and print on flat monthly plans, plus AI consulting and custom AI tools.",
 
   // ---- Locale ----------------------------------------------------------
   locale: "en_US", // primary market is Fort Worth, Texas
@@ -165,7 +165,8 @@ export const siteConfig = {
   ogImage: "/og/og-home.png",
   ogImageWidth: 1200,
   ogImageHeight: 630,
-  ogImageAlt: "Sprint Creative Agency, a creative agency in Fort Worth, Texas",
+  ogImageAlt:
+    "Sprint Creative Agency, a creative agency and AI software studio in Fort Worth, Texas",
   logo: "/assets/sprint-logo-white.svg",
   logoSquare: "/icon.png", // square logo for schema (generated in Phase 4)
 

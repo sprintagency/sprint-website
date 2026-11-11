@@ -26,6 +26,12 @@ function contactLines(): string[] {
   return lines;
 }
 
+// AI software and consulting is quoted per project, not a retainer service,
+// so it sits beside the SERVICES registry rather than inside it.
+const AI_SERVICES_SUMMARY =
+  "Sprint's AI team shows businesses where AI fits, then designs and builds custom AI tools, client portals, workflow automation, and internal platforms. Projects are scoped and quoted separately from the creative plans, starting with a free AI consultation.";
+const AI_SERVICES_LINE = `- [AI Software and Consulting](${absoluteUrl("/#platform")}): ${AI_SERVICES_SUMMARY}`;
+
 /** Concise llms.txt served at /llms.txt. */
 export function buildLlmsTxt(): string {
   const services = SERVICES.map(
@@ -34,7 +40,7 @@ export function buildLlmsTxt(): string {
 
   return `# ${siteConfig.siteName}
 
-> ${siteConfig.shortName} is a creative agency based in Fort Worth, Texas, serving the Fort Worth metro and the UK. It delivers brand identity, web design, video production, social media, and print design for a flat monthly retainer. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
+> ${siteConfig.shortName} is a creative agency and AI software studio based in Fort Worth, Texas, serving the Fort Worth metro and the UK. It delivers brand identity, web design, video production, social media, and print design for a flat monthly retainer, and provides AI consulting, custom AI tools, and workflow automation. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
 
 ## About
 
@@ -43,6 +49,7 @@ ${siteConfig.shortName} is a Fort Worth, Texas creative agency. Clients get a de
 ## Services
 
 ${services}
+${AI_SERVICES_LINE}
 
 ## How the retainer works
 
@@ -83,7 +90,7 @@ export function buildLlmsFull(): string {
 
   return `# ${siteConfig.siteName}: full profile
 
-> ${siteConfig.shortName} is a creative agency based in Fort Worth, Texas (${loc.streetAddress}, ${loc.addressLocality}, ${loc.addressRegion} ${loc.postalCode}). It serves the Fort Worth metro area and the UK, and works with clients nationwide. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
+> ${siteConfig.shortName} is a creative agency and AI software studio based in Fort Worth, Texas (${loc.streetAddress}, ${loc.addressLocality}, ${loc.addressRegion} ${loc.postalCode}). It serves the Fort Worth metro area and the UK, and works with clients nationwide. Trading name of ${siteConfig.legalName}. Founded in ${siteConfig.foundingYear} by ${siteConfig.founder}.
 
 ## Overview
 
@@ -94,6 +101,12 @@ The agency is based in Fort Worth, Texas and serves ${areas}, alongside clients 
 ## Services
 
 ${services}
+
+### AI Software and Consulting
+
+URL: ${absoluteUrl("/#platform")}
+
+${AI_SERVICES_SUMMARY}
 
 ## How Sprint works
 
