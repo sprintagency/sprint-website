@@ -97,7 +97,7 @@ export default function PlatformSection() {
       >
         {/* heading */}
         <div style={{ maxWidth: 560 }}>
-          <Eyebrow style={{ marginBottom: 22 }}>[ BEYOND CREATIVE ]</Eyebrow>
+          <Eyebrow style={{ marginBottom: 22 }}>[ AI SOFTWARE + CONSULTING ]</Eyebrow>
           <h2
             style={{
               fontFamily: "var(--font-sans)",
@@ -108,7 +108,8 @@ export default function PlatformSection() {
               margin: "0 0 26px",
             }}
           >
-            Need a platform like{" "}Sprint?
+            AI built around your&nbsp;business
+            <span className="s-dot">.</span>
           </h2>
           <p
             style={{
@@ -117,9 +118,10 @@ export default function PlatformSection() {
               color: "rgba(255,255,255,0.78)",
               margin: "0 0 14px",
               fontWeight: 500,
+              textWrap: "pretty",
             }}
           >
-            We don&apos;t just create great work. We build better ways to work.
+            AI strategy, software and automation.
           </p>
           <p
             style={{
@@ -128,10 +130,12 @@ export default function PlatformSection() {
               color: "rgba(255,255,255,0.62)",
               margin: "0 0 34px",
               maxWidth: 540,
+              textWrap: "balance",
             }}
           >
-            Our AI team designs bespoke client portals, workflow automation and
-            internal platforms that help businesses operate more efficiently.
+            We show you where AI fits in your business, then design and build
+            the custom tools, client portals, workflow automation and internal
+            platforms that make it work.
           </p>
           <a
             className="cta cta-lime"
@@ -140,7 +144,7 @@ export default function PlatformSection() {
             data-intent="ai-consultation"
             style={ctaLime}
           >
-            Free Consultation
+            Free AI Consultation
             <CtaArrow dark />
           </a>
         </div>

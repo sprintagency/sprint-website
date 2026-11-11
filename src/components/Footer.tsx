@@ -105,7 +105,7 @@ export default function Footer() {
               margin: "0 0 24px",
             }}
           >
-            Your creative department and AI platform team. Established 2011.
+            Creative services and AI software, under one roof. Established 2011.
           </p>
           <a
             className="cta cta-lime"
