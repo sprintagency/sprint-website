@@ -285,10 +285,15 @@ Each session appends what it did, what it proved, and how each test was seen red
   The deep teal `#008566` is unused: the page has no white surfaces.
   Proposals waiting for Graham's call: teal full stops on the H2s, a featured video in the hero, a "Get my free quote" button label, phone number in the footer, and the facts panel (2011, 1,000+, 15+, Dumfries).
   On approval: record the date and any decisions here, then tick Phase 0.5.
+- 2026-11-12: **Phase 0.5 APPROVED by Graham, as is.** Phase 1 is unblocked.
+  The Artifact above (version 4) is the visual reference for Phases 1 and 2: the built homepage must match it at 375 px and 1280 px.
+  Decisions accepted with it: teal full stops on the H2s, the featured Miller Insurance video in the hero, the "Get my free quote" button label, the phone number in the footer, the facts panel, and the "[ Explainer video production UK ]" eyebrow above the H1.
+  No LOCKED token changed.
+  Still placeholder, for the build to settle: the 8 video captions were written from Wistia file names, so confirm them during the Phase 1 content capture; the client logo strip is the live single PNG recoloured white, so replace it with one file per logo.
 
 ## Checklist
 
-- [ ] Phase 0.5: homepage design approved by Graham (Artifact URL in the ledger)
+- [x] Phase 0.5: homepage design approved by Graham (Artifact URL in the ledger)
 - [ ] Phase 0: access and baseline
 - [ ] Phase 1: foundations
 - [ ] Phase 2: pages and interactions
