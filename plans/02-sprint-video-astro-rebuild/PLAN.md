@@ -12,7 +12,7 @@ The risk is SEO: a careless migration can lose rankings that took years to earn.
 
 Done looks like this:
 
-- sprintvideo.co.uk serves an Astro site from Vercel, in the madebysprint look, with `#29FFCD` teal where madebysprint uses lime.
+- sprintvideo.co.uk serves an Astro site from Cloudflare Workers, in the madebysprint look, with `#29FFCD` teal where madebysprint uses lime.
 - All 21 current URLs answer 200 with the same path, the same title and the same H1 as the baseline, unless this plan records a deliberate change.
 - Mobile Lighthouse scores are 95 or higher for performance, SEO, accessibility and best practices on every page template.
 - Enquiry forms deliver email through Resend, and each enquiry is counted in analytics.
@@ -60,6 +60,20 @@ The site is a sibling of madebysprint.com: a visitor should see at a glance that
   No title uses an en or em dash.
   One body sentence on `/white-label-animated-video-production/` uses an em dash ("animated videos" then "without the hassle"); the capture replaces it with a comma, per the Sprint no-dash rule.
 
+### DNS and email (checked 2026-11-12)
+
+- The domain's DNS is run by the current host, Netnerd (`ns1.netnerd.com`, `ns2.netnerd.com`).
+  The apex points at `5.254.55.40`.
+- **Email is Google Workspace**: the MX record is `SMTP.GOOGLE.COM`, and the SPF record is `v=spf1 include:_spf.google.com ip4:185.229.21.105 +a +mx ip4:5.254.55.40 ~all`.
+- **Three `google-site-verification` TXT records** exist.
+  At least one is almost certainly the Search Console verification; losing it loses Search Console access in the middle of the migration.
+- DKIM (`google._domainkey`) and DMARC (`_dmarc`) could not be read clearly with `nslookup`.
+  The full zone must be exported from Netnerd, not rebuilt from lookups.
+- A Cloudflare Workers custom domain requires the domain to be a zone on Cloudflare, so the nameservers move from Netnerd to Cloudflare.
+  **Every record above must exist on Cloudflare before the nameserver change**, or email and Search Console break.
+- Note the SPF record's `+a` and `ip4:5.254.55.40` parts authorise the old web host to send mail; once the apex points at Cloudflare, `+a` no longer means the old host.
+  Check with Graham whether the old host sends any mail (for example WordPress form notifications) before tidying SPF.
+
 ### Lighthouse (mobile, local run, 2026-11-12)
 
 Lighthouse 12.6.1, mobile, run locally with headless Chrome (Google's PageSpeed API quota was exhausted that day).
@@ -106,15 +120,24 @@ Those topics have no page that can rank; see `IMPROVEMENTS.md` item 8.
 - **Spelling: UK English** for all Sprint Video copy.
   madebysprint stays US English.
 - **Every current URL is kept**, with its trailing slash.
+- **Hosting: Cloudflare Workers with static assets** (Graham, 2026-11-12).
+  Cloudflare's own guidance (Workers best practices) is to start new projects on Workers, not Pages: Pages still works, but new features land on Workers.
+  Astro builds static HTML into `dist/`; the `@astrojs/cloudflare` adapter (14.4.x, peer `astro ^7.4.0`) adds one Worker for the form endpoint.
+  `wrangler.jsonc` sets `assets.html_handling: "force-trailing-slash"`, which reproduces the live site's `/about` to `/about/` 301.
+  The domain's DNS moves to Cloudflare (a requirement for a Workers custom domain); see Findings, DNS and email.
 
 ### DEFAULT (my assumption, overridable)
 
-- **Separate repository**, `sprint-video-site`, under the same GitHub owner as this repository, deployed by its own Vercel project.
+- **Separate repository**, `sprint-video-site`, under the same GitHub owner as this repository, deployed by Cloudflare Workers Builds (Cloudflare's Git integration: every push builds, every pull request gets a preview URL).
   Reason: different domain, audience and SEO; a change on one site cannot break the other.
   The tokens are copied, not shared through a package; with two sites, a package costs more than it saves.
-- **Hosting: Vercel**, static pages plus one server endpoint (`@astrojs/vercel` adapter) for the form.
-- **Forms: Resend**, same as madebysprint, with a honeypot field and a rate limit in place of reCAPTCHA.
-  Reason: reCAPTCHA loads about 400 KB of Google script on every page that has a form.
+- **Forms: Resend**, same as madebysprint, called from the Worker with `fetch`, protected by **Cloudflare Turnstile** (Cloudflare's free, usually invisible bot check) plus a honeypot field.
+  Reason: reCAPTCHA loads about 400 KB of Google script on every page that has a form; Turnstile is far lighter and native to the host.
+  The Resend API key and the Turnstile secret are Worker secrets (`wrangler secret put`), never in the repository.
+- **Images: optimised at build time** (Astro's image service in compile mode).
+  Reason: the Workers runtime cannot run `sharp`, so images are resized and converted to AVIF and WebP during the build, not on request.
+- **Redirects:** `public/_redirects` for path redirects (including `/sitemap_index.xml` to `/sitemap-index.xml`), a Cloudflare zone Redirect Rule for `www` to apex, and `http` to `https` by Cloudflare's "Always Use HTTPS".
+  The three Elementor plumbing URLs answer 410 from the Worker, because `_redirects` cannot send a 410.
 - **Content: Astro content collections** (Markdown files with typed frontmatter, checked at build time).
   The 11 industry pages share one template and one schema.
 - **Videos: click-to-load facades.**
@@ -125,11 +148,19 @@ Those topics have no page that can rank; see `IMPROVEMENTS.md` item 8.
   Low-risk fixes ship at launch: the 15 missing meta descriptions, the 3 missing H1s, alt text, schema, speed.
   Copy rewrites and new pages wait for Phase 5, after 4 weeks of stable rankings.
   Reason: if rankings move, you can only find the cause when one thing changed at a time.
-- **Analytics: GA4 behind cookie consent**, same pattern as madebysprint (`src/components/Analytics.tsx`, `CookieConsent.tsx`), with a `generate_lead` event on each form submit.
+- **Analytics: Cloudflare Web Analytics plus GA4.**
+  Cloudflare Web Analytics is cookieless, so it runs for every visitor with no consent banner and gives honest traffic and Core Web Vitals numbers.
+  GA4 runs behind cookie consent, same pattern as madebysprint (`src/components/Analytics.tsx`, `CookieConsent.tsx`), for the `generate_lead` event on each form submit and the link to Search Console.
   Hotjar is dropped.
 - **Elementor plumbing URLs** (the ElementsKit popup and the two `?elementskit_template=` URLs) answer 410 Gone.
   They are not real pages.
-- **Rollback: the WordPress site stays running on its current host** for 30 days after cutover, so a DNS revert restores it.
+- **Rollback: the WordPress site stays running at Netnerd** for 30 days after cutover.
+  Because DNS is then on Cloudflare, rollback is one change: remove the Worker custom domain and point the apex `A` record back at `5.254.55.40`.
+  Cloudflare applies this in minutes; no nameserver change is needed to roll back.
+- **Nameserver move happens before launch day, not on it.**
+  Move the zone to Cloudflare first with the apex still pointing at the WordPress host, so email and the live site carry on unchanged.
+  Launch is then only the switch of the apex to the Worker.
+  Reason: it separates the risky DNS move from the site switch, so if anything breaks you know which one caused it.
 
 ### OPEN (need Graham)
 
@@ -154,28 +185,31 @@ Run them in order; each one deep-tests the phase before it.
   This is the ranking baseline the launch is measured against, and it re-ranks `IMPROVEMENTS.md` (work first on queries already in positions 5 to 20).
 - [ ] Check whether a Google Business Profile exists for the Dumfries address (`IMPROVEMENTS.md` item 18).
 - [ ] WordPress admin login, for the Yoast export and the Gravity Forms quote-builder field list.
-- [ ] Domain registrar and DNS access for sprintvideo.co.uk.
+- [ ] A Cloudflare account (or the existing Sprint one) with access for the build sessions; note whether madebysprint.com is also on it.
+- [ ] Domain registrar access for sprintvideo.co.uk (the nameserver change happens at the registrar) and a full zone export from Netnerd.
 - [ ] Confirm the Vimeo and Wistia accounts that host the videos belong to Sprint, and that the videos are not set to "private to this domain".
 - [ ] Resend: add and verify sprintvideo.co.uk as a sending domain, or decide to send from madebysprint's verified domain.
 - [ ] Answer OPEN 1 and 2.
 
 ### Phase 1: Foundations (prompt: `prompts/phase-1-foundations.md`)
 
-- Create the `sprint-video-site` repository; scaffold Astro 7 with TypeScript strict, the Vercel adapter and `@astrojs/sitemap`.
-- Set `trailingSlash: 'always'` and `build.format: 'directory'` so every URL matches the live trailing-slash form.
+- Create the `sprint-video-site` repository; scaffold Astro 7 with TypeScript strict, `@astrojs/cloudflare` and `@astrojs/sitemap`, and `wrangler.jsonc`.
+- Set `trailingSlash: 'always'` and `build.format: 'directory'` in Astro, and `assets.html_handling: "force-trailing-slash"` in Wrangler, so every URL matches the live trailing-slash form.
 - Port the tokens into `src/styles/tokens.css` with the teal set; self-host Geist.
 - Build the shell: `BaseLayout.astro` (head, meta, schema slot), `Header.astro`, `Footer.astro`, mobile menu island.
 - Write the content capture script: fetch each of the 21 pages, extract the copy section by section into content-collection Markdown with frontmatter (title, description, H1, videos, testimonials), download every image into `src/assets/` for Astro's image pipeline.
   A human-readable diff of captured copy against the live page proves nothing was dropped.
 - Set up lint (ESLint + `eslint-plugin-astro`), type check (`astro check`), build, and a Vitest unit runner.
-- First Vercel preview deploy.
+- Connect the repository to Cloudflare Workers Builds and get the first deploy on its `workers.dev` URL, plus a preview URL for a pull request.
+- Prepare the zone (no switch yet): add sprintvideo.co.uk to Cloudflare, import the Netnerd zone export, and diff it record by record against the export and the Findings list (MX, SPF, DKIM, DMARC, all three `google-site-verification` records).
+  The nameserver change itself is a Graham step at the registrar, done only after that diff is clean, with the apex still pointing at the WordPress host.
 
 ### Phase 2: Pages and interactions (prompt written at the end of Phase 1)
 
 - Templates: home, industry (shared by 11 pages), about, example-videos, white-label, contact, the three quote pages, privacy policy, 404.
 - `VideoFacade.astro` for Vimeo and Wistia: poster, play button, player on click, keyboard accessible.
-- Forms: contact form and the multi-step quote builder (fields copied from Gravity Forms form 3), posting to one Astro server endpoint that sends through Resend.
-- Cookie consent and GA4, with the `generate_lead` event.
+- Forms: contact form and the multi-step quote builder (fields copied from Gravity Forms form 3), posting to one Astro server endpoint on the Worker that checks Turnstile and sends through Resend.
+- Cloudflare Web Analytics; cookie consent and GA4, with the `generate_lead` event.
 - Pixel review at 375, 768, 1280 and 1920 px against madebysprint's components.
 
 ### Phase 3: SEO layer (prompt written at the end of Phase 2)
@@ -185,18 +219,21 @@ Run them in order; each one deep-tests the phase before it.
 - Alt text for every image.
 - Schema: Organization and LocalBusiness (Dumfries address, phone, opening hours, `sameAs` links) site-wide; Service on industry pages; VideoObject for every video (name, description, thumbnail, upload date, duration, embed URL); BreadcrumbList; FAQPage where a page has real FAQs.
 - `sitemap-index.xml` plus a 301 from `/sitemap_index.xml` (the Yoast path Google already knows), `robots.txt`, `llms.txt`.
-- `vercel.json` redirects: `www` to apex, Elementor plumbing URLs to 410.
+- Redirects: `public/_redirects` (including `/sitemap_index.xml`), the zone Redirect Rule for `www` to apex, and the Worker's 410 for the Elementor plumbing URLs.
+- `public/_headers`: long cache lifetimes for hashed assets, and security headers (Content-Security-Policy, Strict-Transport-Security, X-Content-Type-Options, Referrer-Policy).
 - The **parity check**: an automated test that loads every URL in `seo-baseline.json` from a preview deploy and asserts status 200, the canonical, the title and the H1 match (or match the recorded deliberate change).
 
 ### Phase 4: Launch (prompt written at the end of Phase 3)
 
 - Pre-launch gate: parity check green, Lighthouse 95+ on every template (mobile), link check with no broken links, form delivery proven end to end, pixel review signed off.
 - Refresh the Search Console export from Phase 0 so the baseline ends on launch day.
-- DNS cutover to Vercel; verify HTTPS, apex and `www`, and every redirect on the live domain.
+- Before launch day: confirm the nameservers have moved to Cloudflare, email still flows both ways, and Search Console still shows the property as verified.
+- Launch: attach sprintvideo.co.uk as the Worker's custom domain, which repoints the apex from the WordPress host to the Worker.
+  Verify HTTPS, apex and `www`, `http` to `https`, the trailing-slash 301s, the 410s, and every redirect on the live domain.
 - Submit the new sitemap in Search Console; request indexing of the top pages.
 - Monitor daily for week 1, then weekly until week 6: coverage errors, 404s, clicks and impressions against the baseline.
 - Rollback trigger: a sustained drop of more than 20% in clicks for 2 weeks with no other cause.
-  Rollback action: point DNS back at the WordPress host.
+  Rollback action: remove the Worker custom domain and point the apex `A` record back at `5.254.55.40` (the WordPress host).
 
 ### Phase 5: Ranking growth (after 4 stable weeks; prompt written at the end of Phase 4)
 
@@ -219,13 +256,14 @@ Test discipline (Graham ruling 2026-09-24), stated for this plan:
 3. **Refactors stay behind a characterisation suite.**
    Not expected in this plan; if Phase 5 restructures templates, snapshot the rendered head and body of every page first.
 
-Outside the rule: the token swap to teal and the Lighthouse scores, which are proved by measurement, and the DNS cutover, which is proved by checking the live domain.
+Outside the rule: the token swap to teal and the Lighthouse scores, which are proved by measurement, and the DNS move and the launch switch, which are proved by checking the live domain and by sending and receiving a test email.
 
 ## Ledger
 
 Each session appends what it did, what it proved, and how each test was seen red.
 
 - 2026-11-12: Plan written. Baseline captured. No build work yet.
+- 2026-11-12: Hosting changed from Vercel to Cloudflare Workers (Graham). DNS and email findings added; nameserver move separated from launch.
 
 ## Checklist
 
