@@ -7,6 +7,10 @@ You are starting Phase 1 of plan 02: rebuild sprintvideo.co.uk as an Astro site 
 1. `plans/02-sprint-video-astro-rebuild/PLAN.md` in the `sprint-website` repository (the madebysprint site). It holds every decision, marked LOCKED, DEFAULT or OPEN.
 2. `plans/02-sprint-video-astro-rebuild/SEO-BASELINE.md` and `seo-baseline.json`: the 21 live pages you must reproduce.
 3. `src/app/globals.css`, `src/app/layout.tsx` and `src/components/` in the same repository: the design system you are porting.
+4. The approved homepage Artifact, whose URL is in the `PLAN.md` Ledger (Phase 0.5): the visual reference your header, footer and tokens must match.
+
+**Gate: stop if Phase 0.5 is not approved.**
+If the Ledger has no approved Artifact URL from Graham, do not start; tell Graham Phase 0.5 must run first and give him its prompt path, `plans/02-sprint-video-astro-rebuild/prompts/phase-0.5-design-approval.md`.
 
 Check the Phase 0 checklist in `PLAN.md` before you start.
 If OPEN 1 (who edits copy, and so whether a headless CMS is needed) is still unanswered, ask Graham before you choose the content layer, and do the other steps while you wait.
