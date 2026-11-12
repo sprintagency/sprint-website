@@ -21,9 +21,10 @@ One folder per plan, so work is easy to pick up, hand off, and track.
 
 | # | Plan | Summary |
 |---|------|---------|
-| 01 | [Sprint Portal landing page](01-sprint-portal-landing-page/PLAN.md) | New `/sprint-portal-operating-system` route that sells Sprint Portal to other agencies |
+| 02 | [Sprint Video Astro rebuild](02-sprint-video-astro-rebuild/PLAN.md) | Rebuild sprintvideo.co.uk in Astro with the madebysprint look and a teal accent, keep its rankings, then grow them |
 
 ## Complete
 
 | # | Plan | Done |
 |---|------|------|
+| 01 | [Sprint Portal landing page](complete/01-sprint-portal-landing-page/PLAN.md) | 2026-09-23 |
