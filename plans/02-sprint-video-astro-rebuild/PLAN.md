@@ -55,7 +55,9 @@ The site is a sibling of madebysprint.com: a visitor should see at a glance that
 - No Google Analytics or Google Tag Manager tag is present in the HTML.
   A Hotjar reference exists.
   So there is no enquiry or conversion history to preserve, and today nobody can see which pages produce leads.
-- The business address postcode is DG1 3JW (Dumfries) and the phone number is 01387 750 953.
+- The business address postcode is DG1 3JW (Dumfries).
+  The live site shows the phone number 01387 750 953, but that number is no longer in service (Graham, 2026-11-12).
+  The new site carries no phone number: not in copy, the footer, `tel:` links or schema.
 - Copy is British English.
   No title uses an en or em dash.
   One body sentence on `/white-label-animated-video-production/` uses an em dash ("animated videos" then "without the hassle"); the capture replaces it with a comma, per the Sprint no-dash rule.
@@ -164,10 +166,9 @@ Those topics have no page that can rank; see `IMPROVEMENTS.md` item 8.
 
 ### OPEN (need Graham)
 
-1. **Who edits copy after launch?**
-   WordPress lets a non-developer edit pages today.
-   The default above (Markdown in git) means copy changes go through a developer or a Claude session.
-   If the team needs to edit without that, add a headless CMS (a content editor that publishes into the site, for example Keystatic or Sanity) in Phase 1.
+1. **Who edits copy after launch?** ANSWERED 2026-11-12 (Graham): a developer or a Claude session.
+   Copy stays as Markdown in git; no headless CMS.
+   WordPress lets a non-developer edit pages today, so this is a deliberate change.
 2. **The three quote pages.**
    `/getpricing/`, `/get-a-quote/` and `/quote-builder/` overlap.
    Default: keep all three at launch for parity, consolidate in Phase 5 with 301s.
@@ -230,7 +231,7 @@ Changing a look on a mock-up costs minutes; changing it after the components are
 - Per-page title, meta description, canonical, Open Graph and Twitter tags from frontmatter.
 - Write the 15 missing meta descriptions and the 3 missing H1s (UK spelling, no em dashes).
 - Alt text for every image.
-- Schema: Organization and LocalBusiness (Dumfries address, phone, opening hours, `sameAs` links) site-wide; Service on industry pages; VideoObject for every video (name, description, thumbnail, upload date, duration, embed URL); BreadcrumbList; FAQPage where a page has real FAQs.
+- Schema: Organization and LocalBusiness (Dumfries address, opening hours, no `telephone`, `sameAs` links) site-wide; Service on industry pages; VideoObject for every video (name, description, thumbnail, upload date, duration, embed URL); BreadcrumbList; FAQPage where a page has real FAQs.
 - `sitemap-index.xml` plus a 301 from `/sitemap_index.xml` (the Yoast path Google already knows), `robots.txt`, `llms.txt`.
 - Redirects: `public/_redirects` (including `/sitemap_index.xml`), the zone Redirect Rule for `www` to apex, and the Worker's 410 for the Elementor plumbing URLs.
 - `public/_headers`: long cache lifetimes for hashed assets, and security headers (Content-Security-Policy, Strict-Transport-Security, X-Content-Type-Options, Referrer-Policy).
@@ -290,6 +291,35 @@ Each session appends what it did, what it proved, and how each test was seen red
   Decisions accepted with it: teal full stops on the H2s, the featured Miller Insurance video in the hero, the "Get my free quote" button label, the phone number in the footer, the facts panel, and the "[ Explainer video production UK ]" eyebrow above the H1.
   No LOCKED token changed.
   Still placeholder, for the build to settle: the 8 video captions were written from Wistia file names, so confirm them during the Phase 1 content capture; the client logo strip is the live single PNG recoloured white, so replace it with one file per logo.
+- 2026-11-12: Phone number removed (Graham): 01387 750 953 is no longer in service.
+  The homepage Artifact is now version 5, with the number taken out of the footer's "Get in touch" list; nothing else changed, and version 5 replaces version 4 as the visual reference.
+  This reverses the "phone number in the footer" decision above.
+  The Phase 1 prompt now tells the content capture to drop the number from the live copy, and the Phase 3 schema carries no `telephone`.
+- 2026-11-12: **Phase 1 steps 1 to 6 DONE; steps 7 and 8 WAIT for Phase 0** (Cloudflare access and the Netnerd zone export).
+  OPEN 1 answered by Graham: Markdown in git, no CMS.
+  Repository: https://github.com/sprintagency/sprint-video-site (private), local clone `D:\sprint-video-site`, first commit `79d44a4` on `main`.
+  Pinned: Astro 7.4.11, @astrojs/cloudflare 14.4.7, @astrojs/sitemap 3.7.4, ESLint 9.39.5, Vitest 5.1.0, TypeScript 6.0.3, Wrangler 4.160.1, Node 24.
+  Built: tokens with the teal set (emerald dropped, no-green rule), Geist and Geist Mono from Fontsource, BaseLayout, Header with a mobile menu, Footer matching the Artifact (version 5), a plain-content route for all 21 pages.
+  Config: `trailingSlash: 'always'`, `build.format: 'directory'`, `imageService: "compile"`, `session: false` (else the adapter provisions an unused KV namespace), `html_handling: "force-trailing-slash"`, `compatibility_date` 2026-11-12.
+  The build is a static-only Worker: `astro build` writes `dist/client/wrangler.json`, and `wrangler deploy` finds it through `.wrangler/deploy/config.json`.
+  Content capture (`scripts/capture-content.mjs`): 21 pages, every Vimeo and Wistia ID matches the baseline, a `<!-- video:wistia:ID -->` marker where each video sat, testimonials in frontmatter, every content image in `src/assets/pages/<slug>/` with its alt text (mostly empty, as live).
+  Deliberate changes to the live copy, all logged by the script: the phone link "(+44) 01387 750 953" removed from `/contact/` (the only place it appeared); TWO em dashes on `/white-label-animated-video-production/` replaced with commas ("videos, without the hassle" and "your brand, our expertise"), not one as the Findings said; 10 empty icon-only links dropped (7 on `/privacy-policy/`, 3 on `/about/`), they had no text and would be nameless links; internal links made site-relative; links that wrapped whole blocks moved onto their heading.
+  Footer additions to the Artifact: the three live social links (Facebook, X, Instagram) as icons, and the live legal line with the company and VAT numbers, because step 3 says to copy the live footer exactly.
+  **Content-parity reference changed.** The baseline `words` field is approximate and counted a slightly wider region (it includes "Skip to content" and other text outside the page body), so 4 pages that lost nothing read 5 to 15% short against it.
+  Proof that nothing was lost: for `/getpricing/`, `/quote-builder/` and the mortgage page the captured words equal the live body words exactly; `/contact/` differs only by the 4 phone-number tokens.
+  So the test now compares each page with `data/live-body-words.json`, the live body measured by the capture script before any change, with the same counting rule; the plan's `words` stays in each page's frontmatter as `baselineWords`.
+  Tests and how each was seen red:
+  - `tests/slug.test.ts`, `tests/word-count.test.ts`, `tests/page-schema.test.ts`: CODE ABSENT, written first, run red ("Cannot find module"), then green; the later `htmlToText` helper the same way ("htmlToText is not a function", 3 red, then green).
+  - `tests/content-parity.test.ts`: FIX REVERTED, a 42-word paragraph deleted from `/about/`, the test failed on `/about/` only ("405 words, live 446, floor 424"), restored, 22 of 22 green.
+  - Lint gate: a probe file with an image without `alt` and a clickable `div` failed with 3 accessibility errors.
+  Gate at `79d44a4`: lint 0 problems, `astro check` 0 errors, 0 warnings, 0 hints, build 21 pages, Vitest 46 of 46.
+  Checked on the local Workers runtime (`wrangler dev`) in the browser pane: all 21 pages at 375, 768, 1280 and 1920 px, no horizontal scroll (a background glow overflowed at 1280 px; fixed with a clip), header on one row, the mobile menu opens, closes with Escape and returns focus, Geist loads.
+  Three pages have no H1 (`/getpricing/`, `/quote-builder/`, `/get-a-quote/`), as live; Phase 3 adds them.
+  Found for Phase 3: Cloudflare answers a missing trailing slash with a **307**, the live site with a 301; Phase 3 must make it a 301 (a zone redirect rule or a Worker rule) and the parity check must assert it.
+  ESLint 10 was swapped for 9: `eslint-plugin-jsx-a11y` supports ESLint up to 9 only, and forcing it would be an unsupported install.
+  `npm audit`: 0 in production packages; 7 moderate in dev tooling only (`minimatch`, through the lint chain), never deployed; recheck when the lint packages update.
+  CI: no GitHub Actions workflow; Workers Builds will build every push and `npm run gate` runs locally, so no Actions minutes are spent.
+  Not yet done: step 7 (Workers Builds, the `workers.dev` URL, a pull-request preview URL) and step 8 (the zone). Prompt: `prompts/phase-1b-deploy-and-zone.md`.
 
 ## Checklist
 

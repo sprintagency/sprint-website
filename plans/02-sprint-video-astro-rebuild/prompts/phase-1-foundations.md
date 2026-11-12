@@ -38,7 +38,10 @@ Page templates, forms and the SEO layer are Phases 2 and 3: do not build them he
    It reads `seo-baseline.json`, fetches each live URL, and writes one Markdown file per page into a content collection, with frontmatter for title, meta description, H1, Vimeo IDs, Wistia IDs and testimonials.
    It downloads every content image into `src/assets/` and records its alt text (empty where the live site has none; Phase 3 writes them).
    Keep the live copy word for word in UK English. Remove nothing.
-   The one exception is the em dash in the body of `/white-label-animated-video-production/`: replace it with a comma (Sprint no-dash rule) and note it in the ledger.
+   There are two exceptions.
+   The em dash in the body of `/white-label-animated-video-production/`: replace it with a comma (Sprint no-dash rule) and note it in the ledger.
+   The phone number 01387 750 953 (and any `tel:` link) is no longer in service: drop it wherever the live copy shows it, and list each page you dropped it from in the ledger.
+   The footer's "Get in touch" list is email and "Dumfries, Scotland" only, as in the approved Artifact (version 5).
 5. Add the gate: ESLint with `eslint-plugin-astro`, `astro check`, `astro build`, and Vitest.
    Add a GitHub Actions workflow only if the ci-minutes skill agrees it is worth the minutes.
 6. Write a content-parity test that, for each captured page, compares the word count of the Markdown body with the baseline `words` field and fails if any page loses more than 5%.
