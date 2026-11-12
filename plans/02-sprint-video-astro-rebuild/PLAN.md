@@ -278,6 +278,13 @@ Each session appends what it did, what it proved, and how each test was seen red
 - 2026-11-12: Plan written. Baseline captured. No build work yet.
 - 2026-11-12: Hosting changed from Vercel to Cloudflare Workers (Graham). DNS and email findings added; nameserver move separated from launch.
 - 2026-11-12: Phase 0.5 added (Graham): a homepage Artifact for visual approval runs first and gates Phase 1.
+- 2026-11-12: Phase 0.5 IN REVIEW, not yet approved, so Phase 1 stays gated.
+  Homepage Artifact (a Design canvas): https://claude.ai/artifact/KUCbZE8TWf7GQ8x5aNEGQ9, with a desktop artboard (1280 px) and a phone artboard (390 px) that renders the same file.
+  Built from the live homepage copy (2026-11-12), the madebysprint dark navy system and the LOCKED teal set; posters are the 8 real Wistia stills.
+  Checked by a local render at 375 px and 1280 px: no horizontal overflow, Geist loads, every text pair measured at 5.3:1 or better (translucent whites blended onto navy first).
+  The deep teal `#008566` is unused: the page has no white surfaces.
+  Proposals waiting for Graham's call: teal full stops on the H2s, a featured video in the hero, a "Get my free quote" button label, phone number in the footer, and the facts panel (2011, 1,000+, 15+, Dumfries).
+  On approval: record the date and any decisions here, then tick Phase 0.5.
 
 ## Checklist
 
