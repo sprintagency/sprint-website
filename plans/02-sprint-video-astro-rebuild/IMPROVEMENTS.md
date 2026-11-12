@@ -35,7 +35,7 @@ These change how the site is built, not what it says, so they are safe to ship o
    Helps image search and accessibility; small direct ranking value.
 5. **Structured data.** *Reasonable inference.*
    Today only the Yoast default is present.
-   Add LocalBusiness (Heathhall, Dumfries DG1 3JW, 01387 750 953), Service per industry page, VideoObject per video (makes videos eligible for video results), and FAQPage where a page has real FAQs.
+   Add LocalBusiness (Heathhall, Dumfries DG1 3JW; no telephone, the old number is no longer in service), Service per industry page, VideoObject per video (makes videos eligible for video results), and FAQPage where a page has real FAQs.
    Google no longer shows FAQ rich results for most sites, but FAQ content still helps AI answers and long-tail queries.
 6. **Sibling-brand linking with madebysprint.com.** *Reasonable inference.*
    A "Part of Sprint" link in each footer, and `parentOrganization` / `subOrganization` in each site's Organization schema, tell Google the two are one group.
