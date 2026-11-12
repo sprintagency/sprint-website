@@ -3,7 +3,7 @@
 Rebuild sprintvideo.co.uk (today WordPress + Elementor) as an Astro site in the madebysprint visual style with a teal accent.
 Keep every ranking it has on launch day, then grow them.
 
-Size: large (5 build phases, 4 to 6 sessions).
+Size: large (a design approval phase, then 5 build phases; 5 to 7 sessions).
 Risk: medium.
 The design work is low risk.
 The risk is SEO: a careless migration can lose rankings that took years to earn.
@@ -177,6 +177,19 @@ Those topics have no page that can rank; see `IMPROVEMENTS.md` item 8.
 
 Each phase has a ready-to-paste session prompt in `prompts/`.
 Run them in order; each one deep-tests the phase before it.
+Phase 0.5 runs first: it needs nothing from Phase 0, so it can start today, alongside Graham's Phase 0 checklist.
+
+### Phase 0.5: Homepage design approval (runs first; prompt: `prompts/phase-0.5-design-approval.md`)
+
+Graham approves the visual style before any build work starts.
+Changing a look on a mock-up costs minutes; changing it after the components are built costs a phase.
+
+- Build the new sprintvideo.co.uk homepage as a published Artifact (a private claude.ai page, shared by link): the real homepage copy from `SEO-BASELINE.md`, in the madebysprint design system, with the teal set in place of lime.
+- It must work at phone width and at desktop width, so Graham can review it on both.
+- Graham reviews it and leaves comments on the Artifact; the session revises until he approves.
+- The ledger records the approved Artifact URL and the date.
+  That Artifact is the visual reference for Phases 1 and 2: the built homepage must match it.
+- **Gate:** Phase 1 does not start until the approval is in the ledger.
 
 ### Phase 0: Access and baseline (Graham, about 30 minutes, no session)
 
@@ -264,9 +277,11 @@ Each session appends what it did, what it proved, and how each test was seen red
 
 - 2026-11-12: Plan written. Baseline captured. No build work yet.
 - 2026-11-12: Hosting changed from Vercel to Cloudflare Workers (Graham). DNS and email findings added; nameserver move separated from launch.
+- 2026-11-12: Phase 0.5 added (Graham): a homepage Artifact for visual approval runs first and gates Phase 1.
 
 ## Checklist
 
+- [ ] Phase 0.5: homepage design approved by Graham (Artifact URL in the ledger)
 - [ ] Phase 0: access and baseline
 - [ ] Phase 1: foundations
 - [ ] Phase 2: pages and interactions
